@@ -41,14 +41,6 @@ function selectCompVideo(methodPill, scenePill, n_views, modePill) {
     console.log("activate method pill: ", activeMethodPill)
     console.log("activate mode pill: ", activeModePill)
 
-    // console.log("scene pill: ", scenePill)
-    // console.log("method pill: ", methodPill)
-
-    // console.log("method: ", methodPill.getAttribute("data-value"))
-    // console.log("pill: ", scenePill.getAttribute("data-value"))
-    // console.log("mode: ", modePill.getAttribute("data-value"))
-
-    // console.log("active method pill 2: ", activeMethodPill.classList)
 
     if (activeMethodPill) {
         activeMethodPill.classList.remove("active");
@@ -69,16 +61,6 @@ function selectCompVideo(methodPill, scenePill, n_views, modePill) {
     pill = scenePill.getAttribute("data-value");
     mode = activeModePill.getAttribute("data-value");
 
-
-    
-
-    // if (videoSwitch.checked) {
-    //     mode = 'depth'
-    // } else {
-    //     mode = 'rgb'
-    // }
-
-    // swap video to avoid flickering
     activeVidID = 1 - activeVidID;
     var video_active = document.getElementById("compVideo" + activeVidID);
     var video_hidden = document.getElementById("compVideo" + (1 - activeVidID));
@@ -95,9 +77,7 @@ function selectCompVideo(methodPill, scenePill, n_views, modePill) {
 function updateMethodVisibility(mode) {
     // 定義每個mode可以顯示的方法列表
     const methodsByMode = {
-        'rgb': ['gscream', 'gaussiangrouping', 'infusion', '2dgsleftrefill', 'spin'],
-        'depth': ['infusion', 'poisson', 'gdd', 'scaleshift'],
-        'mask': ['gaussiangrouping']
+        'rgb': ["nus8", "gehler"],
     };
 
     // 定義每個mode可以顯示的場景列表
