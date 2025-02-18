@@ -44,10 +44,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
-  <script src="./static/js/video_comparison.js"></script>
-  <script src="./static/js/app.js"></script>
+  <!-- <script src="./static/js/bulma-slider.min.js"></script> -->
+  <!-- <script src="./static/js/index.js"></script> -->
+  <!-- <script src="./static/js/video_comparison.js"></script> -->
+  <!-- <script src="./static/js/app.js"></script> -->
+  <style>
+    .gradient-text {
+      background: linear-gradient(45deg, #001861 0%, #CCCCCC 50%, #803C00 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 2.5rem;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .wb-icon {
+      height: 1em;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body>
 
@@ -57,7 +75,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title neon-text">GCC <img src="static/images/favicon.svg" alt="icon" style="height: 1em; vertical-align: top;"></h1>
+          <h1 class="title is-1 publication-title gradient-text"">GCC <img src="static/images/favicon.svg" alt="icon" style="height: 1em; vertical-align: top;"></h1>
           <h2 class="subtitle is-3 publication-subtitle"><strong>Generative Color Constancy via Diffusing a Color Checker</strong></h2>
           <h3 class="subtitle is-3 publication-subtitle"><strong>arXiv 2025</strong></h3>
           <div class="is-size-4 publication-authors">
@@ -104,17 +122,7 @@
                   <span>arXiv</span>
                 </a>
               </span>
-              <!-- Video Link. -->
-              <!-- <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span> -->
-              <!-- Code Link. -->
+
               <span class="link-block">
                 <a href="https://github.com/kkennethwu/AuraFusion360_official.git"
                    class="external-link button is-normal is-rounded is-dark">
@@ -125,7 +133,7 @@
                   </a>
               </span>
               <!-- Dataset Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://drive.google.com/drive/folders/1C0OqUSavUBwR_p_yNRBia90jvC-23hNN?usp=sharing"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -133,9 +141,9 @@
                   </span>
                   <span>Data</span>
                   </a>
-              </span>
+              </span> -->
               <!-- Results Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://drive.google.com/drive/folders/1ujTKiBfTBD_BVv9YiifOl_SfG8sd0dZ6?usp=sharing"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -143,7 +151,7 @@
                   </span>
                   <span>Evaluation Results</span>
                   </a>
-              </span>
+              </span> -->
             </div>
 
           </div>
@@ -159,143 +167,10 @@
       <div class="pipeline-figure">
         <img src="./static/images/teaser.png" alt="Teaser" style="width: 100%;"/>
       </div>
-      <h2 class="subtitle is-3 has-text-centered">
-        <!-- <span class="dnerf">AuraFusion360</span> can do inpainting in the 360° unbounded scene. -->
-        <span class="subtitle is-3 neon-text">AuraFusion360</span> can perform inpainting in a 360° unbounded scene..
-      </h2>
+ 
     </div>
   </div>
 </section>
-<!-- 
-<section class="hero is-light is-small" >
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-
-
-          <div class="item item-cone">
-              <div class="video-compare-container" id="coneDiv" style="width: 100%;">
-                  <video class="video" id="cone" loop playsinline autoPlay muted src="./videos/360-USID/concats/cone.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                  <canvas height=0 class="videoMerge" id="coneMerge" style="width: 100%;"></canvas>
-              </div>
-          </div>
-
-          <div class="item item-newcone">
-              <div class="video-compare-container" id="newconeDiv" style="width: 100%;">
-                  <video class="video" id="newcone" loop playsinline autoPlay muted src="./videos/360-USID/concats/newcone.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                  <canvas height=0 class="videoMerge" id="newconeMerge" style="width: 100%;"></canvas>
-              </div>
-          </div>
-
-          <div class="item">
-              <div class="video-compare-container" id="skateboardDiv" style="width: 100%;">
-                  <video class="video" id="skateboard" loop playsinline autoPlay muted src="./videos/360-USID/concats/skateboard.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                  <canvas height=0 class="videoMerge" id="skateboardMerge" style="width: 100%;"></canvas>
-              </div>
-          </div>
-
-          <div class="item item-cookie">
-            <div class="video-compare-container" id="cookieDiv" style="width: 100%;">
-                <video class="video" id="cookie" loop playsinline autoPlay muted src="./videos/360-USID/concats/cookie.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                <canvas height=0 class="videoMerge" id="cookieMerge" style="width: 100%;"></canvas>
-            </div>
-          </div>
-
-          <div class="item">
-              <div class="video-compare-container" id="sunflowerDiv" style="width: 100%;">
-                  <video class="video" id="sunflower" loop playsinline autoPlay muted src="./videos/360-USID/concats/sunflower.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                  <canvas height=0 class="videoMerge" id="sunflowerMerge" style="width: 100%;"></canvas>
-              </div>
-          </div>
-
-          <div class="item">
-            <div class="video-compare-container" id="plantDiv" style="width: 100%;">
-                <video class="video" id="plant" loop playsinline autoPlay muted src="./videos/360-USID/concats/plant.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                <canvas height=0 class="videoMerge" id="plantMerge" style="width: 100%;"></canvas>
-            </div>
-          </div>
-
-          <div class="item item-carton">
-            <div class="video-compare-container" id="cartonDiv" style="width: 100%;">
-                <video class="video" id="carton" loop playsinline autoPlay muted src="./videos/360-USID/concats/carton.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                <canvas height=0 class="videoMerge" id="cartonMerge" style="width: 100%;"></canvas>
-            </div>
-        </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <h2 class="subtitle is-4 has-text-centered" style="margin-top: -1.2rem;">
-    Inpainting Results of Our <span class="dnerf">360-USID</span> Dataset
-  </h2>
-</section> -->
-
-
-
-<!-- <section class="hero is-light is-small" >
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-
-          
-
-          <div class="item item-kitchen">
-            <div class="video-compare-container" id="kitchenDiv" style="width: 100%;">
-                <video class="video" id="kitchen" loop playsinline autoPlay muted src="./videos/Other-360/concats/kitchen.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                <canvas height=0 class="videoMerge" id="kitchenMerge" style="width: 100%;"></canvas>
-            </div>
-          </div>
-
-          <div class="item item-bonsai">
-            <div class="video-compare-container" id="bonsaiDiv" style="width: 100%;">
-                <video class="video" id="bonsai" loop playsinline autoPlay muted src="./videos/Other-360/concats/bonsai.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                <canvas height=0 class="videoMerge" id="bonsaiMerge" style="width: 100%;"></canvas>
-            </div>
-          </div>
-
-          <div class="item item-room">
-            <div class="video-compare-container" id="roomDiv" style="width: 100%;">
-                <video class="video" id="room" loop playsinline autoPlay muted src="./videos/Other-360/concats/room.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                <canvas height=0 class="videoMerge" id="roomMerge" style="width: 100%;"></canvas>
-            </div>
-          </div>
-
-          <div class="item item-pinecone">
-            <div class="video-compare-container" id="pineconeDiv" style="width: 100%;">
-                <video class="video" id="pinecone" loop playsinline autoPlay muted src="./videos/Other-360/concats/pinecone.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                <canvas height=0 class="videoMerge" id="pineconeMerge" style="width: 100%;"></canvas>
-            </div>
-          </div>
-
-
-          <div class="item item-vasedeck">
-              <div class="video-compare-container" id="vasedeckDiv" style="width: 100%;">
-                  <video class="video" id="vasedeck" loop playsinline autoPlay muted src="./videos/Other-360/concats/vasedeck.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                  <canvas height=0 class="videoMerge" id="vasedeckMerge" style="width: 100%;"></canvas>
-              </div>
-          </div>
-
-          <div class="item item-bear">
-            <div class="video-compare-container" id="bearDiv" style="width: 100%;">
-                <video class="video" id="bear" loop playsinline autoPlay muted src="./videos/Other-360/concats/bear.mp4" onplay="resizeAndPlay(this)" width="100%"></video>
-                <canvas height=0 class="videoMerge" id="bearMerge" style="width: 100%;"></canvas>
-            </div>
-          </div>
-
-          
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <h2 class="subtitle is-4 has-text-centered" style="margin-top: -1.2rem;">
-    Inpainting Results of Other Collected 360 Scene.
-  </h2>
-</section> -->
-
-
-
 
 <section class="section">
   <div class="container is-max-desktop">
@@ -371,26 +246,12 @@
           </p>
         </div>
       </div>
-      <!-- Unseen Mask Gen. -->
 
-      <!-- AGDD. -->
-      <!-- <div class="column">
-        <div class="content">
-          <h2 class="title is-4">Adaptive Guided Depth Diffusion (AGDD)</h2>
-            <div class="agdd-figure">
-              <img src="./static/images/agdd.png" alt="Agdd" style="width: 100%;"/>
-            </div>
-            <p>
-              Our AGDD is a zero-shot method that effectively aligns the estimated monocular depth with the existing geometric structure without requiring additional training.
-            </p>
-        </div>
-      </div> -->
-      <!--/ AGDD. -->
     </div>
     
-    <div class="columns is-centered">
+    <!-- <div class="columns is-centered"> -->
       <!-- Unseen Mask Gen. -->
-      <div class="column">
+      <!-- <div class="column">
         <div class="content">
           <h3 class="title is-3" style="font-family: sans-serif; text-align: center;">Color checker misalignment issue</h3>
           <div class="unseen-figure" style="display: flex; justify-content: center;">
@@ -406,11 +267,11 @@
             checker structures while accurately reflecting scene illumination.
           </p>
         </div>
-      </div>
+      </div> -->
       <!-- Unseen Mask Gen. -->
 
       <!-- AGDD. -->
-      <div class="column">
+      <!-- <div class="column">
         <div class="content">
           <h2 class="title is-4">Adaptive Guided Depth Diffusion (AGDD)</h2>
             <div class="agdd-figure">
@@ -420,9 +281,10 @@
               Our AGDD is a zero-shot method that effectively aligns the estimated monocular depth with the existing geometric structure without requiring additional training.
             </p>
         </div>
-      </div>
+      </div> -->
       <!--/ AGDD. -->
-    </div>
+    <!-- </div> -->
+    
   </div>
 </section>
 
@@ -440,221 +302,118 @@
     <!--/ Animation. -->
 
 
-    <!-- Concurrent Work. -->
-    <!-- <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
 
-        <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
-          </p>
-        </div>
-      </div>
-    </div> -->
-    <!--/ Concurrent Work. -->
 
     <div class="columns is-centered">
       <div class="column is-full-width">
 
           <h3 id="title-text" class="subtitle is-4" style="text-align: center;">
-            AuraFusion360 outperforms other methods in unbounded 360° scene inpainting.
+            These video demonstrates the robustness of our method across various color checker positions under a single illuminant scenario.
           </h3>
-
-          <div class="text-center ">
-              <ul class="nav nav-pills center-pills">
-                  <li class="method-pill active" data-value="gscream"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>GScream</a></li>
-                  <li class="method-pill" data-value="gaussiangrouping"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>GaussianGrouping</a></li>
-                  <li class="method-pill" data-value="infusion"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>InFusion</a></li>
-                  <li class="method-pill" data-value="2dgsleftrefill"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>2DGS+LeftRefill</a></li>
-                      <li class="method-pill" data-value="spin"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>SPin-NeRF*</a></li>
-
-                  <li class="method-pill" data-value="poisson"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>Poisson</a></li>
-                  <li class="method-pill" data-value="gdd"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>Guided Depth Diffusion</a></li>
-                  <li class="method-pill" data-value="scaleshift"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>Scale & Shift</a></li>
-              </ul>
-              <!-- <ul class="nav nav-pills center-pills">
-                  <li class="method-pill" data-value="freenerf"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>FreeNeRF</a></li>
-                  <li class="method-pill" data-value="simplenerf"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>SimpleNeRF</a></li>
-                  <li class="method-pill" data-value="zeronvs"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>ZeroNVS</a></li>
-              </ul> -->
-          </div>
-
-          <script>
-              activeMethodPill = document.querySelector('.method-pill.active-pill');
-              activeScenePill = document.querySelector('.scene-pill.active-pill');
-              activeModePill = document.querySelector('.mode-pill.active-pill');
-
-              updateMethodVisibility('rgb')
-          </script>
-          
           <div class="text-center">
-              <div class="video-container">
-                  <video class="video" style="height: 280px; max-width: 100%;" m id="compVideo0" loop playsinline autoplay muted>
-                      <source src="./videos/comparison/360USID_skateboard_gscream_vs_ours_rgb.mp4" />
-                  </video>
-                  <video class="video" style="height: 280px; max-width: 100%;" id="compVideo1" loop playsinline autoplay muted hidden>
-                      <source src="./videos/comparison/360USID_skateboard_gscream_vs_ours_rgb.mp4" />
-                  </video>
-              </div>
+            <ul class="nav nav-pills center-pills">
+                <li class="method-pill active" data-value="nus8"><a>NUS8</a></li>
+                <li class="method-pill" data-value="gehler"><a>gehler</a></li>
+            </ul>
+          </div>
+ 
+            <div class="video-container active" id="nus8-container">
+              <video class="video nus8" id="compVideo0" loop playsinline autoplay muted>
+                  <source src="./video/NUS8/Canon1DsMkIII_0002.mp4" />
+              </video>
+              <video class="video nus8" id="compVideo1" loop playsinline autoplay muted>
+                  <source src="./video/NUS8/Canon1DsMkIII_0007.mp4" />
+              </video>
+              <video class="video nus8" id="compVideo1" loop playsinline autoplay muted>
+                <source src="./video/NUS8/SonyA57_0164.mp4" />
+              </video>
+              <video class="video nus8" id="compVideo1" loop playsinline autoplay muted>
+                <source src="./video/NUS8/SonyA57_0165.mp4" />
+              </video>
+              <video class="video nus8" id="compVideo1" loop playsinline autoplay muted>
+                <source src="./video/NUS8/SonyA57_0211.mp4" />
+              </video>
+              <video class="video nus8" id="compVideo1" loop playsinline autoplay muted>
+                <source src="./video/NUS8/NikonD5200_0011.mp4" />
+              </video>
+            </div>
+      
+            <div class="video-container" id="gehler-container" style="display: none;";>
+                <video class="video gehler" id="compVideo2" loop playsinline autoplay muted>
+                    <source src="./video/gehler/8D5U5544.mp4" />
+                </video>
+                <video class="video gehler" id="compVideo3" loop playsinline autoplay muted>
+                    <source src="./video/gehler/8D5U5563.mp4" />
+                </video>
+                <video class="video gehler" id="compVideo3" loop playsinline autoplay muted>
+                  <source src="./video/gehler/IMG_0334.mp4" />
+                </video>
+                <video class="video gehler" id="compVideo3" loop playsinline autoplay muted>
+                  <source src="./video/gehler/IMG_0333.mp4" />
+                </video>
+                <video class="video gehler" id="compVideo3" loop playsinline autoplay muted>
+                  <source src="./video/gehler/IMG_0519.mp4" />
+                </video>
+                <video class="video gehler" id="compVideo3" loop playsinline autoplay muted>
+                  <source src="./video/gehler/IMG_0404.mp4" />
+                </video>
+            </div>
+            
+ 
 
-
-              <div class="text-center" style="color: black;" id="mode-pills">
-                  <div class="btn-group btn-group-sm">
-                      <span class="btn btn-primary mode-pill active" data-value="rgb"
-                          onclick="updateMethodVisibility('rgb'); selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-                          Inpainting Results
-                      </span>
-                      <span class="btn btn-primary mode-pill" data-value="mask"
-                          onclick="updateMethodVisibility('mask'); selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-                          Unseen Mask
-                      </span>
-                      <span class="btn btn-primary mode-pill" data-value="depth"
-                          onclick="updateMethodVisibility('depth'); selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-                          Depth Initilaized Points
-                      </span>
-                  </div>
-              </div>
+            <script>
+              const pills = document.querySelectorAll('.method-pill');
+              const containers = document.querySelectorAll('.video-container');
+              const allVideos = document.querySelectorAll('video');
+              
+              // 當任一影片播放時，同步播放所有影片
+              allVideos.forEach(video => {
+                  video.addEventListener('play', () => {
+                      const currentTime = video.currentTime;
+                      allVideos.forEach(v => {
+                          if (v !== video) {
+                              v.currentTime = currentTime;
+                              v.play();
+                          }
+                      });
+                  });
+              });
+              
+              pills.forEach(pill => {
+                  pill.addEventListener('click', function() {
+                      // 移除所有 pill 的 active class
+                      pills.forEach(p => p.classList.remove('active'));
+                      // 添加 active class 到被點擊的 pill
+                      this.classList.add('active');
+              
+                      // 隱藏所有視頻容器
+                      containers.forEach(container => {
+                          container.style.display = 'none';
+                      });
+              
+                      // 顯示選中的視頻容器
+                      const selectedValue = this.getAttribute('data-value');
+                      document.getElementById(`${selectedValue}-container`).style.display = 'block';
+                  });
+              });
+              </script>
+          <div class="text-center">
 
 
               <br>
-              <p class="text-justify" style="text-align: center; display: none;">
-                Baseline method (left) vs AuraFusion360 (right). Scene trained on <span id="compVideoValue">3</span> views. Try selecting different methods and scenes!
-              </p>
-              <p class="text-justify" style="text-align: center;">
-                <span id="description-text">3</span> Try selecting different methods and scenes!
-              </p>
-              <script>
-                  video0 = document.getElementById("compVideo0");
-                  video1 = document.getElementById("compVideo1");
-                  video0.addEventListener('loadedmetadata', function() {
-                      if (activeVidID == 0 && select){
-                          video0.play();
-                          // print video size
-                          console.log(video0.videoWidth, video0.videoHeight);
-                          video0.hidden = false;
-                          video1.hidden = true;
-                      }
-                  });
-                  video1.addEventListener('loadedmetadata', function() {
-                      if (activeVidID == 1 && select){
-                          video1.play();
-                          // print video size
-                          console.log(video1.videoWidth, video1.videoHeight);
-                          video0.hidden = true;
-                          video1.hidden = false;
-                      }
-                  });
-              </script>
-
-              <div class="pill-row scene-pills" id="scene-pills">
-                  <span class="pill scene-pill" data-value="360USID_carton" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                      <img class="thumbnail-img" src="thumbnails/360USID_carton_thumbnail.png" alt="360USID/carton" width="64">
-                  </span>
-                  <span class="pill scene-pill" data-value="360USID_cone" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                      <img class="thumbnail-img" src="thumbnails/360USID_cone_thumbnail.png" alt="360USID/cone" width="64">
-                  </span>
-                  <span class="pill scene-pill active" data-value="360USID_skateboard" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                      <img class="thumbnail-img" src="thumbnails/360USID_skateboard_thumbnail.png" alt="360USID/skateboard" width="64">
-                  </span>
-                  <span class="pill scene-pill" data-value="360USID_newcone" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                      <img class="thumbnail-img" src="thumbnails/360USID_newcone_thumbnail.png" alt="360USID/newcone" width="64">
-                  </span>
-                  <span class="pill scene-pill" data-value="360USID_sunflower" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                      <img class="thumbnail-img" src="thumbnails/360USID_sunflower_thumbnail.png" alt="360USID/sunflower" width="64">
-                  </span>
-                  <span class="pill scene-pill" data-value="360USID_plant" onclick="selectCompVideo(activeMethodPill, this, 3)">
-                      <img class="thumbnail-img" src="thumbnails/360USID_plant_thumbnail.png" alt="360USID/plant" width="64">
-                  </span>
-                  <span class="pill scene-pill" data-value="360USID_cookie" onclick="selectCompVideo(activeMethodPill, this, 6)">
-                      <img class="thumbnail-img" src="thumbnails/360USID_cookie_thumbnail.png" alt="360USID/cookie" width="64">
-                  </span>
-                  <br>
-
-                  <span class="pill scene-pill" data-value="Other360_kitchen" onclick="selectCompVideo(activeMethodPill, this, 6)">
-                    <img class="thumbnail-img" src="thumbnails/Other360_kitchen_thumbnail.png" alt="Other360/kitchen" width="64">
-                  </span>
-                  <span class="pill scene-pill" data-value="Other360_bear" onclick="selectCompVideo(activeMethodPill, this, 6)">
-                    <img class="thumbnail-img" src="thumbnails/Other360_bear_thumbnail.png" alt="Other360/bear" width="64">
-                  </span>
-                  <span class="pill scene-pill" data-value="Other360_bonsai" onclick="selectCompVideo(activeMethodPill, this, 6)">
-                    <img class="thumbnail-img" src="thumbnails/Other360_bonsai_thumbnail.png" alt="Other360/bonsai" width="64">
-                  </span>
-                  <span class="pill scene-pill" data-value="Other360_room" onclick="selectCompVideo(activeMethodPill, this, 6)">
-                    <img class="thumbnail-img" src="thumbnails/Other360_room_thumbnail.png" alt="Other360/room" width="64">
-                  </span>
-                  <span class="pill scene-pill" data-value="Other360_vasedeck" onclick="selectCompVideo(activeMethodPill, this, 6)">
-                    <img class="thumbnail-img" src="thumbnails/Other360_vasedeck_thumbnail.png" alt="Other360/vasedeck" width="64">
-                  </span>
-                  <span class="pill scene-pill" data-value="Other360_pinecone" onclick="selectCompVideo(activeMethodPill, this, 6)">
-                    <img class="thumbnail-img" src="thumbnails/Other360_pinecone_thumbnail.png" alt="Other360/pinecone" width="64">
-                  </span>
-                  
-              </div>
-
-              <script>
-                  activeMethodPill = document.querySelector('.method-pill.active-pill');
-                  activeScenePill = document.querySelector('.scene-pill.active-pill');
-                  activeModePill = document.querySelector('.mode-pill.active-pill');
-                  updateMethodVisibility('rgb')
-              </script>
+              
           </div>
       </div>   
     </div>
 
-    <!-- Quantitative Results. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-2">Quantitative Results</h2>
-        <p class="content has-text-justified">
-          Quantitative comparison of 360° inpainting methods on our <span class="dnerf"> 360-USID dataset</span>. <span style="color: red;">Red</span> text indicates the best, and <span style="color: rgb(0, 0, 255);">Blue</span> text
-indicates the second-best performing method.
-        </p>
-        <img src="./static/images/quantitative.png" alt="Quantitative" style="width: 100%;"/>
-
-      </div>
-    </div>
-    <!-- Quantitative Results -->
-
+ 
     <!-- Citation -->
     <div class="columns is-centered">
       <div class="column is-full-width">
           <h2 class="title is-2">Citation</h2>
             <div style="display: inline-block; text-align: left; max-width: 100%; background: #f5f5f5; padding: 10px; border-radius: 5px;">
               <textarea id="bibtex" style="display: none;">
-@misc{wu2025aurafusion360augmentedunseenregion,
-      title={AuraFusion360: Augmented Unseen Region Alignment for Reference-based 360{\deg} Unbounded Scene Inpainting}, 
-      author={Chung-Ho Wu and Yang-Jung Chen and Ying-Huan Chen and Jie-Ying Lee and Bo-Hsu Ke and Chun-Wei Tuan Mu and Yi-Chuan Huang and Chin-Yang Lin and Min-Hung Chen and Yen-Yu Lin and Yu-Lun Liu},
-      year={2025},
-      eprint={2502.05176},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2502.05176}, 
-}
+
 </textarea>
             </div>
       </div>
