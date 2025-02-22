@@ -98,7 +98,7 @@
 
           <div class="is-size-4 publication-authors">
             <span class="author-block"><sup>1</sup>National Yang Ming Chiao Tung University,</span>
-            <span class="author-block"><sup>2</sup>MediaTek Inc.</span>
+            <span class="author-block"><sup>2</sup>MediaTek</span>
           </div>
 
           <div class="column has-text-centered">
@@ -181,7 +181,7 @@
         <h2 class="title is-2">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Color constancy methods often struggle to generalize across different camera sensors due to varying spectral sensitivities. We present GCC, which leverages diffusion models to inpaint color checkers into images for illumination estimation. Our key innovations include (1) a single-step deterministic inference approach that inpaints color checkers reflecting scene illumination, (2) a Laplacian composition technique that preserves checker structure while allowing illumination-dependent color adaptation, and (3) a mask-based data augmentation strategy for handling imprecise color checker annotations. GCC demonstrates superior robustness in cross-camera scenarios, achieving state-of-the-art worst-25% error rates of 5.22° and 4.32° in bi-directional evaluations. These results highlight our method's stability and generalization capability across different camera characteristics without requiring sensor-specific training, making it a versatile solution for real-world applications.
+            Color constancy methods often struggle to generalize across different camera sensors due to varying spectral sensitivities. We present GCC, which leverages diffusion models to inpaint color checkers into images for illumination estimation. Our key innovations include (1) a single-step deterministic inference approach that inpaints color checkers reflecting scene illumination, (2) a Laplacian decomposition technique that preserves checker structure while allowing illumination-dependent color adaptation, and (3) a mask-based data augmentation strategy for handling imprecise color checker annotations. GCC demonstrates superior robustness in cross-camera scenarios, achieving state-of-the-art worst-25% error rates of 5.22° and 4.32° in bi-directional evaluations. These results highlight our method's stability and generalization capability across different camera characteristics without requiring sensor-specific training, making it a versatile solution for real-world applications.
           </p>
         </div>
       </div>
@@ -240,6 +240,22 @@
 
     </div>
     
+
+    <div class="columns is-centered">
+      <!-- Unseen Mask Gen. -->
+      <div class="column">
+        <div class="content">
+          <h3 class="title is-3" style="font-family: sans-serif; text-align: center;">Laplacian Decomposition</h3>
+          <div class="unseen-figure" style="display: flex; justify-content: center;">
+            <img src="./static/images/laplacian.png" alt="Unseen" style="width: 60%;"/>
+          </div>
+          <p>
+          We introduce Laplacian decomposition to address a key challenge in color checker generation: maintaining structural consistency while adapting to scene illumination. This technique extracts high-frequency components from the input image, preserving the color checker's patch layout while suppressing the original color patterns from our pre-pasted neutral color checker. This approach prevents the model from simply reconstructing the original colors, instead encouraging it to harmonize the generated color checker with the scene's illumination.
+          </p>
+        </div>
+      </div>
+
+    </div>
     <!-- <div class="columns is-centered"> -->
       <!-- Unseen Mask Gen. -->
       <!-- <div class="column">
@@ -279,8 +295,72 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-2">Qualitative results</h2>
+      </div>
+    </div>
+    
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 id="title-text" class="subtitle is-4" style="text-align: center;">
+          Our method achieves consistent color correction performance across various in-the-wild scenes, demonstrating its practical robustness.
+        </h3>
+        
+        <div class="text-center">
+            <ul class="nav nav-pills center-pills">
+                <li class="image-pill active" data-value="gehler"><a>Gehler dataset</a></li>
+                <li class="image-pill" data-value="nus8"><a>NUS-8 dataset</a></li>
+                <li class="image-pill" data-value="inthewild"><a>In-the-wild images</a></li>
 
+            </ul>
+        </div>
+        
+        <div class="image-container" id="image-gehler-container" style="display: flex; justify-content: center; text-align: center; margin: 0.5em;">
+            <div>
+              <img class="image gehler" src="static/images/qualitative_results_gehler.png">
+            </div>
+        </div>
+        
+        <div class="image-container" id="image-nus8-container" style="display: none; justify-content: center; text-align: center;  margin: 0.5em;">
+            <div>
+              <img class="image nus8" src="static/images/qualitative_results_nus8.png">
+            </div>
+        </div>
 
+        <div class="image-container" id="image-inthewild-container" style="display: none; justify-content: center; text-align: center;  margin: 0.5em;">
+            <div>
+              <img class="image inthewild" src="static/images/qualitative_results_inthewild.png">
+            </div>
+        </div>
+
+    </div>
+  </div>
+</section>
+<script>
+  const image_pills = document.querySelectorAll('.image-pill');
+  const image_containers = document.querySelectorAll('.image-container');
+  
+  image_pills.forEach(pill => {
+      pill.addEventListener('click', function() {
+          // Remove active class from all pills
+          image_pills.forEach(p => p.classList.remove('active'));
+          // Add active class to clicked pill
+          this.classList.add('active');
+          
+          // Hide all image containers
+          image_containers.forEach(container => {
+              container.style.display = 'none';
+          });
+          
+          // Show selected container
+          const selectedValue = this.getAttribute('data-value');
+          document.getElementById(`image-${selectedValue}-container`).style.display = 'flex';  // Changed to 'flex'
+      });
+  });
+</script>
 
 <section class="section">
   <div class="container is-max-desktop">
