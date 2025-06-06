@@ -494,5 +494,16 @@ li .description {
 	}
 	}
 
+    /*Add*/
+
+	.section-offset {
+	scroll-margin-top: 200px;
+	}
+	
+	/* .navbar {
+	padding-top: 0.2rem;
+	padding-bottom: 0.2rem;
+	min-height: 42px;	
+	} */
 
 /* End of all :P*/
