@@ -337,10 +337,12 @@ li .line {
 
 li .logo {
 	display: block;
- 	margin-left: auto;
-  	margin-right: auto;
-	width: 75%;
-	max-width: 80px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 75px;
+	width: auto;
+	max-height: 80px;
+	object-fit: contain; /* keep each logo consistent in height */
 }
 
 li .point {
