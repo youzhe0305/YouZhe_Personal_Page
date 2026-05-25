@@ -1,0 +1,202 @@
+{
+  "defaultVideo": "../data/processed_dataset/mit/fwd/applauding_getty-wide-shot-men-and-women-in-formal-restaurant-standing-clapping-for-video-id670-52_7.mp4",
+
+  "teaser": [
+    {
+      "short": "Plate",
+      "full": "A massive, dirty dinner plate fills the center of the static frame. A hand uses a damp cloth to wipe across the grimy surface.",
+      "videos": [
+        { "src": "videos/teasers/Wan2.2-T2V-A14B/plate.mp4", "label": "Wan2.2-T2V-A14B", "status": "correct" },
+        { "src": "videos/teasers/CogVideoX1.5-5B/plate.mp4", "label": "CogVideoX1.5-5B", "status": "partial" },
+        { "src": "videos/teasers/AnimateDiff-SDXL/plate.mp4", "label": "AnimateDiff-SDXL", "status": "failure" }
+      ]
+    },
+    {
+      "short": "Paint",
+      "full": "A thick paint roller loaded with deep blue paint rolls continuously up and down over a faded white wall.",
+      "videos": [
+        { "src": "videos/teasers/Wan2.2-T2V-A14B/paint.mp4", "label": "Wan2.2-T2V-A14B", "status": "correct" },
+        { "src": "videos/teasers/CogVideoX1.5-5B/paint.mp4", "label": "CogVideoX1.5-5B", "status": "correct" },
+        { "src": "videos/teasers/AnimateDiff-SDXL/paint.mp4", "label": "AnimateDiff-SDXL", "status": "failure" }
+      ]
+    },
+    {
+      "short": "Rubber",
+      "full": "A standard rubber eraser vigorously rubs back and forth over a dense graphite pencil sketch on a piece of white paper.",
+      "videos": [
+        { "src": "videos/teasers/Wan2.2-T2V-A14B/rubber.mp4", "label": "Wan2.2-T2V-A14B", "status": "failure" },
+        { "src": "videos/teasers/CogVideoX1.5-5B/rubber.mp4", "label": "CogVideoX1.5-5B", "status": "failure" },
+        { "src": "videos/teasers/AnimateDiff-SDXL/rubber.mp4", "label": "AnimateDiff-SDXL", "status": "failure" }
+      ]
+    },
+    {
+      "short": "Frying Egg",
+      "full": "A chef firmly cracks a raw egg directly over a sizzling hot, heavily oiled cast-iron frying pan.",
+      "videos": [
+        { "src": "videos/teasers/Wan2.2-T2V-A14B/egg.mp4", "label": "Wan2.2-T2V-A14B", "status": "correct" },
+        { "src": "videos/teasers/CogVideoX1.5-5B/egg.mp4", "label": "CogVideoX1.5-5B", "status": "failure" },
+        { "src": "videos/teasers/AnimateDiff-SDXL/egg.mp4", "label": "AnimateDiff-SDXL", "status": "partial" }
+      ]
+    },
+    {
+      "short": "Marker",
+      "full": "A thick black dry-erase marker is pressed against a clean, glossy whiteboard, moving steadily to trace a large, continuous circle.",
+      "videos": [
+        { "src": "videos/teasers/Wan2.2-T2V-A14B/marker.mp4", "label": "Wan2.2-T2V-A14B", "status": "correct" },
+        { "src": "videos/teasers/CogVideoX1.5-5B/marker.mp4", "label": "CogVideoX1.5-5B", "status": "partial" },
+        { "src": "videos/teasers/AnimateDiff-SDXL/marker.mp4", "label": "AnimateDiff-SDXL", "status": "partial" }
+      ]
+    },
+    {
+      "short": "Power Cord",
+      "full": "Someone firmly unplugs the thick power cord of a brightly glowing neon sign from the electrical socket on the wall.",
+      "videos": [
+        { "src": "videos/teasers/Wan2.2-T2V-A14B/neon.mp4", "label": "Wan2.2-T2V-A14B", "status": "failure" },
+        { "src": "videos/teasers/CogVideoX1.5-5B/neon.mp4", "label": "CogVideoX1.5-5B", "status": "failure" },
+        { "src": "videos/teasers/AnimateDiff-SDXL/neon.mp4", "label": "AnimateDiff-SDXL", "status": "failure" }
+      ]
+    },
+    {
+      "short": "Balloon",
+      "full": "A heavy leather boot forcefully steps down directly onto a fully inflated rubber balloon.",
+      "videos": [
+        { "src": "videos/teasers/Wan2.2-T2V-A14B/balloon.mp4", "label": "Wan2.2-T2V-A14B", "status": "correct" },
+        { "src": "videos/teasers/CogVideoX1.5-5B/balloon.mp4", "label": "CogVideoX1.5-5B", "status": "partial" },
+        { "src": "videos/teasers/AnimateDiff-SDXL/balloon.mp4", "label": "AnimateDiff-SDXL", "status": "failure" }
+      ]
+    },
+    {
+      "short": "Hot ball on Ice",
+      "full": "A glowing red-hot iron sphere is placed directly on top of a large, solid block of transparent ice.",
+      "videos": [
+        { "src": "videos/teasers/Wan2.2-T2V-A14B/hot_ball.mp4", "label": "Wan2.2-T2V-A14B", "status": "failure" },
+        { "src": "videos/teasers/CogVideoX1.5-5B/hot_ball.mp4", "label": "CogVideoX1.5-5B", "status": "failure" },
+        { "src": "videos/teasers/AnimateDiff-SDXL/hot_ball.mp4", "label": "AnimateDiff-SDXL", "status": "failure" }
+      ]
+    },
+    {
+      "short": "Snooker",
+      "full": "A fast-moving ball sharply strikes the front tip of a tightly racked triangular formation of billiard balls on a pool table.",
+      "videos": [
+        { "src": "videos/teasers/Wan2.2-T2V-A14B/snooker.mp4", "label": "Wan2.2-T2V-A14B", "status": "failure" },
+        { "src": "videos/teasers/CogVideoX1.5-5B/snooker.mp4", "label": "CogVideoX1.5-5B", "status": "failure" },
+        { "src": "videos/teasers/AnimateDiff-SDXL/snooker.mp4", "label": "AnimateDiff-SDXL", "status": "failure" }
+      ]
+    },
+    {
+      "short": "Stamp",
+      "full": "A hand firmly presses a custom rubber ink stamp onto a bright red ink pad, then immediately presses it down onto the bottom right corner of a blank white document.",
+      "videos": [
+        { "src": "videos/teasers/Wan2.2-T2V-A14B/stamp.mp4", "label": "Wan2.2-T2V-A14B", "status": "correct" },
+        { "src": "videos/teasers/CogVideoX1.5-5B/stamp.mp4", "label": "CogVideoX1.5-5B", "status": "partial" },
+        { "src": "videos/teasers/AnimateDiff-SDXL/stamp.mp4", "label": "AnimateDiff-SDXL", "status": "failure" }
+      ]
+    }
+
+  ],
+
+  "subset": {
+    "General": {
+      "forward": [
+        { "src": "videos/subset/general/forward/flooding_getty-traffic-driving-through-flood-water-during-torrentail-rain-in-lake-video-id667672969_6.mp4", "prompt": "Flooding" },
+        { "src": "videos/subset/general/forward/frying_yt-pJL_3YiUbq4_16.mp4", "prompt": "Frying" },
+        { "src": "videos/subset/general/forward/burying_yt-qYuLW5vSotM_160.mp4", "prompt": "Burying" },
+        { "src": "videos/subset/general/forward/slipping_yt-2HIZ29YMwNE_52.mp4", "prompt": "Slipping" }
+      ],
+      "reverse": [
+        { "src": "videos/subset/general/reverse/flooding_getty-traffic-driving-through-flood-water-during-torrentail-rain-in-lake-video-id667672969_6.mp4", "prompt": "Flooding" },
+        { "src": "videos/subset/general/reverse/frying_yt-pJL_3YiUbq4_16.mp4", "prompt": "Frying" },
+        { "src": "videos/subset/general/reverse/burying_yt-qYuLW5vSotM_160.mp4", "prompt": "Burying" },
+        { "src": "videos/subset/general/reverse/slipping_yt-2HIZ29YMwNE_52.mp4", "prompt": "Slipping" }
+      ]
+    },
+    "Physics": {
+      "forward": [
+        { "src": "videos/subset/physics/forward/0034_full-videos_30FPS_perspective-left_take-1_trimmed-block-domino.mp4", "prompt": "A row of colorful wooden blocks lined up on a wooden table with a wooden stick attached to a black rotating platform. The platform rotates clockwise and the wooden stick hits the first block as it rotates. Static shot with no camera movement." },
+        { "src": "videos/subset/physics/forward/0086_full-videos_30FPS_perspective-center_take-1_trimmed-liquid-on-duck.mp4", "prompt": "A yellow rubber ducky is placed in an empty black baking pan on a wooden table.  A beverage dispenser with red liquid inside sits on a woven basket behind it. The liquid pours on the duck from the dispenser. Static shot with no camera movement." },
+        { "src": "videos/subset/physics/forward/0045_full-videos_30FPS_perspective-right_take-1_trimmed-cut-paper.mp4", "prompt": "Two black and blue gripping tools are pulling a piece of green paper from its two corners, causing it to tear. Static shot with no camera movement." },
+        { "src": "videos/subset/physics/forward/0362_full-videos_30FPS_perspective-center_take-2_trimmed-siphon.mp4", "prompt": "A bundle of lit matchsticks is placed in a bowl of red liquid. A glass jar gets lowered and covers the matchsticks. Static shot with no camera movement." }
+      ],
+      "reverse": [
+        { "src": "videos/subset/physics/reverse/0034_full-videos_30FPS_perspective-left_take-1_trimmed-block-domino.mp4", "prompt": "A row of colorful wooden blocks lined up on a wooden table with a wooden stick attached to a black rotating platform. The platform rotates clockwise and the wooden stick hits the first block as it rotates. Static shot with no camera movement." },
+        { "src": "videos/subset/physics/reverse/0086_full-videos_30FPS_perspective-center_take-1_trimmed-liquid-on-duck.mp4", "prompt": "A yellow rubber ducky is placed in an empty black baking pan on a wooden table.  A beverage dispenser with red liquid inside sits on a woven basket behind it. The liquid pours on the duck from the dispenser. Static shot with no camera movement." },
+        { "src": "videos/subset/physics/reverse/0045_full-videos_30FPS_perspective-right_take-1_trimmed-cut-paper.mp4", "prompt": "Two black and blue gripping tools are pulling a piece of green paper from its two corners, causing it to tear. Static shot with no camera movement." },
+        { "src": "videos/subset/physics/reverse/0362_full-videos_30FPS_perspective-center_take-2_trimmed-siphon.mp4", "prompt": "A bundle of lit matchsticks is placed in a bowl of red liquid. A glass jar gets lowered and covers the matchsticks. Static shot with no camera movement." }
+      ]
+    },
+    "Human": {
+      "forward": [
+        { "src": "videos/subset/human/forward/_8N7jdEBanY_000001_000011.mp4", "prompt": "Side kick" },
+        { "src": "videos/subset/human/forward/_GVCZKMsKb8_000084_000094.mp4", "prompt": "Swing dancing" },
+        { "src": "videos/subset/human/forward/_3Sd76OyNxo_000012_000022.mp4", "prompt": "Faceplanting" },
+        { "src": "videos/subset/human/forward/_-CCqQ5yngI_000004_000014.mp4", "prompt": "Eating cake" }
+      ],
+      "reverse": [
+        { "src": "videos/subset/human/reverse/_8N7jdEBanY_000001_000011.mp4", "prompt": "Side kick" },
+        { "src": "videos/subset/human/reverse/_8N7jdEBanY_000001_000011.mp4", "prompt": "Swing dancing" },
+        { "src": "videos/subset/human/reverse/_3Sd76OyNxo_000012_000022.mp4", "prompt": "Faceplanting" },
+        { "src": "videos/subset/human/reverse/_-CCqQ5yngI_000004_000014.mp4", "prompt": "Eating cake" }
+      ]
+    },
+    "Animal": {
+      "forward": [
+        { "src": "videos/subset/animal/forward/BELKXFNJ.mp4", "prompt": "The iguana is running on water." },
+        { "src": "videos/subset/animal/forward/EEQHZUUK.mp4", "prompt": "The green woodpecker is jumping." },
+        { "src": "videos/subset/animal/forward/MUFYQBBY.mp4", "prompt": "The giant hornet is falling." },
+        { "src": "videos/subset/animal/forward/OQFUTKGZ.mp4", "prompt": "The fish is swimming." }
+      ],
+      "reverse": [
+        { "src": "videos/subset/animal/reverse/BELKXFNJ.mp4", "prompt": "The iguana is running on water." },
+        { "src": "videos/subset/animal/reverse/EEQHZUUK.mp4", "prompt": "The green woodpecker is jumping." },
+        { "src": "videos/subset/animal/reverse/MUFYQBBY.mp4", "prompt": "The giant hornet is falling." },
+        { "src": "videos/subset/animal/reverse/OQFUTKGZ.mp4", "prompt": "The fish is swimming." }
+      ]
+    }
+  },
+
+  "causal": {
+    "Causal": {
+      "forward": [
+        { "src": "videos/c_nc/causal/forward/0249_full-videos_30FPS_perspective-right_take-2_trimmed-dominos-with-space.mp4", "prompt": "Two rows of alternating black and white dominoes are set up on a wooden table with a gap between the two rows. A wooden stick attached to a rotating platform rotates clockwise and knocks the first domino in the first row. Static shot with no camera movement." },
+        { "src": "videos/c_nc/causal/forward/JRQCMVEI.mp4", "prompt": "The vanellus vanellus bird is walking." },
+        { "src": "videos/c_nc/causal/forward/peeling_getty-shot-of-chefs-hands-preparing-carrot-on-chopping-board-united-kingdom-video-id177279384_1.mp4", "prompt": "Peeling" },
+        { "src": "videos/c_nc/causal/forward/sowing_yt-LnqGJ0R7Bng_15.mp4", "prompt": "Sowing" }
+      ],
+      "reverse": [
+        { "src": "videos/c_nc/causal/reverse/0249_full-videos_30FPS_perspective-right_take-2_trimmed-dominos-with-space.mp4", "prompt": "Two rows of alternating black and white dominoes are set up on a wooden table with a gap between the two rows. A wooden stick attached to a rotating platform rotates clockwise and knocks the first domino in the first row. Static shot with no camera movement." },
+        { "src": "videos/c_nc/causal/reverse/JRQCMVEI.mp4", "prompt": "The vanellus vanellus bird is walking." },
+        { "src": "videos/c_nc/causal/reverse/peeling_getty-shot-of-chefs-hands-preparing-carrot-on-chopping-board-united-kingdom-video-id177279384_1.mp4", "prompt": "Peeling" },
+        { "src": "videos/c_nc/causal/reverse/sowing_yt-LnqGJ0R7Bng_15.mp4", "prompt": "Sowing" }
+      ]
+    },
+    "Non-Causal": {
+      "forward": [
+        { "src": "videos/c_nc/non-causal/forward/_0Z8H7FAtvI_000000_000010.mp4", "prompt": "Presenting weather forecast" },
+        { "src": "videos/c_nc/non-causal/forward/adult_male_singing_getty-band-playing-in-studio-space-video-id531897674_4.mp4", "prompt": "Adult female singing" },
+        { "src": "videos/c_nc/non-causal/forward/0373_full-videos_30FPS_perspective-left_take-2_trimmed-teapot-rotates.mp4", "prompt": "A teapot is placed on a rotating display that rotates clockwise. Static shot with no camera movement." },
+        { "src": "videos/c_nc/non-causal/forward/OQFUTKGZ.mp4", "prompt": "The fish is swimming." }
+      ],
+      "reverse": [
+        { "src": "videos/c_nc/non-causal/reverse/_0Z8H7FAtvI_000000_000010.mp4", "prompt": "Presenting weather forecast" },
+        { "src": "videos/c_nc/non-causal/reverse/adult_male_singing_getty-band-playing-in-studio-space-video-id531897674_4.mp4", "prompt": "Adult female singing" },
+        { "src": "videos/c_nc/non-causal/reverse/0373_full-videos_30FPS_perspective-left_take-2_trimmed-teapot-rotates.mp4", "prompt": "A teapot is placed on a rotating display that rotates clockwise. Static shot with no camera movement." },
+        { "src": "videos/c_nc/non-causal/reverse/OQFUTKGZ.mp4", "prompt": "The fish is swimming." }
+      ]
+    }
+  },
+
+  "temporalSymmetric": {
+    "forward": [
+      { "src": "videos/limitation/forward/0360_single-cradle_from3s.mp4", "prompt": "A Newton's cradle device on the table" },
+      { "src": "videos/limitation/forward/boxing_getty-boxer-exercising-without-gloves-in-boxing-gym-video-id674817640_4.mp4", "prompt": "Boxing" },
+      { "src": "videos/limitation/forward/telephoning_giphy-10ZxpBJiSN6iaI_1.mp4", "prompt": "Telephoning" },
+      { "src": "videos/limitation/forward/UQJFQWMK.mp4", "prompt": "The horned adder is sensing its environment." }
+    ],
+    "reverse": [
+      { "src": "videos/limitation/reverse/0360_single-cradle_from3s.mp4", "prompt": "A Newton's cradle device on the table" },
+      { "src": "videos/limitation/reverse/boxing_getty-boxer-exercising-without-gloves-in-boxing-gym-video-id674817640_4.mp4", "prompt": "Boxing" },
+      { "src": "videos/limitation/reverse/telephoning_giphy-10ZxpBJiSN6iaI_1.mp4", "prompt": "Telephoning" },
+      { "src": "videos/limitation/reverse/UQJFQWMK.mp4", "prompt": "The horned adder is sensing its environment." }
+    ]
+  }
+}

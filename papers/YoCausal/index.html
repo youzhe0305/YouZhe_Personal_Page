@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YoCausal: How Far is Video Generation from World Model?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ════════════ Navigation ════════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-title">YoCausal</div>
+    <div class="nav-links">
+      <a href="#teaser">Teaser</a>
+      <a href="#abstract">Abstract</a>
+      <a href="#podcast">Podcast</a>
+      <a href="#contribution">Contribution</a>
+      <a href="#methodology">Methodology</a>
+      <a href="#ranking">Ranking</a>
+      <a href="#subset-video">Subset Video</a>
+      <a href="#causal-video">Causal Video</a>
+      <a href="#temporal-symmetric">Limitation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════ Hero ════════════ -->
+<header class="hero container" id="top">
+  <h1>YoCausal: How Far is Video Generation from World Model?<br/>A Causality Perspective</h1>
+
+  <div class="publication-authors">
+    <span class="author-block"><a href="https://www.youzhexie.me/" target="_blank">You-Zhe Xie</a><sup>🦊🌐*</sup>,</span>
+    <span class="author-block"><a href="#" target="_blank">Yu-Hsuan Li</a><sup>🦊*</sup>,</span>
+    <span class="author-block"><a href="https://jayinnn.dev/" target="_blank">Jie-Ying Lee</a><sup>🦊</sup>,</span>
+    <span class="author-block"><a href="https://kpzhang93.github.io/" target="_blank">Kaipeng Zhang</a><sup>🌐</sup>,</span>
+    <br/>
+    <span class="author-block"><a href="https://yulunalexliu.github.io/" target="_blank">Yu-Lun Liu</a><sup>🦊&dagger;</sup>,</span>
+    <span class="author-block"><a href="https://lightchaserx.github.io/" target="_blank">Zhixiang Wang</a><sup>🌐&dagger;</sup>,</span>
+  </div>
+
+  <div class="publication-authors note">
+    <span class="author-block">(* equal contribution, &dagger; corresponding authors)</span>
+  </div>
+
+  <div class="publication-authors affiliations">
+    <span class="author-block">
+      <sup>🦊</sup> National Yang Ming Chiao Tung University &nbsp;&nbsp;
+      <sup>🌐</sup> Shanda AI Research Tokyo
+    </span>
+  </div>
+
+  <div class="links">
+    <a href="#" class="btn-primary">📄 Paper (coming soon)</a>
+    <a href="https://github.com/youzhe0305/YoCausal" class="btn-outline">💻 Code</a>
+    <a href="https://huggingface.co/datasets/YouZhe/YoCausal-dataset" class="btn-outline">📦 Dataset</a>
+  </div>
+</header>
+
+<!-- ════════════ 1–2. Teaser ════════════ -->
+<section id="teaser">
+  <div class="container">
+    <h2 class="section-title">Teaser</h2>
+
+    <div class="teaser-img">
+      <img src="figs/teaser.jpg" alt="Teaser" width="100%" />
+    </div>
+
+    <!-- Prompt selector tabs -->
+    <div class="tab-bar" id="teaser-tabs"></div>
+    <!-- Prompt full text -->
+    <div id="teaser-prompt" class="prompt-display"></div>
+    <!-- 3 videos -->
+    <div id="teaser-videos" class="video-row cols-3"></div>
+    <!-- Status Legend -->
+    <div class="status-legend">
+      <span class="legend-item"><span class="video-status correct">&#10003;</span> Causally Correct</span>
+      <span class="legend-item"><span class="video-status partial">?</span> Partial Causally Correct</span>
+      <span class="legend-item"><span class="video-status failure">&#10007;</span> Causal Failure</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TL;DR ════════════ -->
+<section id="tldr">
+  <div class="container">
+    <div class="tldr-box">
+      <strong>TL;DR:</strong> YoCausal is the <strong>first</strong> benchmark evaluating causal cognition in video generation models, inspired by cognitive science experiments that test whether infants perceive causality using reversed videos. Our benchmark can incorporate <strong>any real-world video</strong> at zero cost, making it arbitrarily extensible to easily assess video generation models' understanding of diverse types of causality.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ 3. Abstract ════════════ -->
+<section id="abstract">
+  <div class="container">
+    <h2 class="section-title">Abstract</h2>
+    <p class="abstract-text">
+      As video diffusion models (VDMs) advance toward world models, a key question arises: do they truly understand causality, or merely overfit to statistical temporal patterns? Existing benchmarks mostly rely on synthetic data, limiting real-world generalization due to the sim-to-real gap. We present YoCausal, a two-level benchmark inspired by the Violation of Expectation (VoE) paradigm from cognitive science. By temporally reversing real-world videos at zero cost as natural counterfactual samples, YoCausal establishes an infinitely extensible evaluation protocol. Level 1 introduces the Reverse Surprise Index (RSI), quantifying arrow-of-time perception via denoising loss. Level 2 introduces the Causality Cognition Index (CCI), which leverages a VLM to stratify datasets into causal and non-causal subsets, disentangling genuine causal reasoning from temporal bias. Evaluation of 13 state-of-the-art VDMs reveals that perceiving the arrow of time does not imply understanding causality, and a significant gap persists relative to human-level causal cognition.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════ 3.5. Podcast ════════════ -->
+<section id="podcast">
+  <div class="container">
+    <h2 class="section-title">Podcast</h2>
+    <audio controls style="width: 100%;">
+      <source src="podcast.m4a" type="audio/mp4" />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+</section>
+
+<!-- ════════════ 4. Contribution ════════════ -->
+<section id="contribution">
+  <div class="container">
+    <h2 class="section-title">Contribution</h2>
+    <ol class="contribution-list">
+      <li><strong>The first causality benchmark for VDMs based on cognition science.</strong></li>
+      <li><strong>Build an arbitrary scalable real-world dataset, freeing evaluation from sim-to-real gaps</strong></li>
+      <li><strong>A cognitive-science-grounded two-level framework that disentangles arrow-of-time perception from causal cognition.</strong></li>
+      <li><strong>Evidence that current open-source VDMs lack causal understanding, revealing a critical gap toward world models and providing guidance.</strong></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ════════════ 5. Methodology Framework ════════════ -->
+<section id="methodology">
+  <div class="container">
+    <h2 class="section-title">Methodology Framework</h2>
+    <div class="figure-placeholder">
+      <img src="figs/overview.jpg" alt="Overview" width="100%" />
+      <div class="overview-caption">
+        <p><strong>Overview of the YoCausal evaluation framework.</strong></p>
+        <ul class="overview-list">
+          <li>
+            <strong>(a) Dataset Construction:</strong> We construct an infinitely extensible benchmark by using real-world videos from different domains. By applying zero-cost temporal reversal, we generate natural counterfactual pairs (forward <i>x<sub>f</sub></i> and reverse <i>x<sub>r</sub></i>).
+          </li>
+          <li>
+            <strong>(b) Level 1 Temporal Perception:</strong> Identical sampled noise <i>&epsilon;</i> is added to both sequences and compute their denoising losses. <em>Reverse Surprise Index (RSI)</em>, quantifies the model’s perception of the arrow of time by measuring the proportion of instances where the reversed video has a higher loss (<i>L<sub>r</sub></i> > <i>L<sub>f</sub></i>).
+          </li>
+          <li>
+            <strong>(c) Level 2 Causality Disentanglement:</strong> To disentangle genuine causal cognition from statistical temporal biases, a Vision-Language Model (VLM) divides the dataset into causal (<i>D<sub>c</sub></i>) and non-causal (<i>D<sub>nc</sub></i>) subsets. The Level-2 metric, <em>Causal Cognition Index (CCI)</em>, is computed as the difference in RSI between these subsets, isolating the model’s genuine causal cognition ability.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ 6. Ranking ════════════ -->
+<section id="ranking">
+  <div class="container">
+    <h2 class="section-title">Ranking</h2>
+
+    <!-- Ranking sub-tabs -->
+    <div class="ranking-tabs">
+      <div class="ranking-tab active" onclick="switchRanking('rsi', this)">RSI</div>
+      <div class="ranking-tab" onclick="switchRanking('cci', this)">CCI</div>
+      <div class="ranking-tab" onclick="switchRanking('aggregate', this)">Aggregate Rank</div>
+    </div>
+
+    <!-- View Mode Toggle -->
+    <div class="view-toggle">
+      <button class="view-btn active" onclick="switchView('chart', this)">📈 Chart View</button>
+      <button class="view-btn" onclick="switchView('table', this)">📊 Table View</button>
+    </div>
+
+    <!-- ── RSI Panel ── -->
+    <div id="panel-rsi" class="ranking-panel active">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="sortRSI('Average', this)">Average</button>
+        <button class="tab-btn" onclick="sortRSI('General', this)">General</button>
+        <button class="tab-btn" onclick="sortRSI('Physics', this)">Physics</button>
+        <button class="tab-btn" onclick="sortRSI('Human', this)">Human</button>
+        <button class="tab-btn" onclick="sortRSI('Animal', this)">Animal</button>
+      </div>
+      <div class="table-wrapper">
+        <table id="rsi-table">
+          <thead>
+            <tr>
+              <th>Rank</th><th>Model</th><th>Release Date</th>
+              <th>General</th><th>Physics</th><th>Human</th><th>Animal</th><th>Average</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="rsi-chart" class="chart-wrapper" style="display:none;"></div>
+    </div>
+
+    <!-- ── CCI Panel ── -->
+    <div id="panel-cci" class="ranking-panel">
+      <div class="table-wrapper">
+        <table id="cci-table">
+          <thead>
+            <tr>
+              <th>Rank</th><th>Model</th><th>Release Date</th>
+              <th>CCI(D)</th><th>Normalize</th><th>RSI(Dc)</th><th>RSI(Dnc)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="cci-chart" class="chart-wrapper" style="display:none;"></div>
+    </div>
+
+    <!-- ── Aggregate Rank Panel ── -->
+    <div id="panel-aggregate" class="ranking-panel">
+      <div class="table-wrapper">
+        <table id="agg-table">
+          <thead>
+            <tr>
+              <th>Rank</th><th>Model</th><th>RSI Avg</th><th>RSI Rank</th>
+              <th>CCI(D)</th><th>CCI Rank</th><th>Aggregate Score</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="agg-chart" class="chart-wrapper" style="display:none;"></div>
+    </div>
+
+    <div class="leaderboard-notice">
+      <p>We provide <strong>two submission protocols</strong> for the leaderboard:</p>
+      <ol>
+        <li><strong>Result Submission:</strong> Participants run the evaluation on their own side and submit the resulting JSON files to us.</li>
+        <li><strong>Model Submission:</strong> Participants submit their model weights, inference code, and environment setup, and we will run the evaluation on their behalf.</li>
+      </ol>
+      <p>🚨 To submit your results to the leaderboard, please send to <a href="mailto:youzhe0305.cs12@nycu.edu.tw">this email</a> with your result json files.</p>
+      <p>🚨 For more submission details, please refer to <a href="https://github.com/youzhe0305/YoCausal">this link</a>.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════ 7. Subset Video ════════════ -->
+<section id="subset-video">
+  <div class="container">
+    <h2 class="section-title">Subset Video</h2>
+    <div class="tab-bar" id="subset-tabs"></div>
+    <div id="subset-content"></div>
+  </div>
+</section>
+
+<!-- ════════════ 8. Causal / Non-Causal Video ════════════ -->
+<section id="causal-video">
+  <div class="container">
+    <h2 class="section-title">Causal / Non-Causal Video</h2>
+    <div class="tab-bar" id="causal-tabs"></div>
+    <div id="causal-content"></div>
+  </div>
+</section>
+
+<!-- ════════════ 9. Temporal Symmetric Example ════════════ -->
+<section id="temporal-symmetric">
+  <div class="container">
+    <h2 class="section-title">Limitation: Bidirectionally Plausible Example</h2>
+    <div id="temporal-content"></div>
+  </div>
+</section>
+
+<!-- ════════════ Footer ════════════ -->
+<footer>
+  <p>Anonymous ECCV 2026 Submission &mdash; Paper ID #9660</p>
+</footer>
+
+<!-- ════════════ JavaScript ════════════ -->
+<script>
+/* ── Data ── */
+const rsiData = [
+  { model: "AnimateDiff-SDXL", date: "Apr-24", General: 27.80, Physics: 41.67, Human: 48.73, Animal: 46.50, Average: 41.18 },
+  { model: "CogVideoX-2b", date: "Aug-24", General: 33.20, Physics: 40.15, Human: 56.64, Animal: 36.00, Average: 41.50 },
+  { model: "Wan2.1-T2V-1.3B", date: "Mar-25", General: 29.80, Physics: 59.09, Human: 59.15, Animal: 34.00, Average: 45.51 },
+  { model: "AnimateDiff-SD-1.5", date: "Jun-23", General: 33.00, Physics: 32.58, Human: 61.68, Animal: 55.50, Average: 45.69 },
+  { model: "CogVideoX1.5-5b", date: "Nov-24", General: 28.80, Physics: 62.12, Human: 62.91, Animal: 33.50, Average: 46.83 },
+  { model: "Mochi-1-preview", date: "Oct-24", General: 37.80, Physics: 43.18, Human: 76.50, Animal: 39.00, Average: 49.12 },
+  { model: "CogVideoX-5b", date: "Aug-24", General: 31.10, Physics: 67.42, Human: 63.16, Animal: 38.00, Average: 49.92 },
+  { model: "Wan2.2-TI2V-5B", date: "Jul-25", General: 34.40, Physics: 71.97, Human: 63.75, Animal: 37.50, Average: 51.91 },
+  { model: "HunyuanVideo", date: "Nov-25", General: 25.80, Physics: 64.39, Human: 86.50, Animal: 31.50, Average: 52.05 },
+  { model: "Wan2.1-T2V-14B", date: "Mar-25", General: 37.60, Physics: 70.45, Human: 66.92, Animal: 38.00, Average: 53.24 },
+  { model: "Wan2.2-T2V-A14B", date: "Jul-25", General: 36.80, Physics: 77.27, Human: 66.17, Animal: 36.50, Average: 54.19 },
+  { model: "LTX-Video-13b-0.9.8", date: "Jul-25", General: 61.20, Physics: 47.73, Human: 47.50, Animal: 69.50, Average: 56.48 },
+  { model: "LTX-Video-2b-0.9.6", date: "Apr-25", General: 58.60, Physics: 57.58, Human: 54.25, Animal: 65.00, Average: 58.86 },
+  { model: "Human", date: "—", General: 76.60, Physics: 91.70, Human: 76.00, Animal: 72.00, Average: 79.08, isHuman: true },
+];
+
+const cciData = [
+  { model: "AnimateDiff-SD-1.5", date: "Jun-23", CCI: -5.21, Normalize: -60.09, RSI_Dc: 43.40, RSI_Dnc: 48.61 },
+  { model: "AnimateDiff-SDXL", date: "Apr-24", CCI: -5.07, Normalize: -58.48, RSI_Dc: 38.93, RSI_Dnc: 44.00 },
+  { model: "LTX-Video-13b-0.9.8", date: "Jul-25", CCI: -4.32, Normalize: -49.83, RSI_Dc: 54.65, RSI_Dnc: 58.97 },
+  { model: "Wan2.2-TI2V-5B", date: "Jul-25", CCI: -2.12, Normalize: -24.45, RSI_Dc: 50.90, RSI_Dnc: 53.02 },
+  { model: "HunyuanVideo", date: "Nov-25", CCI: -0.29, Normalize: -3.34, RSI_Dc: 51.15, RSI_Dnc: 51.44 },
+  { model: "LTX-Video-2b-0.9.6", date: "Apr-25", CCI: -0.20, Normalize: -2.31, RSI_Dc: 57.95, RSI_Dnc: 58.15 },
+  { model: "CogVideoX-2b", date: "Aug-24", CCI: 0.93, Normalize: 10.73, RSI_Dc: 41.11, RSI_Dnc: 40.18 },
+  { model: "Mochi-1-preview", date: "Oct-24", CCI: 3.85, Normalize: 44.41, RSI_Dc: 49.11, RSI_Dnc: 45.26 },
+  { model: "CogVideoX1.5-5b", date: "Nov-24", CCI: 4.85, Normalize: 55.94, RSI_Dc: 48.46, RSI_Dnc: 43.61 },
+  { model: "CogVideoX-5b", date: "Aug-24", CCI: 5.09, Normalize: 58.71, RSI_Dc: 51.36, RSI_Dnc: 46.27 },
+  { model: "Wan2.1-T2V-1.3B", date: "Mar-25", CCI: 5.36, Normalize: 61.82, RSI_Dc: 46.92, RSI_Dnc: 41.56 },
+  { model: "Wan2.2-T2V-A14B", date: "Jul-25", CCI: 5.51, Normalize: 63.55, RSI_Dc: 55.73, RSI_Dnc: 50.22 },
+  { model: "Wan2.1-T2V-14B", date: "Mar-25", CCI: 5.91, Normalize: 68.17, RSI_Dc: 54.80, RSI_Dnc: 48.89 },
+  { model: "Human", date: "—", CCI: 8.67, Normalize: 100.00, RSI_Dc: 85.09, RSI_Dnc: 76.42, isHuman: true },
+];
+
+/* ── Utilities ── */
+function rankBadge(rank) {
+  if (rank === 1) return '<span class="rank-badge gold">1</span>';
+  if (rank === 2) return '<span class="rank-badge silver">2</span>';
+  if (rank === 3) return '<span class="rank-badge bronze">3</span>';
+  return '<span class="rank-badge normal">' + rank + '</span>';
+}
+
+function fmt(v) { return v.toFixed(2) + '%'; }
+
+/* ── State ── */
+let currentRSISort = 'Average';
+let currentView = 'chart';
+
+/* ── Bar Chart Renderer ── */
+function renderBarChart(containerId, data, labelKey, valueKey, formatFn, opts) {
+  opts = opts || {};
+  const minVal = opts.minVal != null ? opts.minVal : 0;
+  const maxVal = opts.maxVal != null ? opts.maxVal : 100;
+  const centerVal = opts.centerVal;
+
+  const container = document.getElementById(containerId);
+  const tableWrapper = container.previousElementSibling;
+
+  if (currentView === 'table') {
+    container.style.display = 'none';
+    tableWrapper.style.display = 'block';
+    return;
+  }
+
+  container.style.display = 'block';
+  tableWrapper.style.display = 'none';
+
+  const range = maxVal - minVal;
+  const hasCenterLine = centerVal != null;
+  const centerPct = hasCenterLine ? ((centerVal - minVal) / range * 100) : 0;
+
+  container.innerHTML = data.map((d, i) => {
+    const val = d[valueKey];
+    const isHuman = d.isHuman || d.model === 'Human';
+    const rank = i + 1;
+    const rankHTML = rankBadge(rank);
+    let barHtml = '';
+
+    if (hasCenterLine) {
+      const diff = val - centerVal;
+      const barWidth = Math.abs(diff) / range * 100;
+      const barLeft = diff >= 0 ? centerPct : (centerPct - barWidth);
+      const colorClass = diff >= 0 ? '' : 'negative';
+      barHtml = `<div class="chart-bar-container diverging" style="--center-pct:${centerPct}%">
+        <div class="chart-bar diverging-bar ${colorClass} ${isHuman ? 'human' : ''}" style="left:${barLeft}%; width:${barWidth}%;"></div>
+        <span class="chart-value-label" style="position:absolute; left:${diff >= 0 ? barLeft + barWidth + 1 : Math.max(barLeft - 12, 0)}%; top:2px;">${formatFn(val)}</span>
+      </div>`;
+    } else {
+      const barWidth = (val - minVal) / range * 100;
+      barHtml = `<div class="chart-bar-container">
+        <div class="chart-bar ${isHuman ? 'human' : ''}" style="width:${barWidth}%;">${formatFn(val)}</div>
+      </div>`;
+    }
+
+    return `<div class="chart-row ${isHuman ? 'chart-row-human' : ''}">
+      <div class="chart-rank">${rankHTML}</div>
+      <div class="chart-label" title="${d[labelKey]}">${d[labelKey]}</div>
+      ${barHtml}
+    </div>`;
+  }).join('');
+}
+
+/* ── RSI Render ── */
+function renderRSI(sortKey) {
+  const sorted = [...rsiData].sort((a, b) => b[sortKey] - a[sortKey]);
+
+  const bestInCol = {};
+  ['General','Physics','Human','Animal','Average'].forEach(k => {
+    const models = rsiData.filter(d => !d.isHuman);
+    bestInCol[k] = Math.max(...models.map(d => d[k]));
+  });
+
+  const tbody = document.querySelector('#rsi-table tbody');
+  tbody.innerHTML = sorted.map((d, i) => {
+    const rank = i + 1;
+    const cls = d.isHuman ? 'human-row' : (rank <= 3 ? 'rank-' + rank : '');
+    return `<tr class="${cls}">
+      <td>${rankBadge(rank)}</td>
+      <td>${d.model}</td>
+      <td>${d.date}</td>
+      <td class="${!d.isHuman && d.General === bestInCol.General ? 'highlight-best' : ''}">${fmt(d.General)}</td>
+      <td class="${!d.isHuman && d.Physics === bestInCol.Physics ? 'highlight-best' : ''}">${fmt(d.Physics)}</td>
+      <td class="${!d.isHuman && d.Human === bestInCol.Human ? 'highlight-best' : ''}">${fmt(d.Human)}</td>
+      <td class="${!d.isHuman && d.Animal === bestInCol.Animal ? 'highlight-best' : ''}">${fmt(d.Animal)}</td>
+      <td class="${!d.isHuman && d.Average === bestInCol.Average ? 'highlight-best' : ''}">${fmt(d.Average)}</td>
+    </tr>`;
+  }).join('');
+
+  renderBarChart('rsi-chart', sorted, 'model', sortKey, fmt, { minVal: 20, maxVal: 100, centerVal: 50 });
+}
+
+function sortRSI(key, btn) {
+  currentRSISort = key;
+  if (btn) {
+    document.querySelectorAll('#panel-rsi .tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderRSI(key);
+}
+
+/* ── CCI Render ── */
+function renderCCI() {
+  const sorted = [...cciData].sort((a, b) => b.CCI - a.CCI);
+  const models = cciData.filter(d => !d.isHuman);
+  const bestCCI = Math.max(...models.map(d => d.CCI));
+
+  const tbody = document.querySelector('#cci-table tbody');
+  tbody.innerHTML = sorted.map((d, i) => {
+    const rank = i + 1;
+    const cls = d.isHuman ? 'human-row' : (rank <= 3 ? 'rank-' + rank : '');
+    return `<tr class="${cls}">
+      <td>${rankBadge(rank)}</td>
+      <td>${d.model}</td>
+      <td>${d.date}</td>
+      <td class="${!d.isHuman && d.CCI === bestCCI ? 'highlight-best' : ''}">${fmt(d.CCI)}</td>
+      <td>${fmt(d.Normalize)}</td>
+      <td>${fmt(d.RSI_Dc)}</td>
+      <td>${fmt(d.RSI_Dnc)}</td>
+    </tr>`;
+  }).join('');
+
+  const vals = cciData.map(d => d.CCI);
+  const min = Math.min(...vals, -6);
+  const max = Math.max(...vals, 10);
+  renderBarChart('cci-chart', sorted, 'model', 'CCI', fmt, { minVal: min - 1, maxVal: max + 1, centerVal: 0 });
+}
+
+/* ── Aggregate Render ── */
+function renderAggregate() {
+  const rsiSorted = [...rsiData].sort((a, b) => b.Average - a.Average);
+  const cciSorted = [...cciData].sort((a, b) => b.CCI - a.CCI);
+
+  const rsiRankMap = {};
+  rsiSorted.forEach((d, i) => { rsiRankMap[d.model] = i + 1; });
+  const cciRankMap = {};
+  cciSorted.forEach((d, i) => { cciRankMap[d.model] = i + 1; });
+
+  const rsiAvgMap = {};
+  rsiData.forEach(d => { rsiAvgMap[d.model] = d.Average; });
+  const cciValMap = {};
+  cciData.forEach(d => { cciValMap[d.model] = d.CCI; });
+
+  const allModels = [...new Set([...rsiData.map(d => d.model), ...cciData.map(d => d.model)])];
+  const aggData = allModels.map(m => ({
+    model: m,
+    rsiAvg: rsiAvgMap[m] || 0,
+    rsiRank: rsiRankMap[m] || 99,
+    cciVal: cciValMap[m] || 0,
+    cciRank: cciRankMap[m] || 99,
+    aggScore: ((rsiRankMap[m] || 99) + (cciRankMap[m] || 99)) / 2,
+    isHuman: m === 'Human',
+  }));
+
+  aggData.sort((a, b) => a.aggScore - b.aggScore);
+
+  const tbody = document.querySelector('#agg-table tbody');
+  tbody.innerHTML = aggData.map((d, i) => {
+    const rank = i + 1;
+    const cls = d.isHuman ? 'human-row' : (rank <= 3 ? 'rank-' + rank : '');
+    return `<tr class="${cls}">
+      <td>${rankBadge(rank)}</td>
+      <td>${d.model}</td>
+      <td>${fmt(d.rsiAvg)}</td>
+      <td>${d.rsiRank}</td>
+      <td>${fmt(d.cciVal)}</td>
+      <td>${d.cciRank}</td>
+      <td>${d.aggScore.toFixed(1)}</td>
+    </tr>`;
+  }).join('');
+
+  renderBarChart('agg-chart', aggData, 'model', 'aggScore', (v) => v.toFixed(1), { minVal: 0, maxVal: 15 });
+}
+
+/* ── View Toggle (Table ↔ Chart) ── */
+function switchView(view, btn) {
+  currentView = view;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderRSI(currentRSISort);
+  renderCCI();
+  renderAggregate();
+}
+
+/* ── Ranking Panel Switch (RSI / CCI / Aggregate) ── */
+function switchRanking(panel, tab) {
+  document.querySelectorAll('.ranking-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.ranking-panel').forEach(p => p.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('panel-' + panel).classList.add('active');
+}
+
+/* ══════════════════════════════════════════
+   Video Sections (embedded from videos.json)
+   ══════════════════════════════════════════ */
+let videoData = {"defaultVideo":"../data/processed_dataset/mit/fwd/applauding_getty-wide-shot-men-and-women-in-formal-restaurant-standing-clapping-for-video-id670-52_7.mp4","teaser":[{"short":"Plate","full":"A massive, dirty dinner plate fills the center of the static frame. A hand uses a damp cloth to wipe across the grimy surface.","videos":[{"src":"videos/teasers/Wan2.2-T2V-A14B/plate.mp4","label":"Wan2.2-T2V-A14B","status":"correct"},{"src":"videos/teasers/CogVideoX1.5-5B/plate.mp4","label":"CogVideoX1.5-5B","status":"partial"},{"src":"videos/teasers/AnimateDiff-SDXL/plate.mp4","label":"AnimateDiff-SDXL","status":"failure"}]},{"short":"Paint","full":"A thick paint roller loaded with deep blue paint rolls continuously up and down over a faded white wall.","videos":[{"src":"videos/teasers/Wan2.2-T2V-A14B/paint.mp4","label":"Wan2.2-T2V-A14B","status":"correct"},{"src":"videos/teasers/CogVideoX1.5-5B/paint.mp4","label":"CogVideoX1.5-5B","status":"correct"},{"src":"videos/teasers/AnimateDiff-SDXL/paint.mp4","label":"AnimateDiff-SDXL","status":"failure"}]},{"short":"Rubber","full":"A standard rubber eraser vigorously rubs back and forth over a dense graphite pencil sketch on a piece of white paper.","videos":[{"src":"videos/teasers/Wan2.2-T2V-A14B/rubber.mp4","label":"Wan2.2-T2V-A14B","status":"failure"},{"src":"videos/teasers/CogVideoX1.5-5B/rubber.mp4","label":"CogVideoX1.5-5B","status":"failure"},{"src":"videos/teasers/AnimateDiff-SDXL/rubber.mp4","label":"AnimateDiff-SDXL","status":"failure"}]},{"short":"Frying Egg","full":"A chef firmly cracks a raw egg directly over a sizzling hot, heavily oiled cast-iron frying pan.","videos":[{"src":"videos/teasers/Wan2.2-T2V-A14B/egg.mp4","label":"Wan2.2-T2V-A14B","status":"correct"},{"src":"videos/teasers/CogVideoX1.5-5B/egg.mp4","label":"CogVideoX1.5-5B","status":"failure"},{"src":"videos/teasers/AnimateDiff-SDXL/egg.mp4","label":"AnimateDiff-SDXL","status":"partial"}]},{"short":"Marker","full":"A thick black dry-erase marker is pressed against a clean, glossy whiteboard, moving steadily to trace a large, continuous circle.","videos":[{"src":"videos/teasers/Wan2.2-T2V-A14B/marker.mp4","label":"Wan2.2-T2V-A14B","status":"correct"},{"src":"videos/teasers/CogVideoX1.5-5B/marker.mp4","label":"CogVideoX1.5-5B","status":"partial"},{"src":"videos/teasers/AnimateDiff-SDXL/marker.mp4","label":"AnimateDiff-SDXL","status":"partial"}]},{"short":"Power Cord","full":"Someone firmly unplugs the thick power cord of a brightly glowing neon sign from the electrical socket on the wall.","videos":[{"src":"videos/teasers/Wan2.2-T2V-A14B/neon.mp4","label":"Wan2.2-T2V-A14B","status":"failure"},{"src":"videos/teasers/CogVideoX1.5-5B/neon.mp4","label":"CogVideoX1.5-5B","status":"failure"},{"src":"videos/teasers/AnimateDiff-SDXL/neon.mp4","label":"AnimateDiff-SDXL","status":"failure"}]},{"short":"Balloon","full":"A heavy leather boot forcefully steps down directly onto a fully inflated rubber balloon.","videos":[{"src":"videos/teasers/Wan2.2-T2V-A14B/balloon.mp4","label":"Wan2.2-T2V-A14B","status":"correct"},{"src":"videos/teasers/CogVideoX1.5-5B/balloon.mp4","label":"CogVideoX1.5-5B","status":"partial"},{"src":"videos/teasers/AnimateDiff-SDXL/balloon.mp4","label":"AnimateDiff-SDXL","status":"failure"}]},{"short":"Hot ball on Ice","full":"A glowing red-hot iron sphere is placed directly on top of a large, solid block of transparent ice.","videos":[{"src":"videos/teasers/Wan2.2-T2V-A14B/hot_ball.mp4","label":"Wan2.2-T2V-A14B","status":"failure"},{"src":"videos/teasers/CogVideoX1.5-5B/hot_ball.mp4","label":"CogVideoX1.5-5B","status":"failure"},{"src":"videos/teasers/AnimateDiff-SDXL/hot_ball.mp4","label":"AnimateDiff-SDXL","status":"failure"}]},{"short":"Snooker","full":"A fast-moving ball sharply strikes the front tip of a tightly racked triangular formation of billiard balls on a pool table.","videos":[{"src":"videos/teasers/Wan2.2-T2V-A14B/snooker.mp4","label":"Wan2.2-T2V-A14B","status":"failure"},{"src":"videos/teasers/CogVideoX1.5-5B/snooker.mp4","label":"CogVideoX1.5-5B","status":"failure"},{"src":"videos/teasers/AnimateDiff-SDXL/snooker.mp4","label":"AnimateDiff-SDXL","status":"failure"}]},{"short":"Stamp","full":"A hand firmly presses a custom rubber ink stamp onto a bright red ink pad, then immediately presses it down onto the bottom right corner of a blank white document.","videos":[{"src":"videos/teasers/Wan2.2-T2V-A14B/stamp.mp4","label":"Wan2.2-T2V-A14B","status":"correct"},{"src":"videos/teasers/CogVideoX1.5-5B/stamp.mp4","label":"CogVideoX1.5-5B","status":"partial"},{"src":"videos/teasers/AnimateDiff-SDXL/stamp.mp4","label":"AnimateDiff-SDXL","status":"failure"}]}],"subset":{"General":{"forward":[{"src":"videos/subset/general/forward/flooding_getty-traffic-driving-through-flood-water-during-torrentail-rain-in-lake-video-id667672969_6.mp4","prompt":"Flooding"},{"src":"videos/subset/general/forward/frying_yt-pJL_3YiUbq4_16.mp4","prompt":"Frying"},{"src":"videos/subset/general/forward/burying_yt-qYuLW5vSotM_160.mp4","prompt":"Burying"},{"src":"videos/subset/general/forward/slipping_yt-2HIZ29YMwNE_52.mp4","prompt":"Slipping"}],"reverse":[{"src":"videos/subset/general/reverse/flooding_getty-traffic-driving-through-flood-water-during-torrentail-rain-in-lake-video-id667672969_6.mp4","prompt":"Flooding"},{"src":"videos/subset/general/reverse/frying_yt-pJL_3YiUbq4_16.mp4","prompt":"Frying"},{"src":"videos/subset/general/reverse/burying_yt-qYuLW5vSotM_160.mp4","prompt":"Burying"},{"src":"videos/subset/general/reverse/slipping_yt-2HIZ29YMwNE_52.mp4","prompt":"Slipping"}]},"Physics":{"forward":[{"src":"videos/subset/physics/forward/0034_full-videos_30FPS_perspective-left_take-1_trimmed-block-domino.mp4","prompt":"A row of colorful wooden blocks lined up on a wooden table with a wooden stick attached to a black rotating platform. The platform rotates clockwise and the wooden stick hits the first block as it rotates. Static shot with no camera movement."},{"src":"videos/subset/physics/forward/0086_full-videos_30FPS_perspective-center_take-1_trimmed-liquid-on-duck.mp4","prompt":"A yellow rubber ducky is placed in an empty black baking pan on a wooden table.  A beverage dispenser with red liquid inside sits on a woven basket behind it. The liquid pours on the duck from the dispenser. Static shot with no camera movement."},{"src":"videos/subset/physics/forward/0045_full-videos_30FPS_perspective-right_take-1_trimmed-cut-paper.mp4","prompt":"Two black and blue gripping tools are pulling a piece of green paper from its two corners, causing it to tear. Static shot with no camera movement."},{"src":"videos/subset/physics/forward/0362_full-videos_30FPS_perspective-center_take-2_trimmed-siphon.mp4","prompt":"A bundle of lit matchsticks is placed in a bowl of red liquid. A glass jar gets lowered and covers the matchsticks. Static shot with no camera movement."}],"reverse":[{"src":"videos/subset/physics/reverse/0034_full-videos_30FPS_perspective-left_take-1_trimmed-block-domino.mp4","prompt":"A row of colorful wooden blocks lined up on a wooden table with a wooden stick attached to a black rotating platform. The platform rotates clockwise and the wooden stick hits the first block as it rotates. Static shot with no camera movement."},{"src":"videos/subset/physics/reverse/0086_full-videos_30FPS_perspective-center_take-1_trimmed-liquid-on-duck.mp4","prompt":"A yellow rubber ducky is placed in an empty black baking pan on a wooden table.  A beverage dispenser with red liquid inside sits on a woven basket behind it. The liquid pours on the duck from the dispenser. Static shot with no camera movement."},{"src":"videos/subset/physics/reverse/0045_full-videos_30FPS_perspective-right_take-1_trimmed-cut-paper.mp4","prompt":"Two black and blue gripping tools are pulling a piece of green paper from its two corners, causing it to tear. Static shot with no camera movement."},{"src":"videos/subset/physics/reverse/0362_full-videos_30FPS_perspective-center_take-2_trimmed-siphon.mp4","prompt":"A bundle of lit matchsticks is placed in a bowl of red liquid. A glass jar gets lowered and covers the matchsticks. Static shot with no camera movement."}]},"Human":{"forward":[{"src":"videos/subset/human/forward/_8N7jdEBanY_000001_000011.mp4","prompt":"Side kick"},{"src":"videos/subset/human/forward/_GVCZKMsKb8_000084_000094.mp4","prompt":"Swing dancing"},{"src":"videos/subset/human/forward/_3Sd76OyNxo_000012_000022.mp4","prompt":"Faceplanting"},{"src":"videos/subset/human/forward/_-CCqQ5yngI_000004_000014.mp4","prompt":"Eating cake"}],"reverse":[{"src":"videos/subset/human/reverse/_8N7jdEBanY_000001_000011.mp4","prompt":"Side kick"},{"src":"videos/subset/human/reverse/_8N7jdEBanY_000001_000011.mp4","prompt":"Swing dancing"},{"src":"videos/subset/human/reverse/_3Sd76OyNxo_000012_000022.mp4","prompt":"Faceplanting"},{"src":"videos/subset/human/reverse/_-CCqQ5yngI_000004_000014.mp4","prompt":"Eating cake"}]},"Animal":{"forward":[{"src":"videos/subset/animal/forward/BELKXFNJ.mp4","prompt":"The iguana is running on water."},{"src":"videos/subset/animal/forward/EEQHZUUK.mp4","prompt":"The green woodpecker is jumping."},{"src":"videos/subset/animal/forward/MUFYQBBY.mp4","prompt":"The giant hornet is falling."},{"src":"videos/subset/animal/forward/OQFUTKGZ.mp4","prompt":"The fish is swimming."}],"reverse":[{"src":"videos/subset/animal/reverse/BELKXFNJ.mp4","prompt":"The iguana is running on water."},{"src":"videos/subset/animal/reverse/EEQHZUUK.mp4","prompt":"The green woodpecker is jumping."},{"src":"videos/subset/animal/reverse/MUFYQBBY.mp4","prompt":"The giant hornet is falling."},{"src":"videos/subset/animal/reverse/OQFUTKGZ.mp4","prompt":"The fish is swimming."}]}},"causal":{"Causal":{"forward":[{"src":"videos/c_nc/causal/forward/0249_full-videos_30FPS_perspective-right_take-2_trimmed-dominos-with-space.mp4","prompt":"Two rows of alternating black and white dominoes are set up on a wooden table with a gap between the two rows. A wooden stick attached to a rotating platform rotates clockwise and knocks the first domino in the first row. Static shot with no camera movement."},{"src":"videos/c_nc/causal/forward/JRQCMVEI.mp4","prompt":"The vanellus vanellus bird is walking."},{"src":"videos/c_nc/causal/forward/peeling_getty-shot-of-chefs-hands-preparing-carrot-on-chopping-board-united-kingdom-video-id177279384_1.mp4","prompt":"Peeling"},{"src":"videos/c_nc/causal/forward/sowing_yt-LnqGJ0R7Bng_15.mp4","prompt":"Sowing"}],"reverse":[{"src":"videos/c_nc/causal/reverse/0249_full-videos_30FPS_perspective-right_take-2_trimmed-dominos-with-space.mp4","prompt":"Two rows of alternating black and white dominoes are set up on a wooden table with a gap between the two rows. A wooden stick attached to a rotating platform rotates clockwise and knocks the first domino in the first row. Static shot with no camera movement."},{"src":"videos/c_nc/causal/reverse/JRQCMVEI.mp4","prompt":"The vanellus vanellus bird is walking."},{"src":"videos/c_nc/causal/reverse/peeling_getty-shot-of-chefs-hands-preparing-carrot-on-chopping-board-united-kingdom-video-id177279384_1.mp4","prompt":"Peeling"},{"src":"videos/c_nc/causal/reverse/sowing_yt-LnqGJ0R7Bng_15.mp4","prompt":"Sowing"}]},"Non-Causal":{"forward":[{"src":"videos/c_nc/non-causal/forward/_0Z8H7FAtvI_000000_000010.mp4","prompt":"Presenting weather forecast"},{"src":"videos/c_nc/non-causal/forward/adult_male_singing_getty-band-playing-in-studio-space-video-id531897674_4.mp4","prompt":"Adult female singing"},{"src":"videos/c_nc/non-causal/forward/0373_full-videos_30FPS_perspective-left_take-2_trimmed-teapot-rotates.mp4","prompt":"A teapot is placed on a rotating display that rotates clockwise. Static shot with no camera movement."},{"src":"videos/c_nc/non-causal/forward/OQFUTKGZ.mp4","prompt":"The fish is swimming."}],"reverse":[{"src":"videos/c_nc/non-causal/reverse/_0Z8H7FAtvI_000000_000010.mp4","prompt":"Presenting weather forecast"},{"src":"videos/c_nc/non-causal/reverse/adult_male_singing_getty-band-playing-in-studio-space-video-id531897674_4.mp4","prompt":"Adult female singing"},{"src":"videos/c_nc/non-causal/reverse/0373_full-videos_30FPS_perspective-left_take-2_trimmed-teapot-rotates.mp4","prompt":"A teapot is placed on a rotating display that rotates clockwise. Static shot with no camera movement."},{"src":"videos/c_nc/non-causal/reverse/OQFUTKGZ.mp4","prompt":"The fish is swimming."}]}},"temporalSymmetric":{"forward":[{"src":"videos/limitation/forward/0360_single-cradle_from3s.mp4","prompt":"A Newton's cradle device on the table"},{"src":"videos/limitation/forward/boxing_getty-boxer-exercising-without-gloves-in-boxing-gym-video-id674817640_4.mp4","prompt":"Boxing"},{"src":"videos/limitation/forward/telephoning_giphy-10ZxpBJiSN6iaI_1.mp4","prompt":"Telephoning"},{"src":"videos/limitation/forward/UQJFQWMK.mp4","prompt":"The horned adder is sensing its environment."}],"reverse":[{"src":"videos/limitation/reverse/0360_single-cradle_from3s.mp4","prompt":"A Newton's cradle device on the table"},{"src":"videos/limitation/reverse/boxing_getty-boxer-exercising-without-gloves-in-boxing-gym-video-id674817640_4.mp4","prompt":"Boxing"},{"src":"videos/limitation/reverse/telephoning_giphy-10ZxpBJiSN6iaI_1.mp4","prompt":"Telephoning"},{"src":"videos/limitation/reverse/UQJFQWMK.mp4","prompt":"The horned adder is sensing its environment."}]}};
+
+function getVideoSrc(src) {
+  return (src && src.trim()) ? src : videoData.defaultVideo;
+}
+
+/* ── Lazy-load + autoplay via IntersectionObserver ── */
+let videoObserver = null;
+function setupLazyVideos() {
+  if (videoObserver) videoObserver.disconnect();
+  videoObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        if (!video.dataset.loaded) {
+          video.src = video.dataset.src;
+          video.load();
+          video.dataset.loaded = '1';
+        }
+        video.play().catch(function(){});
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll('video[data-src]').forEach(function(v) {
+    videoObserver.observe(v);
+  });
+}
+
+/* ── Video card for teaser (with status badge + label) ── */
+function makeVideoCard(video) {
+  let statusHTML = '';
+  if (video.status === 'correct') {
+    statusHTML = '<span class="video-status correct">&#10003;</span>';
+  } else if (video.status === 'failure') {
+    statusHTML = '<span class="video-status failure">&#10007;</span>';
+  } else if (video.status === 'partial') {
+    statusHTML = '<span class="video-status partial">?</span>';
+  }
+  return '<div class="video-card">' +
+    '<div class="video-wrapper">' +
+      '<video controls muted loop playsinline data-src="' + getVideoSrc(video.src) + '"></video>' +
+      statusHTML +
+    '</div>' +
+    (video.label ? '<div class="video-label">' + video.label + '</div>' : '') +
+  '</div>';
+}
+
+/* ── Plain video card (no label / no prompt) ── */
+function makeVideoOnly(src) {
+  return '<div class="video-card">' +
+    '<div class="video-wrapper">' +
+      '<video controls muted loop playsinline data-src="' + getVideoSrc(src) + '"></video>' +
+    '</div>' +
+  '</div>';
+}
+
+function pauseAllVideosIn(container) {
+  container.querySelectorAll('video').forEach(function(v) { v.pause(); v.currentTime = 0; });
+}
+
+/* ── Paired section renderer (Forward / shared Prompt / Reverse) ── */
+function renderPairedSection(containerId, data) {
+  const container = document.getElementById(containerId);
+  pauseAllVideosIn(container);
+
+  const fwdVideos = data.forward.map(function(v) { return makeVideoOnly(v.src); }).join('');
+  const revVideos = data.reverse.map(function(v) { return makeVideoOnly(v.src); }).join('');
+  const prompts  = data.forward.map(function(v) {
+    return '<div class="prompt-cell">' + (v.prompt || '') + '</div>';
+  }).join('');
+
+  container.innerHTML =
+    '<div class="divider-row"><span>Forward ▶</span></div>' +
+    '<div class="video-row cols-4">' + fwdVideos + '</div>' +
+    '<div class="prompt-row cols-4">' + prompts + '</div>' +
+    '<div class="divider-row"><span>Reverse ◀</span></div>' +
+    '<div class="video-row cols-4">' + revVideos + '</div>';
+
+  setupLazyVideos();
+}
+
+/* ── Teaser ── */
+let currentTeaserIdx = 0;
+
+function renderTeaser(idx) {
+  currentTeaserIdx = idx;
+  const entry = videoData.teaser[idx];
+
+  document.querySelectorAll('#teaser-tabs .tab-btn').forEach(function(b, i) {
+    b.classList.toggle('active', i === idx);
+  });
+
+  document.getElementById('teaser-prompt').textContent = entry.full;
+
+  const container = document.getElementById('teaser-videos');
+  pauseAllVideosIn(container);
+  container.innerHTML = entry.videos.map(function(v) { return makeVideoCard(v); }).join('');
+  setupLazyVideos();
+}
+
+function initTeaser() {
+  const tabs = document.getElementById('teaser-tabs');
+  tabs.innerHTML = videoData.teaser.map(function(p, i) {
+    return '<button class="tab-btn ' + (i === 0 ? 'active' : '') + '" onclick="renderTeaser(' + i + ')">' + p.short + '</button>';
+  }).join('');
+  renderTeaser(0);
+}
+
+/* ── Subset Video ── */
+function renderSubset(dataset, btn) {
+  if (btn) {
+    document.querySelectorAll('#subset-tabs .tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+  }
+  renderPairedSection('subset-content', videoData.subset[dataset]);
+}
+
+function initSubset() {
+  const datasets = Object.keys(videoData.subset);
+  const tabs = document.getElementById('subset-tabs');
+  tabs.innerHTML = datasets.map(function(d, i) {
+    return '<button class="tab-btn ' + (i === 0 ? 'active' : '') + '" onclick="renderSubset(\'' + d + '\', this)">' + d + '</button>';
+  }).join('');
+  renderSubset(datasets[0]);
+}
+
+/* ── Causal / Non-Causal ── */
+function renderCausalVideo(dataset, btn) {
+  if (btn) {
+    document.querySelectorAll('#causal-tabs .tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+  }
+  renderPairedSection('causal-content', videoData.causal[dataset]);
+}
+
+function initCausal() {
+  const datasets = Object.keys(videoData.causal);
+  const tabs = document.getElementById('causal-tabs');
+  tabs.innerHTML = datasets.map(function(d, i) {
+    return '<button class="tab-btn ' + (i === 0 ? 'active' : '') + '" onclick="renderCausalVideo(\'' + d + '\', this)">' + d + '</button>';
+  }).join('');
+  renderCausalVideo(datasets[0]);
+}
+
+/* ── Temporal Symmetric ── */
+function initTemporalSymmetric() {
+  renderPairedSection('temporal-content', videoData.temporalSymmetric);
+}
+
+/* ── Init on page load ── */
+document.addEventListener('DOMContentLoaded', function() {
+  renderRSI(currentRSISort);
+  renderCCI();
+  renderAggregate();
+
+  initTeaser();
+  initSubset();
+  initCausal();
+  initTemporalSymmetric();
+});
+</script>
+
+</body>
+</html>
