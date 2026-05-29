@@ -113,6 +113,11 @@ div , footer {
 	margin: 60px auto;
 }
 
+.navbar .container {
+	margin: 0 auto;
+	height: auto;
+}
+
 .intro {
 	margin: 50px auto; 
 	position: relative;
