@@ -54,6 +54,14 @@
   /* ── Container ── */
   .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
   
+  /* ── Inline Logo ── */
+  .inline-logo {
+    height: 1em;
+    width: auto;
+    vertical-align: middle;
+    display: inline;
+  }
+
   /* ── Hero / Header ── */
   .hero {
     padding-top: 100px; padding-bottom: 2rem; text-align: center;
