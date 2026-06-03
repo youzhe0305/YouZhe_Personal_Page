@@ -1,4 +1,6 @@
 (function () {
+	var lightbox = null;
+
 	function createLightbox() {
 		var lightbox = document.createElement('div');
 		lightbox.className = 'image-lightbox';
@@ -31,76 +33,74 @@
 		};
 	}
 
-	document.addEventListener('DOMContentLoaded', function () {
-		var lightbox = createLightbox();
-		var zoomableMedia = document.querySelectorAll('.publication .col-lg-4 img, .publication .col-lg-4 video');
-
-		function getVideoSource(sourceVideo) {
-			var source = sourceVideo.querySelector('source');
-			return source ? source.src : sourceVideo.currentSrc || sourceVideo.src;
-		}
-
-		function openLightbox(sourceMedia) {
-			if (sourceMedia.tagName.toLowerCase() === 'video') {
-				lightbox.image.hidden = true;
-				lightbox.image.removeAttribute('src');
-				lightbox.video.hidden = false;
-				lightbox.video.src = getVideoSource(sourceMedia);
-				lightbox.video.loop = sourceMedia.loop;
-				lightbox.video.muted = sourceMedia.muted;
-				lightbox.video.play();
-			} else {
-				lightbox.video.pause();
-				lightbox.video.removeAttribute('src');
-				lightbox.video.load();
-				lightbox.video.hidden = true;
-				lightbox.image.hidden = false;
-				lightbox.image.src = sourceMedia.currentSrc || sourceMedia.src;
-				lightbox.image.alt = sourceMedia.alt || '';
-			}
-			lightbox.el.classList.add('is-open');
-			document.body.classList.add('lightbox-open');
-			lightbox.closeButton.focus();
-		}
-
-		function closeLightbox() {
-			lightbox.el.classList.remove('is-open');
-			document.body.classList.remove('lightbox-open');
-			lightbox.image.removeAttribute('src');
-			lightbox.video.pause();
-			lightbox.video.removeAttribute('src');
-			lightbox.video.load();
-		}
-
-		zoomableMedia.forEach(function (media) {
-			media.classList.add('zoomable-media');
-			media.setAttribute('tabindex', '0');
-			media.setAttribute('role', 'button');
-			media.setAttribute('aria-label', 'Enlarge media');
-
-			media.addEventListener('click', function () {
-				openLightbox(media);
-			});
-
-			media.addEventListener('keydown', function (event) {
-				if (event.key === 'Enter' || event.key === ' ') {
-					event.preventDefault();
-					openLightbox(media);
+	function getLightbox() {
+		if (!lightbox) {
+			lightbox = createLightbox();
+			lightbox.closeButton.addEventListener('click', closeLightbox);
+			lightbox.el.addEventListener('click', function (event) {
+				if (event.target === lightbox.el) {
+					closeLightbox();
 				}
 			});
-		});
+		}
 
-		lightbox.closeButton.addEventListener('click', closeLightbox);
-		lightbox.el.addEventListener('click', function (event) {
-			if (event.target === lightbox.el) {
-				closeLightbox();
-			}
-		});
+		return lightbox;
+	}
 
-		document.addEventListener('keydown', function (event) {
-			if (event.key === 'Escape' && lightbox.el.classList.contains('is-open')) {
-				closeLightbox();
-			}
-		});
+	function getVideoSource(sourceVideo) {
+		var source = sourceVideo.querySelector('source');
+		return source ? source.src : sourceVideo.currentSrc || sourceVideo.src;
+	}
+
+	function openLightbox(sourceMedia) {
+		var activeLightbox = getLightbox();
+
+		if (sourceMedia.tagName.toLowerCase() === 'video') {
+			activeLightbox.image.hidden = true;
+			activeLightbox.image.removeAttribute('src');
+			activeLightbox.video.hidden = false;
+			activeLightbox.video.src = getVideoSource(sourceMedia);
+			activeLightbox.video.loop = sourceMedia.loop;
+			activeLightbox.video.muted = sourceMedia.muted;
+			activeLightbox.video.play();
+		} else {
+			activeLightbox.video.pause();
+			activeLightbox.video.removeAttribute('src');
+			activeLightbox.video.load();
+			activeLightbox.video.hidden = true;
+			activeLightbox.image.hidden = false;
+			activeLightbox.image.src = sourceMedia.currentSrc || sourceMedia.src;
+			activeLightbox.image.alt = sourceMedia.alt || '';
+		}
+		activeLightbox.el.classList.add('is-open');
+		document.body.classList.add('lightbox-open');
+		activeLightbox.closeButton.focus();
+	}
+
+	function closeLightbox() {
+		if (!lightbox) {
+			return;
+		}
+
+		lightbox.el.classList.remove('is-open');
+		document.body.classList.remove('lightbox-open');
+		lightbox.image.removeAttribute('src');
+		lightbox.video.pause();
+		lightbox.video.removeAttribute('src');
+		lightbox.video.load();
+	}
+
+	document.addEventListener('click', function (event) {
+		var media = event.target.closest('.publication .col-lg-4 img, .publication .col-lg-4 video');
+
+		if (media) {
+			openLightbox(media);
+		}
+	});
+
+	document.addEventListener('keydown', function (event) {
+		if (event.key === 'Escape' && lightbox && lightbox.el.classList.contains('is-open')) {
+			closeLightbox();
+		}
 	});
 }());

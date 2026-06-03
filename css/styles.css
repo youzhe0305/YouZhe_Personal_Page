@@ -224,12 +224,14 @@ h1.name {
 	height: auto;
 }
 
-.publication .zoomable-media {
+.publication .col-lg-4 img,
+.publication .col-lg-4 video {
 	cursor: zoom-in;
 	transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.publication .zoomable-media:hover {
+.publication .col-lg-4 img:hover,
+.publication .col-lg-4 video:hover {
 	opacity: 0.92;
 	transform: translateY(-2px);
 	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
