@@ -1,0 +1,1 @@
+const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach(e=>o.observe(e));const b=document.querySelector('nav button'),l=document.querySelector('.links');b.onclick=()=>l.classList.toggle('open');l.onclick=()=>l.classList.remove('open');
