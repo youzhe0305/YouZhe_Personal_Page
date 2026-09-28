@@ -76,7 +76,7 @@
     <h2 class="section-title">Teaser</h2>
 
     <div class="teaser-img">
-      <img src="figs/teaser.jpg" alt="Teaser" width="100%" />
+      <img src="figs/teaser.png" alt="Teaser" width="100%" />
     </div>
 
     <!-- Prompt selector tabs -->
@@ -129,7 +129,7 @@
   <div class="container">
     <h2 class="section-title">Contribution</h2>
     <ol class="contribution-list">
-      <li><strong>The first causality benchmark for VDMs based on cognition science.</strong></li>
+      <li><strong>The first kelihood-based, VoE-grounded causality benchmark for VDMs based on cognition science.</strong></li>
       <li><strong>Build an arbitrary scalable real-world dataset, freeing evaluation from sim-to-real gaps</strong></li>
       <li><strong>A cognitive-science-grounded two-level framework that disentangles arrow-of-time perception from causal cognition.</strong></li>
       <li><strong>Evidence that current open-source VDMs lack causal understanding, revealing a critical gap toward world models and providing guidance.</strong></li>
@@ -482,7 +482,8 @@ function renderAggregate() {
     isHuman: m === 'Human',
   }));
 
-  aggData.sort((a, b) => a.aggScore - b.aggScore);
+  // 同分時 RSI Rank 較好（數字較小）者排前面
+  aggData.sort((a, b) => (a.aggScore - b.aggScore) || (a.rsiRank - b.rsiRank));
 
   const tbody = document.querySelector('#agg-table tbody');
   tbody.innerHTML = aggData.map((d, i) => {
