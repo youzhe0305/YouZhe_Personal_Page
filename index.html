@@ -263,12 +263,12 @@
 				<img src="papers\MLLM-MPM\teaser.png" alt="Teaser" style="max-width: 100%;" loading="lazy" decoding="async">
 			</div>
 			<div class="col-lg-8">
-				<p class=""><strong>Visually Grounded Reasoning: MLLM Bootstraps Gradient-Based System Identification Under Partial Observability</strong></p>
+				<p class=""><strong>TwinReason: Cross-Engine MLLM-Guided Inverse Physics from Monocular Video</strong></p>
 				Chih-Hai Su, Fu-En Wang, Nan Qiao, Yuyin Sun, <strong>You-Zhe Xie</strong>, Yang-Sen Lin, Jie-Ying Lee, Yi-Ruei Liu, Roberto Martín-Martín, Yu-Lun Liu, Tsung-Wei Ke, Min Sun, Cheng-Hao Kuo
 				<p>Authorship: 5th author</p>
 				<p class="intro">
-					Reconstructing simulatable digital twins from monocular video is ill-posed: gradient descent minimizes pixel loss but cannot disambiguate the parameter manifold consistent with 2D projections.
-					We recast system identification as a visually grounded reasoning loop, where an MLLM compares rendered simulations against observations and proposes parameters from semantic material priors external to the loss surface, recovering physics rather than memorizing projections.
+				Recovers an object's material and physical parameters from a single video so it can be re-simulated as a digital twin. 
+				An MLLM acts as a visual critic: it compares simulated rollouts from two physics engines (Spring-Mass, MPM) against the real footage and iteratively refines the parameters.
 				</p>
 					<a class="btn disabled" href="#">
 						<i class="fas fa-globe-asia"></i>&nbsp project page
