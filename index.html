@@ -506,7 +506,7 @@
 			<div class="sec-head"><h2>Experience</h2></div>
 			<div class="exp-grid">
 				<div class="exp reveal">
-					<img src="images/Alaya_Lab_Logo.png" alt="Alaya Lab" loading="lazy" decoding="async">
+					<img src="images/Alaya_Lab_Logo.png" alt="Alaya Lab">
 					<div>
 						<div class="org"><a href="https://alayalab.ai/" target="_blank">Alaya Lab (Tokyo)</a></div>
 						<div class="pos">Research Intern</div>
@@ -514,7 +514,7 @@
 					</div>
 				</div>
 				<div class="exp reveal">
-					<img src="images/Academia_Sinica_Emblem.png" alt="Academia Sinica" loading="lazy" decoding="async">
+					<img src="images/Academia_Sinica_Emblem.png" alt="Academia Sinica">
 					<div>
 						<div class="org"><a href="https://www.sinica.edu.tw/en" target="_blank">Academia Sinica</a></div>
 						<div class="pos">Part-time Research Assistant · Dr. <a href="https://homepage.citi.sinica.edu.tw/pages/pullpull/index_en.html" target="_blank">Jun-Cheng Chen</a></div>
@@ -522,7 +522,7 @@
 					</div>
 				</div>
 				<div class="exp reveal">
-					<img src="images/nycu.png" alt="NYCU" loading="lazy" decoding="async">
+					<img src="images/nycu.png" alt="NYCU">
 					<div>
 						<div class="org"><a href="https://www.nycu.edu.tw/" target="_blank">National Yang Ming Chiao Tung University</a></div>
 						<div class="pos">B.S. in Computer Science · Prof. <a href="https://yulunalexliu.github.io/" target="_blank">Yu-Lun Liu</a></div>
@@ -531,7 +531,7 @@
 					</div>
 				</div>
 				<div class="exp reveal">
-					<img src="images/WorldQuant.png" alt="WorldQuant" loading="lazy" decoding="async">
+					<img src="images/WorldQuant.png" alt="WorldQuant">
 					<div>
 						<div class="org"><a href="https://www.worldquant.com/" target="_blank">WorldQuant</a></div>
 						<div class="pos">Brain Consultant</div>
@@ -539,7 +539,7 @@
 					</div>
 				</div>
 				<div class="exp reveal">
-					<img src="images/GDSC.jpg" alt="GDSC" loading="lazy" decoding="async">
+					<img src="images/GDSC.jpg" alt="GDSC">
 					<div>
 						<div class="org"><a href="https://gdsc.community.dev/" target="_blank">Google Developer Student Club</a></div>
 						<div class="pos">Mentor of Gen CV</div>
@@ -703,9 +703,10 @@
 			const icon = label === 'HF Paper' ? '🤗 ' : `<i class="${ICONS[label] || 'fas fa-link'}"></i>`;
 			return `<a class="pill" href="${esc(url)}">${icon}${esc(label)}</a>`;
 		}).join('');
+		// data-src: the file is fetched later by loadMediaInOrder(), top of the page first
 		const media = (src, alt) => /\.(mp4|webm)$/i.test(src)
-			? `<div class="media"><video loop playsinline muted preload="metadata"><source src="${esc(src)}" type="video/${src.split('.').pop().toLowerCase()}"></video></div>`
-			: `<div class="media"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></div>`;
+			? `<div class="media"><video loop playsinline muted preload="none" data-src="${esc(src)}"></video></div>`
+			: `<div class="media"><img data-src="${esc(src)}" alt="${esc(alt)}" decoding="async"></div>`;
 		const titleLink = (title, url) => url ? `<a href="${esc(url)}">${esc(title)}</a>` : esc(title);
 
 		const pubData = loadList('publications.yaml');
@@ -944,15 +945,54 @@
 		// Once everything is on the page: fade-ins, star counts, nav progress (section heights changed)
 		Promise.all([newsReady, pubsReady, projsReady, honorsReady]).then(() => {
 			document.querySelectorAll('.reveal:not(.in)').forEach(el => rev.observe(el));
-			// Videos only play while on screen, so they don't all download at once
-			const vio = new IntersectionObserver(entries => entries.forEach(({ target: v, isIntersecting }) => {
-				if (isIntersecting) v.play().catch(() => {}); else v.pause();
-			}), { rootMargin: '200px 0px' });
-			document.querySelectorAll('.media video').forEach(v => { v.muted = true; vio.observe(v); });
+			loadMediaInOrder();
 			addStars();
 			addCitations();
 			onScroll();
 		});
+
+		// Publication / project media: fetched two at a time in page order (after the profile photo),
+		// so everything is ready by the time you scroll there. Anything you scroll near jumps the queue.
+		function loadMediaInOrder() {
+			const queue = [...document.querySelectorAll('.media [data-src]')];
+			let running = 0;
+			const load = el => {
+				queue.splice(queue.indexOf(el), 1);
+				near.unobserve(el);
+				running++;
+				const done = () => { if (el.dataset.done) return; el.dataset.done = 1; running--; next(); };
+				if (el.tagName === 'VIDEO') {
+					el.addEventListener('canplaythrough', done, { once: true });
+					el.addEventListener('error', done, { once: true });
+					setTimeout(done, 8000); // a slow video shouldn't hold up the rest of the queue
+					el.preload = 'auto';
+					el.src = el.dataset.src;
+					el.muted = true;
+					play.observe(el);
+				} else {
+					el.addEventListener('load', done, { once: true });
+					el.addEventListener('error', done, { once: true });
+					el.src = el.dataset.src;
+				}
+			};
+			const next = () => { while (running < 2 && queue.length) load(queue[0]); };
+			// Scrolled close to something that hasn't loaded yet → load it right now
+			const near = new IntersectionObserver(entries => entries.forEach(e => {
+				if (e.isIntersecting && queue.includes(e.target)) load(e.target);
+			}), { rootMargin: '600px 0px' });
+			// Videos play only while on screen (they're already downloaded; this just saves CPU)
+			const play = new IntersectionObserver(entries => entries.forEach(({ target: v, isIntersecting }) => {
+				if (isIntersecting) v.play().catch(() => {}); else v.pause();
+			}));
+			queue.forEach(el => near.observe(el));
+			const photo = document.querySelector('.photo');
+			if (photo.complete) next();
+			else {
+				photo.addEventListener('load', next, { once: true });
+				photo.addEventListener('error', next, { once: true });
+				setTimeout(next, 3000);
+			}
+		}
 
 		// Google Scholar citations from data/scholar.json (updated daily by .github/workflows/scholar.yml)
 		async function addCitations() {
@@ -1062,13 +1102,13 @@
 			if (media.tagName === 'VIDEO') {
 				lbImg.hidden = true;
 				lbVid.hidden = false;
-				lbVid.src = media.querySelector('source')?.src || media.currentSrc;
+				lbVid.src = media.currentSrc || media.dataset.src;
 				lbVid.muted = true;
 				lbVid.play();
 			} else {
 				lbVid.hidden = true;
 				lbImg.hidden = false;
-				lbImg.src = media.currentSrc || media.src;
+				lbImg.src = media.currentSrc || media.src || media.dataset.src;
 				lbImg.alt = media.alt;
 			}
 			lb.classList.add('open');
