@@ -1,0 +1,26 @@
+{
+  "citations": 11,
+  "h_index": 1,
+  "i10_index": 1,
+  "publications": [
+    {
+      "title": "StealthAttack: Robust 3D Gaussian Splatting Poisoning via Density-Guided Illusions",
+      "year": "2025",
+      "citations": 10,
+      "id": "DHDR6DAAAAAJ:u-x6o8ySG0sC"
+    },
+    {
+      "title": "YoCausal: How Far is Video Generation from World Model? A Causality Perspective",
+      "year": "2026",
+      "citations": 1,
+      "id": "DHDR6DAAAAAJ:d1gkVwhDpl0C"
+    },
+    {
+      "title": "Every Camera Effect, Every Time, All at Once: 4D Gaussian Ray Tracing for Physics-based Camera Effect Data Generation",
+      "year": "2025",
+      "citations": 0,
+      "id": "DHDR6DAAAAAJ:u5HHmVD_uO8C"
+    }
+  ],
+  "updated": "2026-10-04"
+}

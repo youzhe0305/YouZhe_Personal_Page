@@ -1,0 +1,119 @@
+# Publications shown on index_new.html — displayed in the order they appear in this file.
+#
+# title:     paper title (quote it if it contains ": "); also used to match the Google Scholar citation count
+# short:     short name; [[short]] in news.yaml becomes a colored box linking here
+# url:       optional — makes the title a link
+# date:      optional, not shown on the page (just for your own reference)
+# media:     image or video path (.mp4 / .webm become autoplaying videos); click enlarges it
+# authors:   list; "You-Zhe Xie" is bolded automatically. [Name](url) makes a link, * = equal contribution, † = corresponding author
+# venues:    optional list; each item is a string, or { name, award } to add an award in gold
+# role:      authorship tag, e.g. "1st author"
+# abstract:  short summary
+# links:     label: url, in display order. Known labels get icons:
+#            Project Page, Page, arXiv, Code, Dataset, Video, Demo, Poster, HF Paper
+# note:      optional grey pill, e.g. "Paper & code coming soon"
+# Text fields understand **bold** and [text](url).
+
+- title: "YoCausal: How Far is Video Generation from World Model? A Causality Perspective"
+  short: YoCausal
+  url: https://www.youzhexie.me/papers/YoCausal/index.html
+  date: "2026-05"
+  media: papers/YoCausal/figs/teaser.png
+  authors:
+    - "You-Zhe Xie*"
+    - "[Yu-Hsuan Li*](https://www.yhlizzz.com/)"
+    - "[Jie-Ying Lee](https://jayinnn.dev/)"
+    - "[Kaipeng Zhang](https://kpzhang93.github.io/)"
+    - "[Yu-Lun Liu†](https://yulunalexliu.github.io/)"
+    - "[Zhixiang Wang†](https://lightchaserx.github.io/)"
+  venues:
+    - arXiv 2026
+  role: 1st author
+  abstract: >-
+    The first benchmark for causal cognition in video generation models. Inspired by infant-cognition
+    experiments with reversed videos, it turns any real-world video into a test at zero cost, so it
+    extends to arbitrary types of causality.
+  links:
+    Project Page: https://www.youzhexie.me/papers/YoCausal/index.html
+    arXiv: https://arxiv.org/abs/2605.30346
+    Code: https://github.com/youzhe0305/YoCausal
+    Dataset: https://huggingface.co/datasets/YouZhe/YoCausal-dataset
+    Video: https://youtu.be/dCaAfWTUCFA
+    HF Paper: https://huggingface.co/papers/2605.30346
+
+- title: "StealthAttack: Robust 3D Gaussian Splatting Poisoning via Density-Guided Illusions"
+  short: StealthAttack
+  url: https://hentci.github.io/stealthattack/
+  date: "2025-10"
+  media: files/StealthAttack/stealthAttack_trim.mp4
+  authors:
+    - "[Bo-Hsu Ke](https://hentci.github.io/)"
+    - "You-Zhe Xie"
+    - "[Yu-Lun Liu†](https://yulunalexliu.github.io/)"
+    - "[Wei-Chen Chiu†](https://walonchiu.github.io/)"
+  venues:
+    - ICCV 2025
+    - name: "ICCV 2025 [Responsible Imaging](https://responsible-imaging.github.io/) Workshop"
+      award: "✨ Oral, 🏆 Best Poster Award"
+  role: 2nd author
+  abstract: >-
+    A density-guided poisoning method for 3DGS that injects illusory objects into low-density regions
+    and uses adaptive noise to disrupt multi-view consistency, so the illusion is clearly visible from
+    target views while innocent views stay high-fidelity.
+  links:
+    Project Page: https://hentci.github.io/stealthattack/
+    arXiv: https://arxiv.org/abs/2510.02314
+    Code: https://github.com/Hentci/StealthAttack_official
+    Video: https://www.youtube.com/watch?v=fM5LPSCzVG8
+    HF Paper: https://huggingface.co/papers/2510.02314
+
+- title: "Every Camera Effect, Every Time, All at Once: 4D Gaussian Ray Tracing for Physics-based Camera Effect Data Generation"
+  short: 4DGRT
+  url: https://shigon255.github.io/4DGRT-project-page/
+  date: "2025-12"
+  media: files/4DGRT/coffee_martinirt_rolling_shutter.mp4
+  authors:
+    - "Yi-Ruei Liu*"
+    - "You-Zhe Xie*"
+    - "Yu-Hsiang Hsu*"
+    - "[I-Sheng Fang](https://ishengfang.github.io/)"
+    - "[Yu-Lun Liu](https://yulunalexliu.github.io/)"
+    - "[Jun-Cheng Chen†](https://homepage.citi.sinica.edu.tw/pages/pullpull/index_en.html)"
+  venues:
+    - name: "NeurIPS 2025 [SpaVLE](https://space-in-vision-language-embodied-ai.github.io/) Workshop"
+      award: "✨ Oral"
+  role: co-1st author
+  abstract: >-
+    Camera-effect video generation is limited by data. 4DGRT ray-traces dynamic 3D Gaussians (4DGS) to
+    synthesize physically-accurate camera effects, and releases a paired dataset of 8 dynamic indoor
+    scenes with multi-view videos under four camera effects.
+  links:
+    Project Page: https://shigon255.github.io/4DGRT-project-page/
+    arXiv: https://www.arxiv.org/abs/2509.10759
+  note: "Code coming soon"
+    # Code not public yet:
+    # Code: https://github.com/shigon255/4DGRT
+
+- title: "TwinReason: Cross-Engine MLLM-Guided Inverse Physics from Monocular Video"
+  short: TwinReason
+  media: papers/MLLM-MPM/teaser.png
+  authors:
+    - "Chih-Hai Su"
+    - "Fu-En Wang"
+    - "Nan Qiao"
+    - "Yuyin Sun"
+    - "You-Zhe Xie"
+    - "Yang-Sen Lin"
+    - "Jie-Ying Lee"
+    - "Yi-Ruei Liu"
+    - "Roberto Martín-Martín"
+    - "Yu-Lun Liu"
+    - "Tsung-Wei Ke"
+    - "Min Sun"
+    - "Cheng-Hao Kuo"
+  role: 5th author
+  abstract: >-
+    Recovers an object's material and physical parameters from a single video so it can be
+    re-simulated as a digital twin. An MLLM acts as a visual critic, comparing rollouts from two physics
+    engines (Spring-Mass, MPM) against real footage and iteratively refining the parameters.
+  note: "Paper & code coming soon"

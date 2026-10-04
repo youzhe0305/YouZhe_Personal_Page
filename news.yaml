@@ -1,0 +1,82 @@
+# News shown on index_new.html — sorted by date automatically (newest first).
+# date: "YYYY-MM"   icon: any emoji   text: wrap words in **double asterisks** to bold them.
+# Entries with the same date keep the order they have in this file.
+# [[Name]] shows Name as a colored box linking to the publication / project whose `short:` is Name
+#   (in publications.yaml / projects.yaml; case doesn't matter). [[Name|https://...]] links somewhere else.
+#   Quote the text if it starts with [[ .
+
+- date: "2026-06"
+  icon: 🏅
+  text: "Won 1st Place in the Capstone Project Competition (專題競賽特優) with [[YoCausal]]."
+
+- date: "2026-05"
+  icon: 🚀
+  text: "[[YoCausal]] is released - a causality cognition benchmark for video generation models."
+
+- date: "2026-04"
+  icon: 🏅
+  text: Received the Academic Excellence Award (書卷獎).
+
+- date: "2025-12"
+  icon: 💼
+  text: Joined the research internship program at **Alaya Lab (Tokyo)**.
+
+- date: "2025-10"
+  icon: 🏆
+  text: "[[StealthAttack]] invited for an **Oral** Presentation and won the **Best Poster Award** at the **ICCV 2025 Responsible Imaging workshop**."
+
+- date: "2025-10"
+  icon: 🚀
+  text: "[[StealthAttack]] is released - a density-guided poisoning attack that plants illusory objects in 3D Gaussian Splatting."
+
+- date: "2025-09"
+  icon: 🎉
+  text: "[[4DGRT]] accepted to the **NeurIPS 2025 SpaVLE workshop** and invited for an **Oral Presentation**."
+
+- date: "2025-09"
+  icon: 🚀
+  text: "[[4DGRT]] is released - physics-based camera-effect data generation by ray tracing 4D Gaussians."
+
+- date: "2025-09"
+  icon: 🏅
+  text: Received the Core Fundamental Course Award (核心基礎課程獎) in Computer Organization.
+
+- date: "2025-06"
+  icon: 🎉
+  text: "[[StealthAttack]] accepted to **ICCV 2025**."
+
+- date: "2025-06"
+  icon: ✅
+  text: Completed the GDSC Global Program at NYCU as a core member.
+
+- date: "2025-04"
+  icon: 🏅
+  text: Received the Academic Excellence Award (書卷獎).
+
+- date: "2025-04"
+  icon: 💼
+  text: Joined the summer research internship program at **Academia Sinica**.
+
+- date: "2025-03"
+  icon: 🏅
+  text: Received the Academic Excellence Award (書卷獎).
+
+- date: "2025-03"
+  icon: 🏅
+  text: Received the Core Fundamental Course Award (核心基礎課程獎) in Algorithms.
+
+- date: "2025-02"
+  icon: 💼
+  text: Joined WorldQuant as a Brain Consultant.
+
+- date: "2024-11"
+  icon: 🏅
+  text: Received the Academic Excellence Award (書卷獎).
+
+- date: "2024-09"
+  icon: 🏅
+  text: Received the Core Fundamental Course Award (核心基礎課程獎) in Discrete Mathematics & Digital Circuit Design.
+
+- date: "2024-03"
+  icon: 🏅
+  text: Received the Academic Excellence Award (書卷獎).

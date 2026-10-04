@@ -1,0 +1,41 @@
+name: Update Google Scholar citations
+
+on:
+  schedule:
+    - cron: "17 3 * * *"   # every day at 03:17 UTC (11:17 Taiwan)
+  workflow_dispatch:        # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scholar
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # scholarly 1.7.11 breaks with httpx >= 0.28 and bibtexparser >= 2
+      - run: pip install "scholarly==1.7.11" "httpx<0.28" "bibtexparser<2"
+
+      - run: python scripts/fetch_scholar.py
+
+      - name: Commit if changed
+        run: |
+          git add data/scholar.json
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Update Google Scholar citations"
+            git push
+          fi

@@ -1,0 +1,154 @@
+# Projects shown on index_new.html — displayed in the order they appear in this file.
+#
+# title:        project name (quote it if it contains ": ")
+# short:        short name; [[short]] in news.yaml becomes a colored box linking here
+# url:          optional — makes the title a link
+# date:         "YYYY-MM" (quoted), shown on the card
+# event:        optional, shown after the date, e.g. "YTP Hackathon"
+# image:        thumbnail (16:9 crop; click enlarges it)
+# description:  understands **bold** and [text](url); long text gets a "Read more" button
+# selected:     true → shown under "Selected" (the default view); "All" shows every project
+# links:        label: url, in display order. Known labels get icons:
+#               Page, Project Page, Code, Video, Demo, Poster, arXiv, Dataset
+
+- title: "ShellBench: A Parametric Shell Game Benchmark for Memory-Aware Manipulation"
+  short: ShellBench
+  url: https://www.youzhexie.me/projects/ShellBench/index.html
+  selected: true
+  date: "2026-06"
+  image: images/shell_game.gif
+  description: >-
+    A parametric Isaac Sim benchmark that measures a policy's long-term memory with a shell game: a ball
+    hidden under shuffled identical cups forces reliance on memory over current observations.
+    Configurable cups, shuffles, and speed yield quantitative memory-capacity curves.
+  links:
+    Page: https://www.youzhexie.me/projects/ShellBench/index.html
+    Code: https://github.com/NYCU-AI-Capstone/Advanced-level
+
+- title: "Designing Fun: LLM-based Game Level Generation via Agent Gameplay Feedback"
+  short: Designing Fun
+  url: https://tsaipercy.github.io/RL_final_Project-Page/
+  selected: true
+  date: "2026-06"
+  image: images/designing_fun.gif
+  description: >-
+    Trains an LLM to generate fun MiniGrid levels with a two-stage SFT + GRPO framework. "Fun" is
+    decomposed into three gameplay-grounded rewards — regret (skill discrimination), interaction
+    richness, and diversity — optimized through agent playthroughs. Beats vanilla and SFT baselines on
+    all metrics; ablations confirm each reward's contribution.
+  links:
+    Page: https://tsaipercy.github.io/RL_final_Project-Page/
+    Code: https://github.com/Yu-Hsuan-1220/RL_Final_Project
+
+- title: "MATCHA: Match with Agent"
+  short: MATCHA
+  url: https://github.com/racercode/MATCHA
+  selected: true
+  date: "2026-04"
+  event: YTP Hackathon
+  image: images/MATCHA.png
+  description: >-
+    A multi-agent career-resource matching system where AI agents socialize on behalf of users. Each
+    personal agent learns the user's background, talks with government-resource agents and other users'
+    agents, and brings back opportunities and peer experiences — combining RAG-based policy matching,
+    Coffee Chat discovery, and a government dashboard to turn passive searching into active matching.
+  links:
+    Code: https://github.com/racercode/MATCHA
+
+- title: Desktop Organizer
+  short: Desktop Organizer
+  url: https://github.com/Sean20405/desktop-utils
+  selected: true
+  date: "2025-12"
+  image: images/Desktop_Organizer.png
+  description: >-
+    A React web app that visualizes your Windows desktop layout and uses Google Gemini to suggest
+    categories and tags for your files, with a customizable icon layout. A companion C# utility extracts
+    real icon positions and images from the desktop.
+  links:
+    Demo: https://sean20405.github.io/desktop-utils/
+    Code: https://github.com/Sean20405/desktop-utils
+
+- title: Anime Helper
+  short: Anime Helper
+  url: https://youzhe0305.github.io/Team-Project/Anime-Helper/
+  selected: true
+  date: "2024-12"
+  image: images/AnimeHelper.png
+  description: >-
+    An anime information website built on the MyAnimeList dataset, with search, categorization,
+    sorting, accounts, favorites, comments, and ratings.
+  links:
+    Page: https://youzhe0305.github.io/Team-Project/Anime-Helper/
+    Code: https://github.com/youzhe0305/Anime-Helper
+    Video: https://youtu.be/evQajoC1g4c
+
+- title: Berkeley Computer Vision Projects
+  short: Berkeley CV
+  url: https://youzhe0305.github.io/Personal-Project/Berkeley-CV/
+  selected: false
+  date: "2024-12"
+  image: images/Berkeley_CV.png
+  description: >-
+    Five projects from Berkeley's computational photography course: image alignment, hybrid images,
+    warping, stitching, and automatic stitching.
+  links:
+    Page: https://youzhe0305.github.io/Personal-Project/Berkeley-CV/
+    Code: https://github.com/youzhe0305/Berkeley-Intro-to-Computer-Vision-and-Computational-Photography
+
+- title: Real-Time DSTNet
+  short: RT-DSTNet
+  url: https://youzhe0305.github.io/Team-Project/Real-Time-DSTNet/
+  selected: true
+  date: "2024-08"
+  image: images/RT_DSTNet.png
+  description: >-
+    Turned [DSTNet](https://github.com/xuboming8/DSTNet) (CVPR 2023), an offline video-deblurring model,
+    into an online architecture that deblurs frames as they arrive — at 0.027 s per frame (37 fps) — and
+    built a complete real-time system around it.
+  links:
+    Page: https://youzhe0305.github.io/Team-Project/Real-Time-DSTNet/
+    Code: https://github.com/youzhe0305/Real-Time-DSTNet
+    Poster: https://youzhe0305.github.io/Team-Project/Real-Time-DSTNet/Real_Time_DSTNet_Poster.png
+
+- title: Deep Learning Projects
+  short: DLP
+  url: https://youzhe0305.github.io/Personal-Project/DLP/
+  selected: false
+  date: "2024-08"
+  image: images/DLP.png
+  description: >-
+    Six projects spanning CNN, UNet, ResNet, VAE, Transformer, and Diffusion: a hand-built neural
+    network, image classification, segmentation, conditional video generation, inpainting, and
+    conditional image generation.
+  links:
+    Page: https://youzhe0305.github.io/Personal-Project/DLP/
+    Code: https://github.com/youzhe0305/NYCU-DLP
+
+- title: LLM-Supported Paper Search Bot
+  short: Paper Search Bot
+  url: https://youzhe0305.github.io/Team-Project/LLM-paper-search/
+  selected: false
+  date: "2024-06"
+  image: images/LLMPaperSearchingBot.png
+  description: >-
+    Scrapes the latest papers with Selenium into a local RAG database, so an LLM can find recent papers
+    matching a user's description without network access. Served through a Discord bot.
+  links:
+    Page: https://youzhe0305.github.io/Team-Project/LLM-paper-search/
+    Code: https://github.com/youzhe0305/Intro-AI-Final-Project
+    Video: https://youtu.be/8r9ehgZSaWo
+
+- title: C++ Text-Based Dungeon Game
+  short: Dungeon Game
+  url: https://youzhe0305.github.io/Personal-Project/text-based-dungeon-game/
+  selected: false
+  date: "2024-04"
+  image: images/dungeon_game.png
+  description: >-
+    Procedurally generated dungeons with turn-based combat, 25 equipment types, and 10 skills. Defeat
+    monsters to learn their skills, and trade with NPCs or trigger special events to unlock unique ones.
+  links:
+    Page: https://youzhe0305.github.io/Personal-Project/text-based-dungeon-game/
+    Code: https://github.com/youzhe0305/Text-Based-Dungeon-Game
+    Video: https://youtu.be/GfCF2AjKM00

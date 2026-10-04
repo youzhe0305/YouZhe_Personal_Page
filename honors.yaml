@@ -1,0 +1,18 @@
+# Honors & Awards shown on index_new.html — displayed in the order they appear in this file.
+#
+# date:    shown as written, e.g. "2026", "2025-10", "2024 – 2025"
+# icon:    optional emoji (default 🏅)
+# title:   award name; understands **bold** and [text](url)
+# detail:  optional grey text after the title
+
+- date: "2026"
+  title: 1st Place, Capstone Project Competition (專題競賽特優)
+  detail: "[YoCausal](https://www.youzhexie.me/papers/YoCausal/index.html)"
+
+- date: "2024 – 2026"
+  title: Academic Excellence Award (書卷獎) × 5
+  detail: NYCU
+
+- date: "2024 – 2025"
+  title: Core Fundamental Course Award (核心基礎課程獎) × 4
+  detail: Discrete Mathematics, Digital Circuit Design, Algorithms, Computer Organization
