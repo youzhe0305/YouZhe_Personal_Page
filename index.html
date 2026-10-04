@@ -1,608 +1,1075 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-	<title>You-Zhe Xie</title>
-	<link href="css/bootstrap.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-	<link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="images/cube-solid.svg">
-	<script src="js/project-lightbox.js"></script>
+	<title>You-Zhe Xie</title>
+	<meta name="description" content="You-Zhe Xie — computer vision researcher working on video, 3D and 4D vision.">
+	<meta name="author" content="You-Zhe Xie">
+	<link rel="canonical" href="https://www.youzhexie.me/">
+	<link rel="icon" href="images/Nijika.jpg">
 
-	
+	<!-- Link previews (LINE, Slack, Discord, X, Facebook ...) -->
+	<meta property="og:type" content="profile">
+	<meta property="og:site_name" content="You-Zhe Xie">
+	<meta property="og:title" content="You-Zhe Xie — Computer Vision Researcher">
+	<meta property="og:description" content="Video / 3D / 4D computer vision @ NYCU, advised by Prof. Yu-Lun Liu.">
+	<meta property="og:url" content="https://www.youzhexie.me/">
+	<meta property="og:image" content="https://www.youzhexie.me/images/profile2.png">
+	<meta property="og:image:alt" content="Photo of You-Zhe Xie">
+	<meta property="profile:first_name" content="You-Zhe">
+	<meta property="profile:last_name" content="Xie">
+	<meta name="twitter:card" content="summary">
+
+	<!-- Tells search engines who this page is about -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"name": "You-Zhe Xie",
+		"url": "https://www.youzhexie.me/",
+		"image": "https://www.youzhexie.me/images/profile2.png",
+		"jobTitle": "Computer Vision Researcher",
+		"email": "mailto:youzhe0305.cs12@nycu.edu.tw",
+		"affiliation": { "@type": "CollegeOrUniversity", "name": "National Yang Ming Chiao Tung University" },
+		"knowsAbout": ["Computer Vision", "Video Generation", "3D Vision", "4D Vision", "Gaussian Splatting"],
+		"sameAs": [
+			"https://scholar.google.com/citations?user=DHDR6DAAAAAJ",
+			"https://github.com/youzhe0305",
+			"https://www.linkedin.com/in/you-zhe-xie-6464682b3/"
+		]
+	}
+	</script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+	<style>
+		:root {
+			--bg: #fbfbfd;
+			--surface: #ffffff;
+			--surface-2: #f3f4f8;
+			--text: #161a2b;
+			--text-2: #4a5068;
+			--muted: #8a8fa3;
+			--border: #e5e7ef;
+			--accent: #5046e5;
+			--accent-soft: #eeedfd;
+			--gold: #b45309;
+			--green: #15803d;
+			--green-soft: #e7f6ec;
+			--shadow: 0 1px 2px rgba(20, 24, 50, .04), 0 4px 16px rgba(20, 24, 50, .06);
+			--shadow-hover: 0 2px 4px rgba(20, 24, 50, .05), 0 12px 32px rgba(20, 24, 50, .10);
+			--radius: 14px;
+			--maxw: 1040px;
+		}
+		@media (prefers-color-scheme: dark) {
+			:root {
+				--bg: #0f1117;
+				--surface: #171a23;
+				--surface-2: #1e2230;
+				--text: #e8eaf2;
+				--text-2: #b4b9cc;
+				--muted: #7d8399;
+				--border: #2a2f3f;
+				--accent: #8b85ff;
+				--accent-soft: #24233f;
+				--gold: #f0b85a;
+				--green: #5fd08a;
+				--green-soft: #18301f;
+				--shadow: 0 1px 2px rgba(0, 0, 0, .3);
+				--shadow-hover: 0 8px 28px rgba(0, 0, 0, .45);
+			}
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+		body {
+			margin: 0;
+			background: var(--bg);
+			color: var(--text);
+			font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+			font-size: 16px;
+			line-height: 1.65;
+			-webkit-font-smoothing: antialiased;
+		}
+		img, video { max-width: 100%; display: block; }
+		[hidden] { display: none !important; }
+		a { color: var(--accent); text-decoration: none; }
+		a:hover { text-decoration: underline; text-underline-offset: 3px; }
+		.wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: 24px; }
+
+		/* ---------- Nav ---------- */
+		.nav {
+			position: sticky; top: 0; z-index: 50;
+			background: color-mix(in srgb, var(--bg) 82%, transparent);
+			backdrop-filter: saturate(180%) blur(12px);
+			-webkit-backdrop-filter: saturate(180%) blur(12px);
+			border-bottom: 1px solid transparent;
+			transition: border-color .2s;
+		}
+		.nav.scrolled { border-bottom-color: var(--border); }
+		.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+		.brand { font-weight: 700; color: var(--text); letter-spacing: -.01em; white-space: nowrap; }
+		.brand:hover { text-decoration: none; }
+		.nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; overflow-x: auto; }
+		.nav ul a {
+			display: block; padding: 6px 12px; border-radius: 8px;
+			color: var(--text-2); font-size: 14.5px; font-weight: 500; white-space: nowrap;
+		}
+		.nav ul a:hover, .nav ul a.active { background: var(--surface-2); color: var(--text); text-decoration: none; }
+		/* Per-section reading progress: a bar under each nav link fills as you scroll through that section */
+		.nav ul a { position: relative; }
+		.nav ul a::after {
+			content: ""; position: absolute; left: 10px; right: 10px; bottom: 1px; height: 2px; border-radius: 2px;
+			background: var(--accent); transform: scaleX(var(--p, 0)); transform-origin: left; opacity: .85;
+		}
+
+		/* ---------- Hero ---------- */
+		.hero { padding: 64px 0 32px; }
+		.hero-grid { display: grid; grid-template-columns: 1fr 260px; gap: 56px; align-items: center; }
+		.eyebrow {
+			display: inline-flex; align-items: center; gap: 8px;
+			font-size: 13.5px; font-weight: 600; color: var(--green);
+			background: var(--green-soft); padding: 5px 12px; border-radius: 999px; margin-bottom: 18px;
+		}
+		.eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 25%, transparent); }
+		.hero h1 {
+			display: flex; align-items: center; gap: 14px;
+			font-size: clamp(38px, 6vw, 56px); line-height: 1.08; margin: 0 0 12px; letter-spacing: -.035em; font-weight: 800;
+		}
+		.hero h1 img { height: 1.2em; width: auto; flex-shrink: 0; }
+		.hero .role { font-size: 19px; color: var(--text-2); margin: 0 0 18px; font-weight: 500; }
+		.hero .role strong { color: var(--text); font-weight: 600; }
+		.hero .bio { font-size: 16.5px; color: var(--text-2); margin: 0 0 26px; max-width: 600px; }
+		.slogan {
+			margin: 0 0 26px; padding: 4px 0 4px 14px; border-left: 3px solid var(--accent);
+			font-size: 17px; font-weight: 600; font-style: italic; color: var(--text); letter-spacing: -.01em;
+		}
+		.links { display: flex; flex-wrap: wrap; gap: 10px; }
+		.btn {
+			display: inline-flex; align-items: center; gap: 8px;
+			padding: 9px 16px; border-radius: 10px; font-size: 14.5px; font-weight: 600;
+			color: var(--text); background: var(--surface); border: 1px solid var(--border);
+			transition: transform .15s, border-color .15s, box-shadow .15s;
+		}
+		.btn:hover { text-decoration: none; border-color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow); }
+		.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+		.btn i { font-size: 15px; }
+		.photo {
+			width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 60%;
+			border-radius: 24px; box-shadow: var(--shadow-hover);
+		}
+		.photo-wrap { position: relative; }
+		.photo-wrap::before {
+			content: ""; position: absolute; inset: 14px -14px -14px 14px; border-radius: 24px;
+			background: linear-gradient(135deg, var(--accent), #c084fc); opacity: .18; z-index: -1;
+		}
+		/* Research-interest tags under the photo */
+		.interests { list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+		.interests li {
+			font-size: 13.5px; font-weight: 600; padding: 4px 13px; border-radius: 999px;
+			background: var(--accent-soft); color: var(--accent);
+		}
+
+		/* ---------- Sections ---------- */
+		section { padding: 48px 0; }
+		.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+		.sec-head h2 { font-size: 26px; margin: 0; letter-spacing: -.02em; font-weight: 750; }
+		.sec-head .note { font-size: 14px; color: var(--muted); }
+
+		/* Experience */
+		.exp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+		.exp {
+			display: flex; gap: 14px; align-items: center;
+			background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
+		}
+		.exp img { width: 48px; height: 48px; object-fit: contain; border-radius: 10px; background: #fff; padding: 4px; border: 1px solid var(--border); flex-shrink: 0; }
+		.exp .org { font-weight: 650; line-height: 1.35; color: var(--text); }
+		.exp .pos { font-size: 14.5px; color: var(--text-2); line-height: 1.4; }
+		.exp .when { font-size: 13px; color: var(--muted); margin-top: 2px; }
+		.exp .now { color: var(--green); font-weight: 600; }
+
+		/* Misc. */
+		.misc {
+			list-style: none; margin: 0; background: var(--surface); border: 1px solid var(--border);
+			border-radius: var(--radius); padding: 6px 22px;
+		}
+		.misc li { display: grid; grid-template-columns: 28px 1fr; gap: 6px; padding: 12px 0; border-bottom: 1px dashed var(--border); color: var(--text-2); }
+		.misc li:last-child { border-bottom: 0; }
+
+		/* News: card with a scrollable timeline grouped by year; top/bottom edges fade when there's more to scroll */
+		.news {
+			background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+			padding: 6px 22px;
+		}
+		.news.tl { padding: 0; overflow: hidden; }
+		.tl-scroll {
+			max-height: 380px; overflow-y: auto; padding: 4px 22px 14px;
+			scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+			--ft: 0px; --fb: 0px;
+			-webkit-mask-image: linear-gradient(to bottom, transparent, #000 var(--ft), #000 calc(100% - var(--fb)), transparent);
+			mask-image: linear-gradient(to bottom, transparent, #000 var(--ft), #000 calc(100% - var(--fb)), transparent);
+		}
+		.tl-scroll.fade-top { --ft: 36px; }
+		.tl-scroll.fade-bottom { --fb: 36px; }
+		.tl-year {
+			font-size: 14px; font-weight: 750; letter-spacing: .08em; color: var(--accent);
+			padding: 16px 0 6px; margin-bottom: 4px; border-bottom: 1px solid var(--border);
+		}
+		.tl-list { margin-left: 5px; border-left: 2px solid var(--border); }
+		.tl-item { position: relative; display: grid; grid-template-columns: 26px 26px 1fr; gap: 4px; padding: 9px 0 9px 18px; align-items: baseline; }
+		.tl-item::before {
+			content: ""; position: absolute; left: -7px; top: 15px; width: 12px; height: 12px; border-radius: 50%;
+			background: var(--surface); border: 2px solid var(--accent); box-sizing: border-box; transition: background .15s, transform .15s;
+		}
+		.tl-item:hover::before { background: var(--accent); transform: scale(1.2); }
+		.tl-item .d { font-size: 14px; color: var(--muted); font-weight: 600; font-variant-numeric: tabular-nums; }
+		.tl-item .t { color: var(--text-2); }
+		.tl-item .t b { color: var(--text); font-weight: 650; }
+		/* [[Name]] in news.yaml: a colored box linking to that publication / project */
+		.ptag {
+			padding: 0 8px; border-radius: 6px; line-height: 1.6;
+			background: var(--accent-soft); color: var(--accent); font-weight: 650; font-size: .94em;
+			display: inline; -webkit-box-decoration-break: clone; box-decoration-break: clone;
+			transition: background .15s, color .15s;
+		}
+		a.ptag:hover { background: var(--accent); color: #fff; text-decoration: none; }
+
+		/* Pixel Nijika sitting on the News card, with a speech bubble */
+		.tl-box { position: relative; }
+		.pet { position: absolute; right: 22px; bottom: calc(100% - 3px); display: flex; align-items: flex-start; gap: 6px; z-index: 2; }
+		.pet-sprite {
+			display: block; width: 78px; height: auto; cursor: pointer; padding: 0; border: 0; background: none;
+			animation: pet-bob 1.6s steps(1) infinite;
+		}
+		.pet-sprite svg { display: block; width: 100%; height: auto; shape-rendering: crispEdges; }
+		.pet-sprite.hop { animation: pet-hop .35s ease-out; }
+		@keyframes pet-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(2px); } }
+		@keyframes pet-hop { 40% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
+		.pet-bubble {
+			position: relative; margin-top: 6px; max-width: min(280px, calc(100vw - 240px)); width: max-content;
+			background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow);
+			padding: 6px 11px; font-size: 13px; line-height: 1.45; color: var(--text-2);
+			opacity: 0; transform: translateY(4px); transition: opacity .3s, transform .3s;
+		}
+		.pet-bubble.show { opacity: 1; transform: none; }
+		/* tail pointing right, toward Nijika */
+		.pet-bubble::before, .pet-bubble::after { content: ""; position: absolute; top: 12px; border: 6px solid transparent; border-right: 0; }
+		.pet-bubble::before { right: -7px; border-left-color: var(--border); }
+		.pet-bubble::after { right: -5.5px; border-left-color: var(--surface); }
+		.pet-cursor { display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: -2px; background: var(--accent); animation: pet-blink .9s steps(1) infinite; }
+		@keyframes pet-blink { 50% { opacity: 0; } }
+		@media (prefers-reduced-motion: reduce) { .pet-sprite, .pet-sprite.hop, .pet-cursor { animation: none; } }
+		.news-item { display: grid; grid-template-columns: 86px 28px 1fr; gap: 6px; padding: 12px 0; border-bottom: 1px dashed var(--border); align-items: baseline; }
+		.news-item:last-child { border-bottom: 0; }
+		.news-item .d { font-variant-numeric: tabular-nums; font-size: 14px; color: var(--muted); font-weight: 600; }
+		.news-item .t { color: var(--text-2); }
+		.news .empty { padding: 12px 0; color: var(--muted); }
+		.news-item .t b { color: var(--text); font-weight: 650; }
+
+		/* Media (zoomable) */
+		.media {
+			position: relative; border-radius: 10px; overflow: hidden; background: var(--surface-2);
+			align-self: start; cursor: zoom-in;
+		}
+		.media img, .media video { width: 100%; height: auto; transition: transform .3s; }
+		.media:hover img, .media:hover video { transform: scale(1.03); }
+		.media::after {
+			content: "\f065"; font-family: "Font Awesome 5 Free"; font-weight: 900; font-size: 12px;
+			position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; display: grid; place-items: center;
+			border-radius: 7px; color: #fff; background: rgba(0, 0, 0, .55); opacity: 0; transition: opacity .2s;
+		}
+		.media:hover::after { opacity: 1; }
+
+		/* Publications */
+		.pub {
+			display: grid; grid-template-columns: 300px 1fr; gap: 28px;
+			background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+			padding: 22px; margin-bottom: 18px; transition: box-shadow .2s, border-color .2s;
+			position: relative;
+		}
+		/* Google Scholar citation count, bottom-right corner of the box */
+		.pub .cites {
+			position: absolute; right: 16px; bottom: 12px;
+			display: inline-flex; align-items: center; gap: 5px;
+			font-size: 13.5px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums;
+		}
+		.pub .cites i { font-size: 11px; }
+		.pub .cites:hover { color: var(--accent); text-decoration: none; }
+		.pub.has-cites .pills { padding-right: 52px; }
+		.pub:hover { box-shadow: var(--shadow-hover); border-color: transparent; }
+		.pub h3 { font-size: 18px; line-height: 1.4; margin: 0 0 8px; letter-spacing: -.01em; font-weight: 700; }
+		.pub h3 a { color: var(--text); }
+		.pub h3 a:hover { color: var(--accent); }
+		.authors { font-size: 14.5px; color: var(--text-2); margin-bottom: 8px; }
+		.authors a { color: inherit; border-bottom: 1px dotted var(--muted); }
+		.authors a:hover { color: var(--accent); text-decoration: none; }
+		.authors .me { color: var(--text); font-weight: 700; }
+		.venue.role { background: var(--surface-2); color: var(--text-2); }
+		/* 1st / co-1st author: emphasised automatically */
+		.venue.role.lead { background: var(--green-soft); color: var(--green); font-weight: 700; }
+		.venues { margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+		.venue { font-size: 13.5px; font-weight: 600; padding: 3px 10px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); line-height: 1.5; }
+		.venue a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+		.venue .hl { color: var(--gold); }
+		.pub p.abs { font-size: 15px; color: var(--text-2); margin: 0 0 14px; }
+		.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+		.pill {
+			display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600;
+			padding: 5px 12px; border-radius: 8px; color: var(--text); background: var(--surface-2);
+			border: 1px solid transparent; transition: border-color .15s, color .15s;
+		}
+		.pill:hover { text-decoration: none; border-color: var(--accent); color: var(--accent); }
+		.pill .star { font-weight: 600; color: var(--muted); padding-left: 7px; margin-left: 1px; border-left: 1px solid var(--border); }
+		.pill .star i { color: var(--gold); font-size: 11.5px; margin-right: 3px; }
+		.pill.soon { color: var(--muted); cursor: default; }
+		.pill.soon:hover { border-color: transparent; color: var(--muted); }
+
+		/* Projects */
+		.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+		.proj {
+			display: flex; flex-direction: column;
+			background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+			overflow: hidden; transition: transform .2s, box-shadow .2s;
+		}
+		.proj:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+		.proj .media { border-radius: 0; aspect-ratio: 16 / 9; }
+		.proj .media img { width: 100%; height: 100%; object-fit: cover; }
+		.proj .body { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
+		.proj .date { font-size: 12.5px; font-weight: 700; color: var(--muted); letter-spacing: .04em; }
+		.proj h3 { font-size: 16.5px; line-height: 1.4; margin: 4px 0 8px; font-weight: 700; }
+		.proj h3 a { color: var(--text); }
+		.proj h3 a:hover { color: var(--accent); }
+		.proj p {
+			font-size: 14.5px; color: var(--text-2); margin: 0 0 14px; flex: 1;
+			display: -webkit-box; -webkit-line-clamp: 4; line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+		}
+		.proj.open p { -webkit-line-clamp: unset; line-clamp: unset; display: block; }
+		.proj .expand { background: none; border: 0; padding: 0; margin: -8px 0 14px; font: inherit; font-size: 13.5px; color: var(--accent); cursor: pointer; align-self: flex-start; }
+
+		/* Projects: Selected / All toggle */
+		.seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); }
+		.seg button {
+			border: 0; background: none; font: inherit; font-size: 13.5px; font-weight: 600; color: var(--muted);
+			padding: 4px 14px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s;
+		}
+		.seg button:hover { color: var(--text); }
+		.seg button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
+		.seg .n { font-weight: 500; opacity: .7; margin-left: 3px; }
+		.proj-grid.selected-only .proj:not(.sel) { display: none; }
+
+		/* Honors & Awards */
+		.honors { max-height: none; overflow: visible; }
+		.honors .news-item { grid-template-columns: 112px 28px 1fr; }
+		.honors .news-item .t .sub { color: var(--muted); }
+
+		/* Lightbox */
+		.lightbox {
+			position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 48px 24px;
+			background: rgba(8, 10, 16, .88); opacity: 0; pointer-events: none; transition: opacity .2s;
+		}
+		.lightbox.open { opacity: 1; pointer-events: auto; }
+		.lightbox img, .lightbox video { max-width: min(1400px, 100%); max-height: calc(100vh - 96px); width: auto; height: auto; border-radius: 8px; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); }
+		.lightbox .close {
+			position: absolute; top: 14px; right: 18px; width: 40px; height: 40px; border-radius: 50%;
+			border: 0; background: rgba(255, 255, 255, .12); color: #fff; font-size: 24px; line-height: 1; cursor: pointer;
+		}
+		.lightbox .close:hover { background: rgba(255, 255, 255, .22); }
+		body.no-scroll { overflow: hidden; }
+
+		/* Back to top (ring shows overall page progress) */
+		.to-top {
+			position: fixed; right: 22px; bottom: 22px; z-index: 60; width: 46px; height: 46px; border-radius: 50%;
+			display: grid; place-items: center; border: 0; padding: 0; cursor: pointer;
+			background: var(--surface); color: var(--text); box-shadow: var(--shadow-hover);
+			opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity .2s, transform .2s;
+		}
+		.to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+		.to-top:hover { color: var(--accent); }
+		.to-top svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+		.to-top circle { fill: none; stroke-width: 3; }
+		.to-top .track { stroke: var(--border); }
+		.to-top .ring { stroke: var(--accent); stroke-linecap: round; }
+
+		/* Footer */
+		footer { border-top: 1px solid var(--border); padding: 32px 0 48px; margin-top: 32px; color: var(--muted); font-size: 14px; }
+		footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: flex-start; }
+		footer .map { width: 260px; max-width: 100%; }
+
+		/* Reveal animation */
+		.reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+		.reveal.in { opacity: 1; transform: none; }
+		@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+		/* ---------- Responsive ---------- */
+		@media (max-width: 860px) {
+			.hero { padding-top: 36px; }
+			.hero-grid { grid-template-columns: 1fr; gap: 32px; }
+			.hero-side { order: -1; }
+			.photo-wrap { width: 180px; }
+			.interests { justify-content: flex-start; margin-top: 28px; }
+			.pub { grid-template-columns: 1fr; gap: 18px; }
+		}
+		@media (max-width: 480px) {
+			.wrap { padding-inline: 16px; }
+			.nav ul a { padding: 6px 7px; font-size: 13.5px; }
+		.nav ul a::after { left: 6px; right: 6px; }
+		.to-top { right: 14px; bottom: 14px; }
+			.news { padding: 4px 16px; }
+			.news-item, .honors .news-item { grid-template-columns: 1fr; gap: 0; }
+			.news-item .e { display: none; }
+			.tl-scroll { padding-inline: 16px; }
+			.tl-item { grid-template-columns: 24px 1fr; padding-left: 14px; }
+			.tl-item .e { display: none; }
+			.pub { padding: 16px; }
+		}
+	</style>
 </head>
-<body data-spy="scroll" data-target=".fixed-top" class='has-animations'>
+<body>
 
-	<!-- Navbar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="min-height: 56px;">
-	<div class="container">
-		<a class="navbar-brand" href="#">You-Zhe Xie</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-		aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-		<ul class="navbar-nav  w-100">
-			<li class="nav-item">
-			<a class="nav-link" href="#Experience">Experience</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="#News">News</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="#Publications">Publications</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="#Projects">Projects</a>
-			</li>
-		</ul>
+	<!-- ================= Nav ================= -->
+	<nav class="nav" id="nav">
+		<div class="wrap">
+			<a class="brand" href="#top">You-Zhe Xie</a>
+			<ul>
+				<li><a href="#experience">Experience</a></li>
+				<li><a href="#news">News</a></li>
+				<li><a href="#publications">Publications</a></li>
+				<li><a href="#projects">Projects</a></li>
+				<li><a href="#honors">Honors</a></li>
+				<li><a href="#misc">Misc.</a></li>
+			</ul>
 		</div>
-	</div>
 	</nav>
 
-	<div class="container section-offset">
-		<div class="intro">
-			<div class="row">
-				<div class="col-lg-8 is-revealing is-header">
-					<h1 class="name"><strong><img src="images/Nijika.jpg" alt="" style="height: 2em; vertical-align: middle; margin-right: 4px; object-fit: cover;"> You-Zhe</strong> Xie</h1>
-					<!--<span class="job-title">Ph.D. Student</span>-->
-					<!--<span class="email">yclee@umd.edu</span>-->
-					<h2 class="lead">Computer Science Bachelor’s Student
-					<br/>National Yang Ming Chiao Tung University</h2>
+	<main id="top">
+
+	<!-- ================= Hero ================= -->
+	<header class="hero">
+		<div class="wrap">
+			<div class="hero-grid">
+				<div>
+					<h1><img src="images/Nijika.jpg" alt="">You-Zhe Xie (謝侑哲)</h1>
+					<p class="role">Undergraduate Student @ <strong>National Yang Ming Chiao Tung University</strong></p>
+					<p class="bio">
+						I am a 4th-year undergraduate student in CPLab@NYCU, advised by
+						Prof. <a href="https://yulunalexliu.github.io/" target="_blank">Yu-Lun Liu</a>.
+						I'm currently exploring <b>world modeling through computer vision</b>: how vision models might learn to simulate the world,
+						and whether they can grasp its rules well enough to reason and act.
+						I am also a research intern at <a href="https://alayalab.ai/" target="_blank">Alaya Lab</a> (Tokyo)
+						and a part-time research assistant at <a href="https://www.sinica.edu.tw/en" target="_blank">Academia Sinica</a>,
+						working with Dr. <a href="https://homepage.citi.sinica.edu.tw/pages/pullpull/index_en.html" target="_blank">Jun-Cheng Chen</a>.
+						<br>
+						I am  actively seeking interns and research collaborations. If you are interested in working with me, don't hesitate to reach out.
+					</p>
+					<p class="slogan">Stay curious. Stay lost. Keep going.</p>
+					<div class="links">
+						<a class="btn primary" href="files/You_Zhe_Xie_Resume.pdf" target="_blank"><i class="fas fa-file-alt"></i>CV</a>
+						<a class="btn" href="files/Transcript.pdf" target="_blank"><i class="fas fa-file-invoice"></i>Transcript</a>
+						<a class="btn" href="mailto:youzhe0305.cs12@nycu.edu.tw"><i class="fas fa-envelope"></i>Email</a>
+						<a class="btn" href="https://scholar.google.com/citations?user=DHDR6DAAAAAJ" target="_blank"><i class="ai ai-google-scholar"></i>Scholar</a>
+						<a class="btn" href="https://github.com/youzhe0305" target="_blank"><i class="fab fa-github"></i>GitHub</a>
+						<a class="btn" href="https://www.linkedin.com/in/you-zhe-xie-6464682b3/" target="_blank"><i class="fab fa-linkedin-in"></i>LinkedIn</a>
+					</div>
 				</div>
-				<div class="col-lg-4">
-					<img class="img-fluid" src="images/profile2.png" alt="alternative" style="max-width: 80%; margin-left: 20%; margin-right: 20%;">
+				<div class="hero-side">
+					<div class="photo-wrap">
+						<img class="photo" src="images/profile2.png" alt="Photo of You-Zhe Xie">
+					</div>
+					<ul class="interests" aria-label="Research interests">
+						<li>3D</li>
+						<li>4D</li>
+						<li>Video Generation</li>
+					</ul>
 				</div>
 			</div>
-			<div class="is-revealing is-header">
-				<p>
-					I am currently a  4rd-year Bachelor’s student in Institute of Computer Science at National Yang Ming Chiao Tung
-					University, advised by Prof. <a href="https://yulunalexliu.github.io/" target="_blank">Yu-Lun Liu</a>.
-					My research interest focuses on Video/3D/4D Computer Vision.
-				  </p>
-			</div>
-			<a class="btn is-revealing is-header" href="files/You_Zhe_Xie_Resume.pdf"><i class="fas fa-file-alt"></i>&nbsp CV</a>
-			<a class="btn is-revealing is-header" href="files/Transcript.pdf"><i class="fas fa-file-alt"></i>&nbsp Transcript</a>
-			<a class="btn is-revealing is-header" href="youzhe0305.cs12@nycu.edu.tw"><i class="fas fa-envelope"></i>&nbsp Email</a>
-			<a class="btn is-revealing is-header" href="https://youzhe0305.github.io/"><i class="fas fa-folder-open"></i>&nbsp Projects Page</a>
-			<a class="btn is-revealing is-header" href="https://scholar.google.com/citations?user=DHDR6DAAAAAJ"><i class="fab fa-google"></i>&nbsp Google Scholar</a>
-			<a class="btn is-revealing is-header" href="https://github.com/youzhe0305"><i class="fab fa-github"></i>&nbsp Github</a>
-			<a class="btn is-revealing is-header" href="https://www.linkedin.com/in/you-zhe-xie-6464682b3/"><i class="fab fa-linkedin-in"></i>&nbsp LinkedIn</a>
-
 		</div>
-		
-	</div>
+	</header>
 
-	<!-- Timeeline -->
-
-	<div class="container section-offset" id="Experience">
-		<!-- <h2 class="section-title timeline">Experience</h2> -->
-		<ol class="timeline">
-			<li class="is-revealing is-header">
-				<!-- <span class="point"></span> -->
-				<img src="images/Alaya_Lab_Logo.png" class="logo" />
-				<p class="description">
-					▶️ <a href="https://alayalab.ai/" target="_blank">Alaya Lab (Tokyo)</a><br>
-					💼 Research intern<br>
-					🕗 12/2025 - Now
-				</p>
-				<p class="date"></p>
-			</li>
-			<li class="is-revealing is-header">
-				<!-- <span class="point"></span> -->
-				<img src="images/Academia_Sinica_Emblem.png" class="logo" />
-				<p class="description">
-					▶️ <a href="https://www.sinica.edu.tw/en" target="_blank">Academia Sinica</a><br>
-					💼 Research Assistant under Dr. <a href="https://homepage.citi.sinica.edu.tw/pages/pullpull/index_en.html" target="_blank">Jun-Cheng Chen</a><br>
-					🕗 07/2025 - Now
-				</p>
-				<p class="date"></p>
-			</li>
-			<li class="is-revealing is-header">
-				<!-- <span class="point"></span> -->
-				<img src="images/WorldQuant.png" class="logo" />
-				<p class="description">
-					▶️ <a href="https://www.worldquant.com/" target="_blank">WorldQuant</a><br>
-					💼 Brain Consultant<br>
-					🕗 02/2025 - 06/2025
-				</p>
-				<p class="date"></p>
-			</li>
-			<li class="is-revealing is-header">
-				<!-- <span class="point"></span> -->
-				<img src="images/GDSC.jpg" class="logo" />
-				<p class="description">
-					▶️ <a href="https://gdsc.community.dev/" target="_blank">Google Developer Student Club</a><br>
-					💼 Mentor of Gen CV<br>
-					🕗 09/2024 - 06/2025
-				</p>
-				<p class="date"></p>
-			</li>
-			<li class="is-revealing is-header">
-				<!-- <span class="point"></span> -->
-				<img src="images/nycu.png" class="logo" />
-				<p class="description">
-					▶️ <a href="https://www.nycu.edu.tw/" target="_blank">National Yang Ming Chiao Tung University</a><br>
-					💼 B.S. of Computer Science<br>
-					🕗 09/2023 - Now
-				</p>
-			</li>
-		</ol>
-	</div>
-
-
-	<div class="container section-offset" id="News">
-		<h2 class="section-title" >News</h2>
-    
-		<div style="border: 1px solid #dddddd; padding: 20px; max-height: 500px; overflow-y: auto;">
-			<p><strong>🏅 06/2026: </strong>Awarded with <strong>Top 2 Award in Capstone Project Competition (專題競賽特優)</strong> with YoCausal !!!</p>
-			<p><strong>🏅 04/2025: </strong>Awarded with <strong>Academic Excellence Award (書卷獎)</strong>!!!</p>
-			<p><strong>💼 12/2025: </strong>Enrolled in Research Internship Program in <strong><u>Alaya Lab (Tokyo)</u></strong>!!!</p>
-			<p><strong>🎉 11/2025: </strong><strong>"4D Gaussian Ray Tracing"</strong> is invited to deliever an <strong>Oral Presentation</strong> at <strong><u>NeurIPS 2025 SpaVLE workshop</u></strong>!!!</p>
-			<p><strong>🎉 10/2025: </strong><strong>"StealthAttack"</strong> is invited to deliever an <strong>Oral Presentation</strong> and awarded with <strong>Best Poster Award</strong> at <strong><u>ICCV 2025 Responsible Imaging workshop</u></strong>!!!</p>
-			<p><strong>🎉 09/2025: </strong><strong>"4D Gaussian Ray Tracing"</strong> accepted by <strong><u>NeurIPS 2025 SpaVLE workshop</u></strong>!!!</p>
-			<p><strong>🏅 09/2025: </strong>Awarded with <strong>Core Fundamental Course Award (核心基礎課程獎)</strong> of Computer Organization !!!</p>
-			<p><strong>🎉 06/2025: </strong><strong>"StealthAttack"</strong> accepted by <strong><u>ICCV 2025</u></strong>!!!</p>
-			<p><strong>🎉 06/2025: </strong>Completed <strong><u>GDSC Global Program</u></strong> in NYCU as core member!!!</p>
-			<p><strong>💼 04/2025: </strong>Enrolled in Summer Research Internship Program in <strong><u>Academia Sinica</u></strong>!!!</p>
-			<p><strong>🏅 03/2025: </strong>Awarded with <strong>Academic Excellence Award (書卷獎)</strong>!!!</p>
-			<p><strong>🏅 03/2025: </strong>Awarded with <strong>Core Fundamental Course Award (核心基礎課程獎)</strong> of Algorithm !!!</p>
-			<p><strong>💼 02/2025: </strong>Enrolled as Brain Consultant in <strong><u>WorldQuant</u></strong>!!!</p>
-			<p><strong>🏅 11/2024: </strong>Awarded with <strong>Academic Excellence Award (書卷獎)</strong>!!!</p>
-			<p><strong>🏅 09/2024: </strong>Awarded with <strong>Core Fundamental Course Award (核心基礎課程獎)</strong> of Discrete Mathematics & Digital Circuit Design !!!</p>
-			<p><strong>🏅 03/2024: </strong>Awarded with <strong>Academic Excellence Award (書卷獎)</strong>!!!</p>
-		</div>
-	</div>
-
-	<div class="container section-offset" id="Publications">
-		<h2 class="section-title">Publications</h2>
-
-
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src="papers\YoCausal\figs\teaser.png" alt="YoCausal Teaser" style="max-width: 100%;" loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class=""><strong>YoCausal: How Far is Video Generation from World Model? A Causality Perspective</strong></p>
-				<strong>You-Zhe Xie*</strong>, <a href="https://www.yhlizzz.com/">Yu-Hsuan Li*</a>, <a href="https://jayinnn.dev/">Jie-Ying Lee</a>, <a href="https://kpzhang93.github.io/">Kaipeng Zhang</a>, <a href="https://yulunalexliu.github.io/">Yu-Lun Liu</a>, <a href="https://lightchaserx.github.io/">Zhixiang Wang</a>
-				<p>Authorship: <strong>1st</strong> author</p>
-				<p class="intro">
-					YoCausal is the first benchmark evaluating causal cognition in video generation models, inspired by cognitive science experiments that test whether infants perceive causality using reversed videos. Our benchmark can incorporate any real-world video at zero cost, making it arbitrarily extensible to easily assess video generation models' understanding of diverse types of causality.
-				</p>
-					<a class="btn" href="https://www.youzhexie.me/papers/YoCausal/index.html">
-						<i class="fas fa-globe-asia"></i>&nbsp project page
-					</a>
-					<a class="btn" href="https://arxiv.org/abs/2605.30346">
-						<i class="ai ai-arxiv"></i>&nbsp arXiv
-					</a>
-					<a class="btn" href="https://github.com/youzhe0305/YoCausal">
-						<i class="fab fa-github"></i>&nbsp Code
-					</a>
-					<a class="btn" href="https://huggingface.co/datasets/YouZhe/YoCausal-dataset">
-						<i class="fas fa-database"></i>&nbsp Dataset
-					</a>
-					<a class="btn" href="https://youtu.be/dCaAfWTUCFA">
-						<i class="fab fa-youtube"></i>&nbsp Video
-					</a>
-					<a class="btn" href="https://huggingface.co/papers/2605.30346">
-						🤗&nbsp Huggingface
-					</a>
+	<!-- ================= Experience ================= -->
+	<section id="experience">
+		<div class="wrap">
+			<div class="sec-head"><h2>Experience</h2></div>
+			<div class="exp-grid">
+				<div class="exp reveal">
+					<img src="images/Alaya_Lab_Logo.png" alt="Alaya Lab">
+					<div>
+						<div class="org"><a href="https://alayalab.ai/" target="_blank">Alaya Lab (Tokyo)</a></div>
+						<div class="pos">Research Intern</div>
+						<div class="when">12/2025 – <span class="now">Now</span></div>
+					</div>
+				</div>
+				<div class="exp reveal">
+					<img src="images/Academia_Sinica_Emblem.png" alt="Academia Sinica">
+					<div>
+						<div class="org"><a href="https://www.sinica.edu.tw/en" target="_blank">Academia Sinica</a></div>
+						<div class="pos">Part-time Research Assistant · Dr. <a href="https://homepage.citi.sinica.edu.tw/pages/pullpull/index_en.html" target="_blank">Jun-Cheng Chen</a></div>
+						<div class="when">07/2025 – <span class="now">Now</span></div>
+					</div>
+				</div>
+				<div class="exp reveal">
+					<img src="images/nycu.png" alt="NYCU">
+					<div>
+						<div class="org"><a href="https://www.nycu.edu.tw/" target="_blank">National Yang Ming Chiao Tung University</a></div>
+						<div class="pos">B.S. in Computer Science · Prof. <a href="https://yulunalexliu.github.io/" target="_blank">Yu-Lun Liu</a></div>
+						<div class="pos">GPA: <strong>4.29 / 4.3</strong> · Rank: <strong>1 / 197</strong></div>
+						<div class="when">09/2023 – <span class="now">Now</span></div>
+					</div>
+				</div>
+				<div class="exp reveal">
+					<img src="images/WorldQuant.png" alt="WorldQuant">
+					<div>
+						<div class="org"><a href="https://www.worldquant.com/" target="_blank">WorldQuant</a></div>
+						<div class="pos">Brain Consultant</div>
+						<div class="when">02/2025 – 06/2025</div>
+					</div>
+				</div>
+				<div class="exp reveal">
+					<img src="images/GDSC.jpg" alt="GDSC">
+					<div>
+						<div class="org"><a href="https://gdsc.community.dev/" target="_blank">Google Developer Student Club</a></div>
+						<div class="pos">Mentor of Gen CV</div>
+						<div class="when">09/2024 – 06/2025</div>
+					</div>
+				</div>
 			</div>
 		</div>
+	</section>
 
-
-		<div class="row publication">
-			<div class="col-lg-4">
-				<video class="video" style="max-width: 100%;" loop playsinline autoplay muted>
-					<source src="files\4DGRT\coffee_martinirt_rolling_shutter.mp4" />
-				</video>
-			</div>
-			<div class="col-lg-8">
-				<p class=""><strong>Every Camera Effect, Every Time, All at Once: 4D Gaussian Ray Tracing for Physics-based Camera Effect Data Generation</strong></p>
-				Yi-Ruei Liu*, <strong>You-Zhe Xie*</strong>, Yu-Hsiang Hsu*, <a href="https://ishengfang.github.io/">I-Sheng Fang</a>, <a href="https://yulunalexliu.github.io/">Yu-Lun Liu</a>, <a href="https://homepage.citi.sinica.edu.tw/pages/pullpull/index_en.html">Jun-Cheng Chen</a>
-				<p>Authorship: <strong>co-1st</strong> author</p>
-				<p>✅<strong>NeurIPS 2025 <a href="https://space-in-vision-language-embodied-ai.github.io/">SpaVLE</a> Workshop</strong> (✨Oral)</p>
-				<p class="intro">
-					4DGRT identify problems about limited understanding of camera-effect video generation model, and proposes a data generation pipeline to synthesize videos with physically-accurate camera effect through apply ray tracing on dynamic 3DGS (4DGS).
-					4DGRT also construct and release a paired dataset containing 8 dynamic indoor scenes with multi-view videos under four camera effects.
-				</p>
-					<a class="btn" href="https://shigon255.github.io/4DGRT-project-page/">
-						<i class="fas fa-globe-asia"></i>&nbsp project page
-					</a>
-					<a class="btn" href="https://www.arxiv.org/abs/2509.10759">
-						<i class="ai ai-arxiv"></i>&nbsp arXiv
-					</a>
-					<a class="btn" href="https://github.com/shigon255/4DGRT">
-						<i class="fab fa-github"></i>&nbsp Code
-					</a>
-					<a class="btn disabled" href="#">
-						<i class="fab fa-youtube"></i>&nbsp Video
-					</a>
+	<!-- ================= News ================= -->
+	<section id="news">
+		<div class="wrap">
+			<div class="sec-head"><h2>News</h2></div>
+			<div class="tl-box reveal">
+				<div class="pet" id="pet">
+					<div class="pet-bubble" id="petBubble" aria-live="polite"><span id="petText"></span><span class="pet-cursor"></span></div>
+					<button class="pet-sprite" id="petSprite" type="button" aria-label="Nijika — click for another line"></button>
+				</div>
+				<div class="news tl"><div class="tl-scroll" id="newsList"></div></div>
 			</div>
 		</div>
+	</section>
 
-		<div class="row publication">
-			<div class="col-lg-4">
-				<video class="video" style="max-width: 100%;" loop playsinline autoplay muted>
-					<source src="files/StealthAttack/stealthAttack_trim.mp4" />
-				</video>
-			</div>
-			<div class="col-lg-8">
-				<p class=""><strong>StealthAttack: Robust 3D Gaussian Splatting Poisoning via Density-Guided Illusions</strong></p>
-				<a href="https://hentci.github.io/">Bo-Hsu Ke</a>, <strong>You-Zhe Xie</strong>, <a href="https://yulunalexliu.github.io/">Yu-Lun Liu</a>, <a href="https://walonchiu.github.io/">Wei-Chen Chiu</a>
-				<p>Authorship: <strong>2nd</strong> author</p>
-				<p>✅<strong>ICCV 2025</strong> (Poster)</p>
-				<p>✅<strong>ICCV 2025 <a href="https://responsible-imaging.github.io/">Responsible Imaging</a> Workshop (✨ Oral, 🎊Best Poster Award)</strong></p>
-				<p class="intro">
-					StealthAttack proposes a novel density-guided poisoning method for 3D Gaussian Splatting (3DGS) that strategically injects illusory objects into low-density regions to create viewpoint-dependent visual illusions. 
-					The method combines point cloud poisoning with adaptive noise scheduling to disrupt multi-view consistency, enabling successful attacks where illusions are clearly visible from target views while maintaining high fidelity in innocent viewpoints.
-				</p>
-					<a class="btn" href="https://hentci.github.io/stealthattack/">
-						<i class="fas fa-globe-asia"></i>&nbsp project page
-					</a>
-					<a class="btn" href="https://arxiv.org/abs/2510.02314">
-						<i class="ai ai-arxiv"></i>&nbsp arXiv
-					</a>
-					<a class="btn" href="https://github.com/Hentci/StealthAttack_official">
-						<i class="fab fa-github"></i>&nbsp Code
-					</a>
-					<a class="btn" href="https://www.youtube.com/watch?v=fM5LPSCzVG8">
-						<i class="fab fa-youtube"></i>&nbsp Video
-					</a>
-					<a class="btn" href="https://huggingface.co/papers/2510.02314">
-						🤗&nbsp Huggingface
-					</a>
-			</div>
+	<!-- ================= Publications ================= -->
+	<section id="publications">
+		<div class="wrap">
+			<div class="sec-head"><h2>Publications</h2><span class="note"><span id="citeTotal"></span>* equal contribution · † corresponding author</span></div>
+
+			<div id="pubList"></div>
 		</div>
+	</section>
 
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src="papers\MLLM-MPM\teaser.png" alt="Teaser" style="max-width: 100%;" loading="lazy" decoding="async">
+	<!-- ================= Projects ================= -->
+	<section id="projects">
+		<div class="wrap">
+			<div class="sec-head">
+				<h2>Projects</h2>
+				<div class="seg" id="projToggle" hidden>
+					<button type="button" class="on" data-mode="selected">Selected<span class="n" id="projSelCount"></span></button>
+					<button type="button" data-mode="all">All<span class="n" id="projCount"></span></button>
+				</div>
 			</div>
-			<div class="col-lg-8">
-				<p class=""><strong>TwinReason: Cross-Engine MLLM-Guided Inverse Physics from Monocular Video</strong></p>
-				Chih-Hai Su, Fu-En Wang, Nan Qiao, Yuyin Sun, <strong>You-Zhe Xie</strong>, Yang-Sen Lin, Jie-Ying Lee, Yi-Ruei Liu, Roberto Martín-Martín, Yu-Lun Liu, Tsung-Wei Ke, Min Sun, Cheng-Hao Kuo
-				<p>Authorship: 5th author</p>
-				<p class="intro">
-				Recovers an object's material and physical parameters from a single video so it can be re-simulated as a digital twin. 
-				An MLLM acts as a visual critic: it compares simulated rollouts from two physics engines (Spring-Mass, MPM) against the real footage and iteratively refines the parameters.
-				</p>
-					<a class="btn disabled" href="#">
-						<i class="fas fa-globe-asia"></i>&nbsp project page
-					</a>
-					<a class="btn disabled" href="#">
-						<i class="ai ai-arxiv"></i>&nbsp arXiv
-					</a>
-					<a class="btn disabled" href="#">
-						<i class="fab fa-github"></i>&nbsp Code
-					</a>
-			</div>
+			<div class="proj-grid" id="projList"></div>
 		</div>
+	</section>
 
-	</div>
-		
-
-	
-	</div>
-	<div class="container section-offset" id="Projects">
-		<h2 class="section-title">Projects</h2>
-
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/shell_game.gif' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://github.com/NYCU-AI-Capstone/Advanced-level">ShellBench: A Parametric Shell Game Benchmark for Memory-Aware Manipulation</a></p>
-				<strong>06/2026</strong>
-				<p class="intro">
-					ShellBench is a parametric Isaac Sim benchmark that evaluates the long-term memory capacity of policies via a shell game: a ball hidden under shuffled identical cups forces reliance on memory over current observations, with configurable cups, shuffles, and speed yielding quantitative memory-capacity curves.
-				</p>
-				<a class="btn" href="https://www.youzhexie.me/projects/ShellBench/index.html">
-					<i class="fas fa-info-circle"></i>&nbsp Project Page</a>
-				<a class="btn" href="https://github.com/NYCU-AI-Capstone/Advanced-level">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-			</div>
+	<!-- ================= Honors & Awards ================= -->
+	<section id="honors">
+		<div class="wrap">
+			<div class="sec-head"><h2>Honors &amp; Awards</h2></div>
+			<div class="news honors reveal" id="honorList"></div>
 		</div>
+	</section>
 
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/designing_fun.gif' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://tsaipercy.github.io/RL_final_Project-Page/">Designing Fun: LLM-based Game Level Generation via Agent Gameplay Feedback</a></p>
-				<strong>06/2026</strong>
-				<p class="intro">
-					We train an LLM to generate fun MiniGrid levels via a two-stage SFT + GRPO framework. 
-					We decompose "fun" into three gameplay-grounded rewards—regret (skill discrimination), interaction richness, and diversity—optimized through agent playthroughs. 
-					Our method beats vanilla and SFT baselines on all metrics, with ablations confirming each reward's distinct contribution.
-				</p>
-				<a class="btn" href="https://tsaipercy.github.io/RL_final_Project-Page/">
-					<i class="fas fa-info-circle"></i>&nbsp Project Page</a>
-				<a class="btn" href="https://github.com/Yu-Hsuan-1220/RL_Final_Project">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-			</div>
+	<!-- ================= Misc. ================= -->
+	<section id="misc">
+		<div class="wrap">
+			<div class="sec-head"><h2>Misc.</h2></div>
+			<ul class="misc reveal">
+				<li><span class="e">🌸</span><span>Big fan of anime, comics &amp; games (ACG) — Nijika Ijichi (伊地知虹夏) is my oshi (推し).</span></li>
+				<li><span class="e">🎮</span><span>I enjoy video games and board games 🎲.</span></li>
+				<li><span class="e">🎧</span><span>Always have J-pop playing.</span></li>
+				<li><span class="e">🔍</span><span>I love falling down rabbit holes out of curiosity — questions about technology, society, or anything in between.</span></li>
+			</ul>
 		</div>
+	</section>
 
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/MATCHA.png' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://github.com/racercode/MATCHA">MATCHA: Match with Agent</a></p>
-				<strong>04/2026</strong>
-				<p class="intro">
-					MATCHA is a multi-agent career resource matching system built for the 2026 YTP Hackathon.
-					Its core idea is to let AI Agents socialize on behalf of users: each personal Agent learns the user's background, talks with resource Agents and other user Agents, and brings back useful opportunities or peer experiences.
-					By combining User Agents, government resource Agents, RAG-based policy matching, Coffee Chat discovery, and a government dashboard, MATCHA turns passive searching into active matching.
-				</p>
-				<a class="btn disabled" href="#">
-					<i class="fas fa-info-circle"></i>&nbsp Intro Page</a>
-				<a class="btn" href="https://github.com/racercode/MATCHA">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-			</div>
-		</div>
+	</main>
 
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/Desktop_Organizer.png' loading="lazy" decoding="async">
+	<footer>
+		<div class="wrap">
+			<div>
+				<div>© 2026 You-Zhe Xie<span id="lastUpdated"></span></div>
+				<div>Earlier template borrowed from <a href="https://chenwei891213.github.io/">Chen-Wei Chang</a>, originally by <a href="https://dribbble.com/shots/4342703-Minimal-resume-freebie-for-junior-self-taught-people">Nicolas Meuzard</a>.</div>
 			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://github.com/Sean20405/desktop-utils">Desktop Organizer</a></p>
-				<strong>12/2025</strong>
-				<p class="intro">
-					An application (web demo, React-based) designed to help organize desktop with AI-powered features<br>
-					Desktop Visualization: View your current desktop layout in a web interface. <br>
-					AI-Powered Organization: Analyzes your desktop files and automatically suggests appropriate categories/tags using Google Gemini AI.
-					Customizable Layout: Organize your desktop icons efficiently.<br>
-					Desktop Info Extractor: A C# utility to extract icon positions and images from your actual Windows desktop.
-				</p>	
-				<!-- <p class="author"><strong>You-Zhe Xie</strong>, <a href="https://ztzhang.info/">Zhoutong Zhang</a>, <a href="http://kmatzen.com/">Kevin Blackburn-Matzen</a>, <a href="https://sniklaus.com/welcome">Simon Niklaus</a>, <a href="https://jimmie33.github.io/">Jianming Zhang</a>, <a href="https://jbhuang0604.github.io/">Jia-Bin Huang</a>, <a href="https://pages.cs.wisc.edu/~fliu/">Feng Liu</a></p> -->
-				<a class="btn disable" href="#">
-					<i class="fas fa-info-circle"></i>&nbsp Intro Page</a>					
-				<a class="btn" href="https://github.com/Sean20405/desktop-utils">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-				<a class="btn" href="https://sean20405.github.io/desktop-utils/">
-					<i class="fas fa-bullhorn"></i>&nbsp Demo website</a>
-				<!-- <a class="btn" href="https://youtu.be/e4LrUpUBsMA">
-					<i class="fab fa-youtube"></i>&nbsp Video</a> -->
+			<div class="map">
+				<script async type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=z8fwpRWmn8PZNEp2jPF4fNLZWWw120kVcSfOslruvuU&cl=ffffff&w=a"></script>
 			</div>
-		</div>
-	<div class="container section-offset" id="Projects">
-
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/RT_DSTNet.png' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://youzhe0305.github.io/Team-Project/Real-Time-DSTNet/">Real-Time DSTNet</a></p>
-				<strong>08/2024</strong>
-				<p class="intro">
-					Improved the <a href="https://github.com/xuboming8/DSTNet" target="_blank">DSTNet</a> model from the CVPR 2023 paper, which originally focused on offline video deblurring.
-					Our enhancement transforms it into an online architecture that can perform real-time deblurring as new frames arrive.
-					Additionally, we reduced the inference time to 0.027 seconds per frame (37 fps) and built a complete system to enable real-time deblurring.</p>	
-				<!-- <p class="author"><strong>You-Zhe Xie</strong>, <a href="https://ztzhang.info/">Zhoutong Zhang</a>, <a href="http://kmatzen.com/">Kevin Blackburn-Matzen</a>, <a href="https://sniklaus.com/welcome">Simon Niklaus</a>, <a href="https://jimmie33.github.io/">Jianming Zhang</a>, <a href="https://jbhuang0604.github.io/">Jia-Bin Huang</a>, <a href="https://pages.cs.wisc.edu/~fliu/">Feng Liu</a></p> -->
-				<a class="btn" href="https://youzhe0305.github.io/Team-Project/Real-Time-DSTNet/">
-					<i class="fas fa-info-circle"></i>&nbsp Intro Page</a>					
-				<a class="btn" href="https://github.com/youzhe0305/Real-Time-DSTNet">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-				<a class="btn" href="https://youzhe0305.github.io/Team-Project/Real-Time-DSTNet/Real_Time_DSTNet_Poster.png">
-					<i class="fas fa-bullhorn"></i>&nbsp Poster</a>
-				<!-- <a class="btn" href="https://youtu.be/e4LrUpUBsMA">
-					<i class="fab fa-youtube"></i>&nbsp Video</a> -->
-			</div>
-		</div>
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/AnimeHelper.png' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://youzhe0305.github.io/Team-Project/Anime-Helper/">Anime Helper</a></p>
-				<strong>12/2024</strong>
-				<p class="intro"> 
-					Anime Helper, an anime information integration website based on the MyAnimeList dataset. 
-					Its features include anime search, categorization, sorting, login/logout, favorites list, comments, and ratings.</p>	
-				<!-- <p class="author"><strong>You-Zhe Xie</strong>, <a href="https://ztzhang.info/">Zhoutong Zhang</a>, <a href="http://kmatzen.com/">Kevin Blackburn-Matzen</a>, <a href="https://sniklaus.com/welcome">Simon Niklaus</a>, <a href="https://jimmie33.github.io/">Jianming Zhang</a>, <a href="https://jbhuang0604.github.io/">Jia-Bin Huang</a>, <a href="https://pages.cs.wisc.edu/~fliu/">Feng Liu</a></p> -->
-				<a class="btn" href="https://youzhe0305.github.io/Team-Project/Anime-Helper/">
-					<i class="fas fa-info-circle"></i>&nbsp Intro Page</a>					
-				<a class="btn" href="https://github.com/youzhe0305/Real-Time-DSTNet">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-				<a class="btn" href="https://youtu.be/evQajoC1g4c">
-					<i class="fab fa-youtube"></i>&nbsp Video</a>
-			</div>
-		</div>
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/LLMPaperSearchingBot.png' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://youzhe0305.github.io/Team-Project/LLM-paper-search/">LLM supported paper searching bot</a></p>
-				<strong>06/2024</strong>
-				<p class="intro"> 
-					Web scraping to collect the latest research papers with Selenium and analyze their content. The system utilizes RAG technology, implemented as a local database that allows the LLM to search for papers that meet the user’s description and are sufficiently recent without network connection. Using a Discord Bot as UI</p>	
-				<!-- <p class="author"><strong>You-Zhe Xie</strong>, <a href="https://ztzhang.info/">Zhoutong Zhang</a>, <a href="http://kmatzen.com/">Kevin Blackburn-Matzen</a>, <a href="https://sniklaus.com/welcome">Simon Niklaus</a>, <a href="https://jimmie33.github.io/">Jianming Zhang</a>, <a href="https://jbhuang0604.github.io/">Jia-Bin Huang</a>, <a href="https://pages.cs.wisc.edu/~fliu/">Feng Liu</a></p> -->
-				<a class="btn" href="https://youzhe0305.github.io/Team-Project/LLM-paper-search/">
-					<i class="fas fa-info-circle"></i>&nbsp Intro Page</a>					
-				<a class="btn" href="https://github.com/youzhe0305/Intro-AI-Final-Project">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-				<a class="btn" href="https://youtu.be/8r9ehgZSaWo">
-					<i class="fab fa-youtube"></i>&nbsp Video</a>
-			</div>
-		</div>
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/DLP.png' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://youzhe0305.github.io/Personal-Project/DLP/">Deep Learning Projects</a></p>
-				<strong>08/2024</strong>
-				<p class="intro"> 
-					6 sub-projects with technique including: CNN, UNet. ResNet, VAE, Transformer, Diffusion etc. Completed task include: handcraft neural network, image classification, image segmentation, conditional video generation, image inpainting, conditional image generation</p>	
-				<!-- <p class="author"><strong>You-Zhe Xie</strong>, <a href="https://ztzhang.info/">Zhoutong Zhang</a>, <a href="http://kmatzen.com/">Kevin Blackburn-Matzen</a>, <a href="https://sniklaus.com/welcome">Simon Niklaus</a>, <a href="https://jimmie33.github.io/">Jianming Zhang</a>, <a href="https://jbhuang0604.github.io/">Jia-Bin Huang</a>, <a href="https://pages.cs.wisc.edu/~fliu/">Feng Liu</a></p> -->
-				<a class="btn" href="https://youzhe0305.github.io/Personal-Project/DLP/">
-					<i class="fas fa-info-circle"></i>&nbsp Intro Page</a>					
-				<a class="btn" href="https://github.com/youzhe0305/NYCU-DLP">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-				<a class="btn disabled" href="#">
-					<i class="fab fa-youtube"></i>&nbsp Video</a>
-			</div>
-		</div>
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/Berkeley_CV.png' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://youzhe0305.github.io/Personal-Project/Berkeley-CV/">Berkeley Computer Vision Projects</a></p>
-				<strong>12/2024</strong>
-				<p class="intro"> 
-					5 sub-projects include image alignment, hybrid, warping, stitching, auto stitching.</p>	
-				<!-- <p class="author"><strong>You-Zhe Xie</strong>, <a href="https://ztzhang.info/">Zhoutong Zhang</a>, <a href="http://kmatzen.com/">Kevin Blackburn-Matzen</a>, <a href="https://sniklaus.com/welcome">Simon Niklaus</a>, <a href="https://jimmie33.github.io/">Jianming Zhang</a>, <a href="https://jbhuang0604.github.io/">Jia-Bin Huang</a>, <a href="https://pages.cs.wisc.edu/~fliu/">Feng Liu</a></p> -->
-				<a class="btn" href="https://youzhe0305.github.io/Personal-Project/Berkeley-CV/">
-					<i class="fas fa-info-circle"></i>&nbsp Intro Page</a>					
-				<a class="btn" href="https://github.com/youzhe0305/Berkeley-Intro-to-Computer-Vision-and-Computational-Photography">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-				<a class="btn disabled" href="#">
-					<i class="fab fa-youtube"></i>&nbsp Video</a>
-			</div>
-		</div>
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/dungeon_game.png' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://youzhe0305.github.io/Personal-Project/text-based-dungeon-game/">C++ Text-Based Dungeon Game</a></p>
-				<strong>04/2024</strong>
-				<p class="intro"> 
-					Text-Based Dungeon Game includes generated dungeons, turn-based combat, equipment system and a skill system, with 25 types of equipment and 10 types of skills designed. In the dungeon, players encounter various monsters, and defeating them allows players to acquire their skills. Along the way, players also meet different NPCs with whom they can trade or trigger special events to learn unique skills.</p>	
-				<!-- <p class="author"><strong>You-Zhe Xie</strong>, <a href="https://ztzhang.info/">Zhoutong Zhang</a>, <a href="http://kmatzen.com/">Kevin Blackburn-Matzen</a>, <a href="https://sniklaus.com/welcome">Simon Niklaus</a>, <a href="https://jimmie33.github.io/">Jianming Zhang</a>, <a href="https://jbhuang0604.github.io/">Jia-Bin Huang</a>, <a href="https://pages.cs.wisc.edu/~fliu/">Feng Liu</a></p> -->
-				<a class="btn" href="https://youzhe0305.github.io/Personal-Project/text-based-dungeon-game/">
-					<i class="fas fa-info-circle"></i>&nbsp Intro Page</a>					
-				<a class="btn" href="https://github.com/youzhe0305/Text-Based-Dungeon-Game">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-				<a class="btn" href="https://youtu.be/GfCF2AjKM00">
-					<i class="fab fa-youtube"></i>&nbsp Video</a>
-			</div>
-		</div>
-	</div>
-
-		<!-- <div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/shape-aware-video-editing.gif' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://text-video-edit.github.io/">Shape-aware Text-driven Layered Video Editing</a></p>
-				<p class="author"><strong>Yao-Chih Lee</strong>, <a href="#">Ji-Ze Genevieve Jang</a>, <a  href="https://jamie725.github.io/website/">Yi-Ting Chen</a>, <a href="#">Elizabeth Qiu</a>, <a href="https://jbhuang0604.github.io/">Jia-Bin Huang</a></p>
-				<p class="venue">CVPR 2023</p>
-				<a class="btn" href="https://text-video-edit.github.io/">
-					<i class="fas fa-globe-asia"></i>&nbsp Project page</a>
-				<a class="btn" href="https://openaccess.thecvf.com/content/CVPR2023/papers/Lee_Shape-Aware_Text-Driven_Layered_Video_Editing_CVPR_2023_paper.pdf">
-					<i class="fas fa-file-pdf"></i>&nbsp Paper</a>
-				<a class="btn" href="https://github.com/text-video-edit/shape-aware-text-driven-layered-video-editing-release">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-			</div>
-		</div> -->
-
-		
-
-		<!-- <div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/deep3d-stabilizer.gif' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://yaochih.github.io/deep3d-stabilizer.io/">3D Video Stabilization with Depth Estimation by CNN-based Optimization</a></p>
-				<p class="author"><strong>Yao-Chih Lee</strong>, <a href="https://kuan-wei-tseng.github.io/">Kuan-Wei Tseng</a>, Yu-Ta Chen, Chien-Cheng Chen, <a href="https://imp.iis.sinica.edu.tw/">Chu-Song Chen</a>, <a href="https://www.csie.ntu.edu.tw/~hung/index.html#about">Yi-Ping Hung</a></p>
-				<p class="venue">CVPR 2021</p>
-				<a class="btn" href="https://yaochih.github.io/deep3d-stabilizer.io/">
-					<i class="fas fa-globe-asia"></i>&nbsp Project page</a>
-				<a class="btn" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Lee_3D_Video_Stabilization_With_Depth_Estimation_by_CNN-Based_Optimization_CVPR_2021_paper.pdf">
-					<i class="fas fa-file-pdf"></i>&nbsp Paper</a>
-				<a class="btn" href="https://github.com/yaochih/Deep3D-Stabilizer-release">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-				<a class="btn" href="https://youtu.be/pMluFVA7NDQ">
-					<i class="fab fa-youtube"></i>&nbsp Video</a>
-				<a class="btn" href="https://github.com/yaochih/awesome-video-stabilization">
-					<i class="fas fa-list-ul"></i>&nbsp Awesome video stabilization</a>
-			</div>
-		</div> -->
-		
-		<!-- <br/><hr/><br/>
-		<h2 class="section-title">Others</h2>
-
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/latent-diffusion-prior.gif' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://latent-diffusion-prior.github.io/">Text-driven Visual Synthesis with Latent Diffusion Prior</a></p>
-				<p class="author"><a href="https://tinghliao.github.io/">Ting-Hsuan Liao</a>, <a  href="http://songweige.github.io/">Songwei Ge</a>, <a href="https://twizwei.github.io/">Yiran Xu</a>, <strong>Yao-Chih Lee</strong>, <a href="https://badouralbahar.github.io/">Badour AlBahar</a>, <a href="https://jbhuang0604.github.io/">Jia-Bin Huang</a></p>
-				<p class="venue">arXiv preprint 2023</p>
-				<a class="btn" href="https://latent-diffusion-prior.github.io/">
-					<i class="fas fa-globe-asia"></i>&nbsp Project page</a>
-				<a class="btn" href="https://arxiv.org/abs/2301.13173">
-					<i class="ai ai-arxiv"></i>&nbsp arXiv</a>
-			</div>
-		</div>
-
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/gcvd.gif' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://arxiv.org/abs/2208.02709">GCVD: Globally-Consistent Video Depth and Pose Estimation with Efficiency</a></p>
-				<p class="author"><strong>Yao-Chih Lee</strong>, <a href="https://kuan-wei-tseng.github.io/">Kuan-Wei Tseng</a>, Guan-Sheng Chen, <a href="https://imp.iis.sinica.edu.tw/">Chu-Song Chen</a></p>
-				<p class="venue">arXiv preprint 2022</p>
-				<a class="btn" href="https://arxiv.org/abs/2208.02709">
-					<i class="ai ai-arxiv"></i>&nbsp arXiv</a>
-				<a class="btn" href="https://github.com/yaochih/GCVD-release">
-					<i class="fab fa-github"></i>&nbsp Code</a>
-			</div>
-		</div>
-
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/pixstabnet.png' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://ieeexplore.ieee.org/document/9506801">PixStabNet: Fast Deep Online Video Stabilization</a></p>
-				<p class="author">Yu-Ta Chen, <a href="https://kuan-wei-tseng.github.io/">Kuan-Wei Tseng</a>, <strong>Yao-Chih Lee</strong>, Chun-Yu Chen, and <a href="https://www.csie.ntu.edu.tw/~hung/index.html#about">Yi-Ping Hung</a></p>
-				<p class="venue">ICIP 2021</p>
-				<a class="btn" href="https://ieeexplore.ieee.org/document/9506801">
-					<i class="fas fa-file-pdf"></i>&nbsp Paper</a>
-			</div>
-		</div>
-
-		<div class="row publication">
-			<div class="col-lg-4">
-				<img src='images/part-aware-human-pose-cvprw-2021.png' loading="lazy" decoding="async">
-			</div>
-			<div class="col-lg-8">
-				<p class="title"><a href="https://arxiv.org/abs/2106.11589">Part-aware Measurement for Robust Multi-View Multi-Human 3D Pose Estimation and Tracking</a></p>
-				<p class="author">Hau Chu, Jia-Hong Lee, <strong>Yao-Chih Lee</strong>, Ching-Hsien Hsu, Jia-Da Li, and <a href="https://imp.iis.sinica.edu.tw/">Chu-Song Chen</a></p>
-				<p class="venue">CVPR Workshop 2021</p>
-				<a class="btn" href="https://arxiv.org/abs/2106.11589">
-					<i class="fas fa-file-pdf"></i>&nbsp Paper</a>
-			</div>
-		</div>
-	</div> -->
-	<!-- End of publications -->
-
-	<!-- <br><br><br><br> -->
-
-	<footer class="container">
-		<span style="font-size: 16px;">The webpage template is borrowed from <a href="https://chenwei891213.github.io/">Chen-Wei Chang</a>, which was originally designed by <a href="https://dribbble.com/shots/4342703-Minimal-resume-freebie-for-junior-self-taught-people">Nicolas Meuzard</a>.</span>
-		<div class="container text-center" style="width: 400px; height: 300px;">
-			<script async type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=z8fwpRWmn8PZNEp2jPF4fNLZWWw120kVcSfOslruvuU&cl=ffffff&w=a"></script>
 		</div>
 	</footer>
 
-	<script src="js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
-	<script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
-	<script src="js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
-    <script src="js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
-	<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
-	<script src="js/animation.js"></script>
+	<!-- Lightbox for publication / project media -->
+	<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged media">
+		<button class="close" type="button" aria-label="Close">&times;</button>
+		<img alt="" hidden>
+		<video controls playsinline loop hidden></video>
+	</div>
 
+	<button class="to-top" id="toTop" type="button" aria-label="Back to top">
+		<svg viewBox="0 0 46 46" aria-hidden="true"><circle class="track" cx="23" cy="23" r="21"/><circle class="ring" cx="23" cy="23" r="21"/></svg>
+		<i class="fas fa-arrow-up"></i>
+	</button>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+	<script>
+		// Nav border, per-section progress bars in the nav, and the back-to-top button
+		const nav = document.getElementById('nav');
+		const navLinks = [...document.querySelectorAll('.nav ul a')];
+		const linkSections = navLinks.map(a => [a, document.querySelector(a.getAttribute('href'))]);
+		const toTop = document.getElementById('toTop');
+		const ring = toTop.querySelector('.ring');
+		const RING = 2 * Math.PI * 21;
+		ring.style.strokeDasharray = RING;
+		let ticking = false;
+		function onScroll() {
+			ticking = false;
+			const y = window.scrollY, vh = window.innerHeight;
+			nav.classList.toggle('scrolled', y > 8);
+			// A section counts as fully read once its bottom edge has entered the viewport
+			linkSections.forEach(([a, sec]) => {
+				const r = sec.getBoundingClientRect();
+				const p = Math.min(1, Math.max(0, (vh - r.top) / r.height));
+				a.style.setProperty('--p', p.toFixed(3));
+			});
+			const total = document.documentElement.scrollHeight - vh;
+			ring.style.strokeDashoffset = RING * (1 - (total > 0 ? y / total : 0));
+			toTop.classList.toggle('show', y > vh * 0.8);
+		}
+		window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+		window.addEventListener('resize', onScroll);
+		window.addEventListener('load', onScroll);
+		onScroll();
+		toTop.addEventListener('click', () => window.scrollTo({ top: 0 }));
+
+		// Highlight the nav link of the section in view
+		const spy = new IntersectionObserver(entries => {
+			entries.forEach(e => {
+				if (!e.isIntersecting) return;
+				navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+			});
+		}, { rootMargin: '-45% 0px -50% 0px' });
+		document.querySelectorAll('section[id]').forEach(s => spy.observe(s));
+
+		// ---------- Content from news.yaml / publications.yaml / projects.yaml ----------
+		const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+		// Inline markup in YAML text: **bold** and [text](url)
+		const fmt = s => esc(s)
+			.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+			.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+		const mmYYYY = d => { const [y, m] = d.split('-'); return `${esc(m)}/${esc(y)}`; };
+
+		// Load a YAML list in file order; pass sort=true to order it newest-first by date (ties keep file order)
+		const loadList = (file, sort = false) => fetch(file)
+			.then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+			.then(txt => {
+				const items = (jsyaml.load(txt) || []).map(n => ({ ...n, date: n.date ? String(n.date) : '' }));
+				return sort ? items.sort((a, b) => b.date.localeCompare(a.date)) : items;
+			});
+		const fail = (el, what) => { el.innerHTML = `<div class="empty">${what} could not be loaded.</div>`; };
+
+		const ICONS = {
+			'Project Page': 'fas fa-globe-asia', 'Page': 'fas fa-globe-asia', 'arXiv': 'ai ai-arxiv',
+			'Code': 'fab fa-github', 'Dataset': 'fas fa-database', 'Video': 'fab fa-youtube',
+			'Demo': 'fas fa-play', 'Poster': 'fas fa-image'
+		};
+		const pills = links => Object.entries(links || {}).map(([label, url]) => {
+			const icon = label === 'HF Paper' ? '🤗 ' : `<i class="${ICONS[label] || 'fas fa-link'}"></i>`;
+			return `<a class="pill" href="${esc(url)}">${icon}${esc(label)}</a>`;
+		}).join('');
+		const media = (src, alt) => /\.(mp4|webm)$/i.test(src)
+			? `<div class="media"><video loop playsinline autoplay muted preload="metadata"><source src="${esc(src)}" type="video/${src.split('.').pop().toLowerCase()}"></video></div>`
+			: `<div class="media"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></div>`;
+		const titleLink = (title, url) => url ? `<a href="${esc(url)}">${esc(title)}</a>` : esc(title);
+
+		const pubData = loadList('publications.yaml');
+		const projData = loadList('projects.yaml');
+
+		// News: a timeline grouped by year. [[Name]] in the text becomes a colored box linking to the
+		// publication / project whose `short:` is Name; [[Name|url]] links to url instead.
+		const newsEl = document.getElementById('newsList');
+		const newsReady = Promise.all([
+			loadList('news.yaml', true),
+			pubData.catch(() => []),
+			projData.catch(() => [])
+		]).then(([items, pubs, projs]) => {
+			// short name (lower-case) → link of that publication / project
+			const shorts = new Map();
+			[...pubs, ...projs].forEach(w => {
+				if (!w.short) return;
+				const k = String(w.short).toLowerCase();
+				if (shorts.has(k)) console.warn(`Duplicate short name "${w.short}" in publications.yaml / projects.yaml`);
+				else shorts.set(k, w.url || Object.values(w.links || {})[0] || '');
+			});
+			const tagUrl = name => shorts.get(name.trim().toLowerCase());
+			const text = s => fmt(s).replace(/\[\[([^\]|]+?)(?:\|([^\]\s]+))?\]\]/g, (_, name, url) => {
+				url = url || esc(tagUrl(name) || ''); // explicit url was already escaped by fmt()
+				return url ? `<a class="ptag" href="${url}" target="_blank">${name}</a>` : `<span class="ptag">${name}</span>`;
+			});
+			const years = new Map();
+			items.forEach(n => {
+				const y = n.date.slice(0, 4);
+				years.has(y) || years.set(y, []);
+				years.get(y).push(n);
+			});
+			newsEl.innerHTML = [...years].map(([y, list]) => `<div class="tl-year">${esc(y)}</div><div class="tl-list">` +
+				list.map(n => `<div class="tl-item"><span class="d">${esc(n.date.slice(5, 7))}</span><span class="e">${esc(n.icon)}</span><span class="t">${text(n.text)}</span></div>`).join('') +
+				'</div>').join('');
+		}).catch(() => fail(newsEl, 'News'));
+		// Fade the top / bottom edge of the news card only when there is more to scroll that way
+		const newsFade = () => {
+			const { scrollTop: t, scrollHeight: h, clientHeight: c } = newsEl;
+			newsEl.classList.toggle('fade-top', t > 4);
+			newsEl.classList.toggle('fade-bottom', t + c < h - 4);
+		};
+		newsEl.addEventListener('scroll', newsFade, { passive: true });
+		window.addEventListener('resize', newsFade);
+		newsReady.then(newsFade);
+
+		// ---------- Pixel Nijika on the News card ----------
+		// Each character is one pixel: K outline, Y/H hair, S skin, B blush, E/e/p eye, M mouth,
+		// R/r bow, W white, T shirt, D suspenders & skirt, N shoes
+		(function pet() {
+			const PAL = {
+				K: '#2b211a', Y: '#fade78', H: '#e2b648', S: '#ffe8dc', B: '#f7a6aa', E: '#aa2626', e: '#6e161e', p: '#ec8080', M: '#c85a5a',
+				R: '#e84850', r: '#b22834', W: '#ffffff', T: '#eef1f8', D: '#343a54', N: '#c43c34'
+			};
+			const ART = [
+				'.........KKKKK............',
+				'.........KYHYK............',
+				'..........KYK.............',
+				'..........KYK.............',
+				'...........K..............',
+				'..........................',
+				'........KKKKKKK..KKKK.....',
+				'......KKYYYYYYYKKYYYYK....',
+				'.....KYYYYYYYYYYYKYHYYK...',
+				'....KYYYYYYYYYYYYYKYHYYK..',
+				'...KYYHYYHYYYYHYYYYKYHYK..',
+				'...KYHYYYHYYYYHYYYYKYHYK..',
+				'...KYYSYYSYYYSYYSYYKYHYK..',
+				'...KYSKKKSSSSSKKKSYKYHYK..',
+				'...KYSEEESSSSSEEESYKYHYK..',
+				'...KYSEeESSSSSEeESYKYHYK..',
+				'...KYSEeESSSSSEeESYKYHYK..',
+				'...KYSEpESSSSSEpESYKYHYK..',
+				'...KYBBSSSSMSSSSBBYKYHYK..',
+				'...KYSSSSSSSSSSSSSYKYHYK..',
+				'...KYYKKKKKKKKKKKYYKYHYK..',
+				'...KYKTTRRTTTRRTTKYKYHYK..',
+				'...KYKTTRWRrRWRTTKYKYHYK..',
+				'...KYKTTRRTTTRRTTKYKHYYK..',
+				'...KKKTDTTTTTTTDTKKKYKYK..',
+				'.....KSDTTTTTTTDSK..K.K...',
+				'.....KDDDDDDDDDDDK........',
+				'.....KDDDDDDDDDDDK........',
+				'.......KNNK.KNNK..........',
+				'.......KKKK.KKKK..........'
+			];
+			const W = ART[0].length, H = ART.length;
+			// Horizontal runs of the same color → one <rect> each
+			const rects = rows => rows.map((row, y) => row.replace(/(.)\1*/g, (run, c, x) =>
+				PAL[c] ? `<rect x="${x}" y="${y}" width="${run.length}" height="1" fill="${PAL[c]}"/>` : '')).join('');
+			const px = (x, y, c, w = 1, h = 1) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${PAL[c]}"/>`;
+			const EYES = [6, 14]; // left column of each 3×4 eye (rows 14–17)
+			const sprite = document.getElementById('petSprite');
+			sprite.innerHTML = `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${rects(ART)}` +
+				`<g class="shine">${EYES.map(x => px(x, 14, 'W')).join('')}</g>` +
+				`<g class="shut" visibility="hidden">${EYES.map(x => px(x, 13, 'S', 3, 5) + px(x, 16, 'K', 3)).join('')}</g></svg>`;
+			const shine = [...sprite.querySelectorAll('.shine rect')];
+			const shut = sprite.querySelector('.shut');
+
+			// Eye highlights follow the mouse
+			let raf = 0;
+			document.addEventListener('mousemove', e => {
+				if (raf) return;
+				raf = requestAnimationFrame(() => {
+					raf = 0;
+					const r = sprite.getBoundingClientRect();
+					const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height * .48);
+					shine.forEach((s, i) => {
+						s.setAttribute('x', EYES[i] + (dx > 0 ? 2 : 0));
+						s.setAttribute('y', dy > 40 ? 15 : 14);
+					});
+				});
+			});
+			// Blink now and then
+			setInterval(() => {
+				if (Math.random() > .45) return;
+				shut.setAttribute('visibility', 'visible');
+				setTimeout(() => shut.setAttribute('visibility', 'hidden'), 140);
+			}, 2600);
+
+			// What she says depends on the time in Taiwan
+			const tw = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Taipei' }));
+			const h = tw.getHours(), weekend = tw.getDay() === 0 || tw.getDay() === 6;
+			const SLEEP = ['probably asleep… 💤', 'probably dreaming randomly 💤'];
+			const WORK = ['probably reading papers 📄', 'adjusting models, I think… ⚙️', 'maybe running experiments 🧪', 'probably waiting for the GPUs… ⏳', 'debugging something, probably 🐛'];
+			const NIGHT = ['overtime? maybe one more experiment 🧪', 'gaming, maybe 🎮', 'probably watching anime 📺', 'hacking on a side project, I bet 🛠️', 'probably falling down a random research rabbit hole 🔍'];
+			const JPOP = ['J-pop on, probably 🎧'];
+			const LINES = (weekend
+				? h < 4 ? [...NIGHT, ...JPOP]
+				: h < 12 ? SLEEP
+				: h < 13 ? ['probably having lunch 🍱']
+				: h < 18 ? ['out having fun, maybe? 🚶', 'board games with friends, maybe 🎲', 'probably gaming 🎮', 'catching up on anime, I bet 📺', 'maybe a little weekend work 💻', ...JPOP]
+				: h < 19 ? ['probably having dinner 🍜']
+				: [...NIGHT, ...JPOP]
+				: h < 2 ? ['maybe one last experiment before bed… 🌙', 'probably checking the experiment before sleeping 📈', ...NIGHT, ...JPOP]
+				: h < 10 ? SLEEP
+				: h < 12 ? ['probably in morning work mode 💻', ...WORK, ...JPOP]
+				: h < 14 ? ['lunch + nap time, probably 🍱💤', ...JPOP]
+				: h < 19 ? [...WORK, ...JPOP]
+				: [...NIGHT, ...JPOP]).map(s => 'You-Zhe: ' + s);
+			const EXTRA = ['Hi, I\'m Nijika! 🥁', 'Have you listened to Kessoku Band? 🎸', 'Thanks for stopping by ✨'];
+
+			const bubble = document.getElementById('petBubble'), text = document.getElementById('petText');
+			const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+			let typing = 0, last = '';
+			function say(pool) {
+				let line;
+				do line = pool[Math.floor(Math.random() * pool.length)]; while (pool.length > 1 && line === last);
+				last = line;
+				clearInterval(typing);
+				bubble.classList.add('show');
+				const chars = [...line]; // keep emoji in one piece
+				if (still) { text.textContent = line; return; }
+				let i = 0;
+				text.textContent = '';
+				typing = setInterval(() => {
+					text.textContent += chars[i++];
+					if (i >= chars.length) clearInterval(typing);
+				}, 45);
+			}
+			// First line once the News card scrolls into view; clicking her gives another one
+			new IntersectionObserver((entries, obs) => {
+				if (!entries[0].isIntersecting) return;
+				obs.disconnect();
+				setTimeout(() => say(LINES), 600);
+			}, { threshold: .6 }).observe(sprite);
+			sprite.addEventListener('click', () => {
+				sprite.classList.remove('hop');
+				void sprite.offsetWidth; // restart the animation
+				sprite.classList.add('hop');
+				say(Math.random() < .85 ? LINES : EXTRA);
+			});
+			sprite.addEventListener('animationend', e => { if (e.animationName === 'pet-hop') sprite.classList.remove('hop'); });
+		})();
+
+		const pubEl = document.getElementById('pubList');
+		const pubsReady = pubData.then(items => {
+			pubEl.innerHTML = items.map(p => {
+				const authors = (p.authors || []).map(a => /^You-Zhe Xie/.test(a) ? `<span class="me">${esc(a)}</span>` : fmt(a)).join(', ');
+				const venues = (p.venues || []).map(v => typeof v === 'string'
+					? `<span class="venue">${fmt(v)}</span>`
+					: `<span class="venue">${fmt(v.name)}${v.award ? ` · <span class="hl">${esc(v.award)}</span>` : ''}</span>`).join('')
+					+ (p.role ? `<span class="venue role${/^(co-)?1st/i.test(p.role) ? ' lead' : ''}">${esc(p.role)}</span>` : '');
+				const note = p.note ? `<span class="pill soon"><i class="far fa-clock"></i>${esc(p.note)}</span>` : '';
+				return `<article class="pub reveal" data-title="${esc(p.title)}">
+					${p.media ? media(p.media, p.title) : '<div></div>'}
+					<div>
+						<h3>${titleLink(p.title, p.url)}</h3>
+						<div class="authors">${authors}</div>
+						${venues ? `<div class="venues">${venues}</div>` : ''}
+						${p.abstract ? `<p class="abs">${fmt(p.abstract)}</p>` : ''}
+						<div class="pills">${pills(p.links)}${note}</div>
+					</div>
+				</article>`;
+			}).join('');
+		}).catch(() => fail(pubEl, 'Publications'));
+
+		const projEl = document.getElementById('projList');
+		const projsReady = projData.then(items => {
+			projEl.innerHTML = items.map(p => `<article class="proj reveal${p.selected ? ' sel' : ''}">
+				${p.image ? media(p.image, p.title) : ''}
+				<div class="body">
+					<span class="date">${mmYYYY(p.date)}${p.event ? ' · ' + esc(p.event) : ''}</span>
+					<h3>${titleLink(p.title, p.url)}</h3>
+					<p>${fmt(p.description)}</p>
+					<div class="pills">${pills(p.links)}</div>
+				</div>
+			</article>`).join('');
+			// Selected / All toggle — only useful if some, but not all, projects are marked selected
+			const nSel = items.filter(p => p.selected).length;
+			if (nSel && nSel < items.length) {
+				const toggle = document.getElementById('projToggle');
+				document.getElementById('projCount').textContent = items.length;
+				document.getElementById('projSelCount').textContent = nSel;
+				projEl.classList.add('selected-only');
+				toggle.hidden = false;
+				toggle.addEventListener('click', e => {
+					const btn = e.target.closest('button');
+					if (!btn) return;
+					toggle.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === btn));
+					projEl.classList.toggle('selected-only', btn.dataset.mode === 'selected');
+					addReadMore(); // cards that were hidden couldn't be measured before
+					onScroll();
+				});
+			}
+			addReadMore();
+		}).catch(() => fail(projEl, 'Projects'));
+
+		const honorEl = document.getElementById('honorList');
+		const honorsReady = loadList('honors.yaml').then(items => {
+			honorEl.innerHTML = items.map(h =>
+				`<div class="news-item"><span class="d">${esc(h.date)}</span><span class="e">${esc(h.icon || '🏅')}</span><span class="t"><b>${fmt(h.title)}</b>${h.detail ? `<span class="sub"> · ${fmt(h.detail)}</span>` : ''}</span></div>`
+			).join('');
+		}).catch(() => fail(honorEl, 'Honors'));
+
+		// Once everything is on the page: fade-ins, star counts, nav progress (section heights changed)
+		Promise.all([newsReady, pubsReady, projsReady, honorsReady]).then(() => {
+			document.querySelectorAll('.reveal:not(.in)').forEach(el => rev.observe(el));
+			// Make sure inserted videos autoplay (muted attribute set via innerHTML isn't always honoured)
+			document.querySelectorAll('.media video').forEach(v => { v.muted = true; v.play().catch(() => {}); });
+			addStars();
+			addCitations();
+			onScroll();
+		});
+
+		// Google Scholar citations from data/scholar.json (updated daily by .github/workflows/scholar.yml)
+		async function addCitations() {
+			const SCHOLAR = 'https://scholar.google.com/citations?user=DHDR6DAAAAAJ';
+			const data = await fetch('data/scholar.json').then(r => r.ok ? r.json() : null).catch(() => null);
+			if (!data) return;
+			const norm = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+			const byTitle = new Map(data.publications.map(p => [norm(p.title), p]));
+			document.querySelectorAll('.pub[data-title]').forEach(card => {
+				const p = byTitle.get(norm(card.dataset.title));
+				if (!p) return; // not on Scholar yet
+				const a = document.createElement('a');
+				a.className = 'cites';
+				a.href = `${SCHOLAR}&view_op=view_citation&citation_for_view=${encodeURIComponent(p.id)}`;
+				a.target = '_blank';
+				a.title = `${p.citations} citations on Google Scholar · updated ${data.updated}`;
+				a.innerHTML = `<i class="fas fa-quote-right"></i>${p.citations}`;
+				card.append(a);
+				card.classList.add('has-cites');
+			});
+			if (data.citations) {
+				document.getElementById('citeTotal').innerHTML =
+					`<a href="${SCHOLAR}" target="_blank" title="Google Scholar · updated ${esc(data.updated)}">${data.citations} citations</a> · `;
+			}
+		}
+
+		// "Last updated" in the footer: date of the latest commit not made by a bot (the daily Scholar update
+		// doesn't count). Cached for 6 h; falls back to the file's own modification time.
+		(async function lastUpdated() {
+			const KEY = 'site-updated', TTL = 6 * 3600e3;
+			let cache = null;
+			try { cache = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+			let iso = cache && Date.now() - cache.t < TTL ? cache.d : null;
+			if (!iso) {
+				const commits = await fetch('https://api.github.com/repos/youzhe0305/YouZhe_Personal_Page/commits?per_page=30')
+					.then(r => r.ok ? r.json() : []).catch(() => []);
+				const c = commits.find(c => !/\[bot\]$/.test(c.author?.login || c.commit?.author?.name || ''));
+				iso = c?.commit?.committer?.date;
+				try { if (iso) localStorage.setItem(KEY, JSON.stringify({ t: Date.now(), d: iso })); } catch (e) {}
+			}
+			const d = new Date(iso || document.lastModified);
+			if (isNaN(d)) return;
+			document.getElementById('lastUpdated').textContent =
+				' · Last updated ' + d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+		})();
+
+		// GitHub stars next to every "Code" link (cached for 6 h to stay under GitHub's 60 req/h limit)
+		async function addStars() {
+			const KEY = 'gh-stars', TTL = 6 * 3600e3;
+			const pills = [...document.querySelectorAll('.pill[href^="https://github.com/"]')]
+				.map(a => [a, a.getAttribute('href').split('/').slice(3, 5).join('/').toLowerCase()])
+				.filter(([, repo]) => repo.includes('/'));
+			let cache = null;
+			try { cache = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+			let stars = cache && Date.now() - cache.t < TTL ? cache.s : null;
+			if (!stars) {
+				stars = {};
+				const get = url => fetch(url).then(r => r.ok ? r.json() : Promise.reject(r.status));
+				// One request covers all of my own repos; other people's repos are fetched one by one
+				const mine = await get('https://api.github.com/users/youzhe0305/repos?per_page=100').catch(() => []);
+				mine.forEach(r => { stars[r.full_name.toLowerCase()] = r.stargazers_count; });
+				const rest = [...new Set(pills.map(([, repo]) => repo))].filter(repo => !(repo in stars));
+				await Promise.all(rest.map(repo => get('https://api.github.com/repos/' + repo)
+					.then(r => { stars[repo] = r.stargazers_count; }).catch(() => {})));
+				try { if (Object.keys(stars).length) localStorage.setItem(KEY, JSON.stringify({ t: Date.now(), s: stars })); } catch (e) {}
+			}
+			pills.forEach(([a, repo]) => {
+				const n = stars[repo];
+				if (!n) return; // hide unknown or zero
+				const s = document.createElement('span');
+				s.className = 'star';
+				s.title = n + ' GitHub stars';
+				s.innerHTML = '<i class="fas fa-star"></i>' + (n >= 1000 ? (n / 1000).toFixed(1) + 'k' : n);
+				a.append(s);
+			});
+		}
+
+		// Fade-in on scroll
+		const rev = new IntersectionObserver(entries => {
+			entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); } });
+		}, { rootMargin: '0px 0px -8% 0px' });
+		document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
+
+		// "Read more" for project descriptions that got clamped
+		function addReadMore() {
+			document.querySelectorAll('.proj').forEach(card => {
+				const p = card.querySelector('.body p');
+				if (card.querySelector('.expand') || p.scrollHeight - p.clientHeight < 4) return;
+				const b = document.createElement('button');
+				b.className = 'expand'; b.type = 'button'; b.textContent = 'Read more';
+				b.addEventListener('click', () => {
+					b.textContent = card.classList.toggle('open') ? 'Show less' : 'Read more';
+				});
+				p.after(b);
+			});
+		}
+
+		// Lightbox: click any publication / project image or video to enlarge
+		const lb = document.getElementById('lightbox');
+		const lbImg = lb.querySelector('img');
+		const lbVid = lb.querySelector('video');
+
+		function openLightbox(media) {
+			if (media.tagName === 'VIDEO') {
+				lbImg.hidden = true;
+				lbVid.hidden = false;
+				lbVid.src = media.querySelector('source')?.src || media.currentSrc;
+				lbVid.muted = true;
+				lbVid.play();
+			} else {
+				lbVid.hidden = true;
+				lbImg.hidden = false;
+				lbImg.src = media.currentSrc || media.src;
+				lbImg.alt = media.alt;
+			}
+			lb.classList.add('open');
+			document.body.classList.add('no-scroll');
+			lb.querySelector('.close').focus();
+		}
+		function closeLightbox() {
+			lb.classList.remove('open');
+			document.body.classList.remove('no-scroll');
+			lbVid.pause();
+			lbVid.removeAttribute('src');
+			lbVid.load();
+			lbImg.removeAttribute('src');
+		}
+		// Delegated, so it also works for cards rendered from YAML
+		document.addEventListener('click', e => {
+			const m = e.target.closest('.media');
+			if (m) openLightbox(m.querySelector('img, video'));
+		});
+		lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('close')) closeLightbox(); });
+		document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) closeLightbox(); });
+	</script>
 </body>
 </html>

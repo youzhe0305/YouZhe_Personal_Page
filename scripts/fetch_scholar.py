@@ -1,6 +1,6 @@
 """Fetch my Google Scholar profile and write citation counts to data/scholar.json.
 
-Run daily by .github/workflows/scholar.yml; index_new.html reads the JSON.
+Run daily by .github/workflows/scholar.yml; index.html reads the JSON.
 The file is only rewritten when a number actually changed, and is left
 untouched if Scholar blocks the request, so the page keeps the last good data.
 """

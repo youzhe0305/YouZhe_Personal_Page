@@ -1,4 +1,4 @@
-# News shown on index_new.html — sorted by date automatically (newest first).
+# News shown on index.html — sorted by date automatically (newest first).
 # date: "YYYY-MM"   icon: any emoji   text: wrap words in **double asterisks** to bold them.
 # Entries with the same date keep the order they have in this file.
 # [[Name]] shows Name as a colored box linking to the publication / project whose `short:` is Name
