@@ -7,7 +7,7 @@
 	<meta name="description" content="You-Zhe Xie — computer vision researcher working on video, 3D and 4D vision.">
 	<meta name="author" content="You-Zhe Xie">
 	<link rel="canonical" href="https://www.youzhexie.me/">
-	<link rel="icon" href="images/Nijika.jpg">
+	<link rel="icon" href="images/Nijika_pixel.png">
 
 	<!-- Link previews (LINE, Slack, Discord, X, Facebook ...) -->
 	<meta property="og:type" content="profile">
@@ -140,7 +140,7 @@
 			display: flex; align-items: center; gap: 14px;
 			font-size: clamp(38px, 6vw, 56px); line-height: 1.08; margin: 0 0 12px; letter-spacing: -.035em; font-weight: 800;
 		}
-		.hero h1 img { height: 1.2em; width: auto; flex-shrink: 0; }
+		.hero h1 img { height: 1.2em; width: auto; flex-shrink: 0; image-rendering: pixelated; }
 		.hero .role { font-size: 19px; color: var(--text-2); margin: 0 0 18px; font-weight: 500; }
 		.hero .role strong { color: var(--text); font-weight: 600; }
 		.hero .bio { font-size: 16.5px; color: var(--text-2); margin: 0 0 26px; max-width: 600px; }
@@ -159,7 +159,7 @@
 		.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
 		.btn i { font-size: 15px; }
 		.photo {
-			width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 60%;
+			width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 50% 60%;
 			border-radius: 24px; box-shadow: var(--shadow-hover);
 		}
 		.photo-wrap { position: relative; }
@@ -179,6 +179,17 @@
 		.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
 		.sec-head h2 { font-size: 26px; margin: 0; letter-spacing: -.02em; font-weight: 750; }
 		.sec-head .note { font-size: 14px; color: var(--muted); }
+		.sec-title { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+		/* Total Google Scholar citations, right next to the "Publications" heading */
+		.citation-badge {
+			display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px;
+			border: 1px solid var(--border); border-radius: 999px; background: var(--surface);
+			font: 600 12.5px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--text-2);
+			transition: color .2s, border-color .2s, background .2s;
+		}
+		.citation-badge:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+		.citation-icon { display: inline-flex; color: var(--muted); transition: color .2s; }
+		.citation-badge:hover .citation-icon { color: inherit; }
 
 		/* Experience */
 		.exp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
@@ -452,7 +463,7 @@
 		<div class="wrap">
 			<div class="hero-grid">
 				<div>
-					<h1><img src="images/Nijika.jpg" alt="">You-Zhe Xie (謝侑哲)</h1>
+					<h1><img src="images/Nijika_pixel.png" alt="">You-Zhe Xie (謝侑哲)</h1>
 					<p class="role">Undergraduate Student @ <strong>National Yang Ming Chiao Tung University</strong></p>
 					<p class="bio">
 						I am a 4th-year undergraduate student in CPLab@NYCU, advised by
@@ -477,7 +488,7 @@
 				</div>
 				<div class="hero-side">
 					<div class="photo-wrap">
-						<img class="photo" src="images/profile2.png" alt="Photo of You-Zhe Xie">
+						<img class="photo" src="images/profile2.webp" alt="Photo of You-Zhe Xie" width="1700" height="1700" fetchpriority="high">
 					</div>
 					<ul class="interests" aria-label="Research interests">
 						<li>3D</li>
@@ -495,7 +506,7 @@
 			<div class="sec-head"><h2>Experience</h2></div>
 			<div class="exp-grid">
 				<div class="exp reveal">
-					<img src="images/Alaya_Lab_Logo.png" alt="Alaya Lab">
+					<img src="images/Alaya_Lab_Logo.png" alt="Alaya Lab" loading="lazy" decoding="async">
 					<div>
 						<div class="org"><a href="https://alayalab.ai/" target="_blank">Alaya Lab (Tokyo)</a></div>
 						<div class="pos">Research Intern</div>
@@ -503,7 +514,7 @@
 					</div>
 				</div>
 				<div class="exp reveal">
-					<img src="images/Academia_Sinica_Emblem.png" alt="Academia Sinica">
+					<img src="images/Academia_Sinica_Emblem.png" alt="Academia Sinica" loading="lazy" decoding="async">
 					<div>
 						<div class="org"><a href="https://www.sinica.edu.tw/en" target="_blank">Academia Sinica</a></div>
 						<div class="pos">Part-time Research Assistant · Dr. <a href="https://homepage.citi.sinica.edu.tw/pages/pullpull/index_en.html" target="_blank">Jun-Cheng Chen</a></div>
@@ -511,7 +522,7 @@
 					</div>
 				</div>
 				<div class="exp reveal">
-					<img src="images/nycu.png" alt="NYCU">
+					<img src="images/nycu.png" alt="NYCU" loading="lazy" decoding="async">
 					<div>
 						<div class="org"><a href="https://www.nycu.edu.tw/" target="_blank">National Yang Ming Chiao Tung University</a></div>
 						<div class="pos">B.S. in Computer Science · Prof. <a href="https://yulunalexliu.github.io/" target="_blank">Yu-Lun Liu</a></div>
@@ -520,7 +531,7 @@
 					</div>
 				</div>
 				<div class="exp reveal">
-					<img src="images/WorldQuant.png" alt="WorldQuant">
+					<img src="images/WorldQuant.png" alt="WorldQuant" loading="lazy" decoding="async">
 					<div>
 						<div class="org"><a href="https://www.worldquant.com/" target="_blank">WorldQuant</a></div>
 						<div class="pos">Brain Consultant</div>
@@ -528,7 +539,7 @@
 					</div>
 				</div>
 				<div class="exp reveal">
-					<img src="images/GDSC.jpg" alt="GDSC">
+					<img src="images/GDSC.jpg" alt="GDSC" loading="lazy" decoding="async">
 					<div>
 						<div class="org"><a href="https://gdsc.community.dev/" target="_blank">Google Developer Student Club</a></div>
 						<div class="pos">Mentor of Gen CV</div>
@@ -556,7 +567,10 @@
 	<!-- ================= Publications ================= -->
 	<section id="publications">
 		<div class="wrap">
-			<div class="sec-head"><h2>Publications</h2><span class="note"><span id="citeTotal"></span>* equal contribution · † corresponding author</span></div>
+			<div class="sec-head">
+				<div class="sec-title"><h2>Publications</h2><a id="citeTotal" class="citation-badge" target="_blank" rel="noopener noreferrer" hidden><span class="citation-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg></span><span id="citeCount"></span></a></div>
+				<span class="note">* equal contribution · † corresponding author</span>
+			</div>
 
 			<div id="pubList"></div>
 		</div>
@@ -690,7 +704,7 @@
 			return `<a class="pill" href="${esc(url)}">${icon}${esc(label)}</a>`;
 		}).join('');
 		const media = (src, alt) => /\.(mp4|webm)$/i.test(src)
-			? `<div class="media"><video loop playsinline autoplay muted preload="metadata"><source src="${esc(src)}" type="video/${src.split('.').pop().toLowerCase()}"></video></div>`
+			? `<div class="media"><video loop playsinline muted preload="metadata"><source src="${esc(src)}" type="video/${src.split('.').pop().toLowerCase()}"></video></div>`
 			: `<div class="media"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></div>`;
 		const titleLink = (title, url) => url ? `<a href="${esc(url)}">${esc(title)}</a>` : esc(title);
 
@@ -930,8 +944,11 @@
 		// Once everything is on the page: fade-ins, star counts, nav progress (section heights changed)
 		Promise.all([newsReady, pubsReady, projsReady, honorsReady]).then(() => {
 			document.querySelectorAll('.reveal:not(.in)').forEach(el => rev.observe(el));
-			// Make sure inserted videos autoplay (muted attribute set via innerHTML isn't always honoured)
-			document.querySelectorAll('.media video').forEach(v => { v.muted = true; v.play().catch(() => {}); });
+			// Videos only play while on screen, so they don't all download at once
+			const vio = new IntersectionObserver(entries => entries.forEach(({ target: v, isIntersecting }) => {
+				if (isIntersecting) v.play().catch(() => {}); else v.pause();
+			}), { rootMargin: '200px 0px' });
+			document.querySelectorAll('.media video').forEach(v => { v.muted = true; vio.observe(v); });
 			addStars();
 			addCitations();
 			onScroll();
@@ -957,8 +974,11 @@
 				card.classList.add('has-cites');
 			});
 			if (data.citations) {
-				document.getElementById('citeTotal').innerHTML =
-					`<a href="${SCHOLAR}" target="_blank" title="Google Scholar · updated ${esc(data.updated)}">${data.citations} citations</a> · `;
+				const badge = document.getElementById('citeTotal');
+				badge.href = SCHOLAR;
+				badge.title = `Google Scholar · updated ${data.updated}`;
+				document.getElementById('citeCount').textContent = `${data.citations} citations`;
+				badge.hidden = false;
 			}
 		}
 
