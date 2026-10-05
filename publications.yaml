@@ -144,3 +144,26 @@
     re-simulated as a digital twin. An MLLM acts as a visual critic, comparing rollouts from two physics
     engines (Spring-Mass, MPM) against real footage and iteratively refining the parameters.
   note: "Paper & code coming soon"
+
+
+- title: "TGPED: Task-Generalized Procedural Error Detection and Explanation using Large Language Models with Procedural Grounding"
+  short: TGPED
+  media: files/TGPED/teaser.jpg
+  authors:
+    - "Siangyu Yang"
+    - "S-Wei Chen"
+    - "You-Zhe Xie"
+    - "Ho-En Tsai"
+    - "Yu-Chi Lai"
+    - "Kai-En Peng"
+    - "YouChen Lai"
+    - "Yu-Lun Liu"
+    - "Chun-Yi Lee"
+    - "Shih-Po Lee"
+    - "Shao-Yuan Lo"
+  role: 3rd author
+  abstract: >-
+    Procedural-video error detectors rarely generalize beyond their training tasks. TGPED is a
+    task-agnostic framework for procedural video error detection unifying action segmentation,
+    detection, and explanation, optimized via synthesized data.
+  note: "Paper & code coming soon"
