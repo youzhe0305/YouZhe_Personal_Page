@@ -275,6 +275,13 @@
 		.pet-bubble::after { right: -5.5px; border-left-color: var(--surface); }
 		.pet-cursor { display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: -2px; background: var(--accent); animation: pet-blink .9s steps(1) infinite; }
 		@keyframes pet-blink { 50% { opacity: 0; } }
+		/* little zzz / notes / hearts that float up beside her head */
+		.pet-sprite .fx > g { animation: pet-float 1.8s ease-out forwards; }
+		@keyframes pet-float {
+			0% { opacity: 0; transform: translate(0, 0); }
+			15% { opacity: 1; }
+			100% { opacity: 0; transform: translate(var(--dx, 1px), -5px); }
+		}
 		@media (prefers-reduced-motion: reduce) { .pet-sprite, .pet-sprite.hop, .pet-cursor { animation: none; } }
 		.news-item { display: grid; grid-template-columns: 86px 28px 1fr; gap: 6px; padding: 12px 0; border-bottom: 1px dashed var(--border); align-items: baseline; }
 		.news-item:last-child { border-bottom: 0; }
@@ -762,7 +769,8 @@
 		(function pet() {
 			const PAL = {
 				K: '#2b211a', Y: '#fade78', H: '#e2b648', S: '#ffe8dc', B: '#f7a6aa', E: '#aa2626', e: '#6e161e', p: '#ec8080', M: '#c85a5a',
-				R: '#e84850', r: '#b22834', W: '#ffffff', T: '#eef1f8', D: '#343a54', N: '#c43c34'
+				R: '#e84850', r: '#b22834', W: '#ffffff', T: '#eef1f8', D: '#343a54', N: '#c43c34',
+				Z: '#8d93ab', n: '#5046e5', b: '#8cc8ec', w: '#e6f5fd' // zzz, music notes, snot bubble
 			};
 			const ART = [
 				'.........KKKKK............',
@@ -802,12 +810,66 @@
 				PAL[c] ? `<rect x="${x}" y="${y}" width="${run.length}" height="1" fill="${PAL[c]}"/>` : '')).join('');
 			const px = (x, y, c, w = 1, h = 1) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${PAL[c]}"/>`;
 			const EYES = [6, 14]; // left column of each 3×4 eye (rows 14–17)
+			// A small pixel grid drawn at (x0, y0); '.' stays transparent
+			const patch = (x0, y0, rows) => rows.map((row, dy) => [...row].map((c, dx) => PAL[c] ? px(x0 + dx, y0 + dy, c) : '').join('')).join('');
+			const both = rows => EYES.map(x => patch(x, 13, rows)).join('');
+			// Expression overlays (差分), each one hidden until needed
+			const FACES = {
+				shut: both(['SSS', 'SSS', 'SSS', 'KKK', 'SSS']),    // blink / asleep
+				happy: both(['SSS', 'SSS', 'SKS', 'KSK', 'SSS']),   // ^ ^
+				// snot bubble that grows and shrinks while she sleeps
+				bub1: patch(12, 18, ['bb', 'bb']),
+				bub2: patch(12, 17, ['.b.', 'bwb', '.b.']),
+				bub3: patch(12, 17, ['.bb.', 'bwwb', 'bwwb', '.bb.'])
+			};
+			const tipRows = 3; // the top of the ahoge sways on its own
 			const sprite = document.getElementById('petSprite');
-			sprite.innerHTML = `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${rects(ART)}` +
+			sprite.innerHTML = `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">` +
+				`${rects(ART.map((r, y) => y < tipRows ? '' : r))}<g class="tip">${rects(ART.slice(0, tipRows))}</g>` +
 				`<g class="shine">${EYES.map(x => px(x, 14, 'W')).join('')}</g>` +
-				`<g class="shut" visibility="hidden">${EYES.map(x => px(x, 13, 'S', 3, 5) + px(x, 16, 'K', 3)).join('')}</g></svg>`;
+				Object.entries(FACES).map(([k, v]) => `<g class="${k}" visibility="hidden">${v}</g>`).join('') +
+				`<g class="fx"></g></svg>`;
 			const shine = [...sprite.querySelectorAll('.shine rect')];
-			const shut = sprite.querySelector('.shut');
+			const face = Object.fromEntries(Object.keys(FACES).map(k => [k, sprite.querySelector('.' + k)]));
+			const show = (k, on) => face[k].setAttribute('visibility', on ? 'visible' : 'hidden');
+			const tip = sprite.querySelector('.tip'), fx = sprite.querySelector('.fx');
+			const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+			// Floating particles: z for sleep, ♪ for music, ♥ for clicks
+			const PARTS = {
+				z: ['ZZZ', '.Z.', 'ZZZ'],
+				note: ['..nn', '..n.', 'nnn.', 'nn..'],
+				heart: ['R.R', 'RRR', '.R.']
+			};
+			function puff(kind, x, y) {
+				if (still) return;
+				const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+				g.innerHTML = patch(x, y, PARTS[kind]);
+				g.style.setProperty('--dx', (Math.random() < .5 ? -1 : 1) + 'px');
+				g.addEventListener('animationend', () => g.remove());
+				fx.appendChild(g);
+			}
+			let mood = '', moodTimer = 0;
+			function setMood(m) {
+				mood = m;
+				show('shut', m === 'sleep');
+				clearInterval(moodTimer);
+				['bub1', 'bub2', 'bub3'].forEach(k => show(k, false));
+				if (m === 'sleep' && !still) {
+					let f = 0; // bubble size: 1 2 3 2 1 2 3 …
+					moodTimer = setInterval(() => {
+						const size = [1, 2, 3, 2][f++ % 4];
+						['bub1', 'bub2', 'bub3'].forEach((k, i) => show(k, i + 1 === size));
+						if (f % 3 === 1) puff('z', 19 + Math.round(Math.random() * 2), 3);
+					}, 500);
+				}
+				if (m === 'music') moodTimer = setInterval(() => puff('note', 18 + Math.round(Math.random() * 3), 2), 1300);
+			}
+
+			// The ahoge tip tilts: sometimes on its own, and a boing when she hops
+			const tilt = dx => tip.setAttribute('transform', dx ? `translate(${dx} 0)` : '');
+			const wobble = (seq, step = 90) => seq.forEach((dx, i) => setTimeout(() => tilt(dx), i * step));
+			setInterval(() => { if (!still && Math.random() < .35) wobble([Math.random() < .5 ? -1 : 1, 0], 260); }, 3200);
 
 			// Eye highlights follow the mouse
 			let raf = 0;
@@ -823,11 +885,12 @@
 					});
 				});
 			});
-			// Blink now and then
+			// Blink now and then (not while smiling with ^ ^ eyes or asleep)
+			let happy = 0;
 			setInterval(() => {
-				if (Math.random() > .45) return;
-				shut.setAttribute('visibility', 'visible');
-				setTimeout(() => shut.setAttribute('visibility', 'hidden'), 140);
+				if (happy || mood === 'sleep' || Math.random() > .45) return;
+				show('shut', true);
+				setTimeout(() => show('shut', mood === 'sleep'), 140);
 			}, 2600);
 
 			// What she says depends on the time in Taiwan
@@ -853,13 +916,13 @@
 			const EXTRA = ['Hi, I\'m Nijika! 🥁', 'Have you listened to Kessoku Band? 🎸', 'Thanks for stopping by ✨'];
 
 			const bubble = document.getElementById('petBubble'), text = document.getElementById('petText');
-			const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 			let typing = 0, last = '';
 			function say(pool) {
 				let line;
 				do line = pool[Math.floor(Math.random() * pool.length)]; while (pool.length > 1 && line === last);
 				last = line;
 				clearInterval(typing);
+				setMood(line.includes('💤') ? 'sleep' : line.includes('🎧') ? 'music' : '');
 				bubble.classList.add('show');
 				const chars = [...line]; // keep emoji in one piece
 				if (still) { text.textContent = line; return; }
@@ -880,6 +943,12 @@
 				sprite.classList.remove('hop');
 				void sprite.offsetWidth; // restart the animation
 				sprite.classList.add('hop');
+				// ^ ^ for a moment, a heart, and the ahoge boings
+				clearTimeout(happy);
+				show('happy', true);
+				happy = setTimeout(() => { happy = 0; show('happy', false); }, 1100);
+				puff('heart', 20, 3);
+				if (!still) wobble([-1, 1, -1, 0]);
 				say(Math.random() < .85 ? LINES : EXTRA);
 			});
 			sprite.addEventListener('animationend', e => { if (e.animationName === 'pet-hop') sprite.classList.remove('hop'); });
