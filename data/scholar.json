@@ -1,12 +1,12 @@
 {
-  "citations": 11,
+  "citations": 12,
   "h_index": 1,
   "i10_index": 1,
   "publications": [
     {
       "title": "StealthAttack: Robust 3D Gaussian Splatting Poisoning via Density-Guided Illusions",
       "year": "2025",
-      "citations": 10,
+      "citations": 11,
       "id": "DHDR6DAAAAAJ:u-x6o8ySG0sC"
     },
     {
@@ -22,5 +22,5 @@
       "id": "DHDR6DAAAAAJ:u5HHmVD_uO8C"
     }
   ],
-  "updated": "2026-10-04"
+  "updated": "2026-10-08"
 }
