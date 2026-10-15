@@ -34,12 +34,11 @@
     No masks, no seams: any static 3DGS scene becomes a 3D cinemagraph whose motion loops by construction, from any viewpoint.
   links:
     Project Page: https://ouroworld.userwei.com/
-    # arXiv: #
+    arXiv: https://arxiv.org/abs/2610.12461
     Code: https://github.com/youzhe0305/OuroWorld
     Dataset: https://huggingface.co/datasets/YouZhe/OuroWorld-dataset
     Video: https://www.youtube.com/watch?v=QCJ4u7f3K-8
-    # HF Paper: #
-  note: "Paper coming soon"
+    HF Paper: https://huggingface.co/papers/2610.12461
 
 - title: "YoCausal: How Far is Video Generation from World Model? A Causality Perspective"
   short: YoCausal
@@ -107,6 +106,7 @@
     - "[Yu-Lun Liu](https://yulunalexliu.github.io/)"
     - "[Jun-Cheng Chen†](https://homepage.citi.sinica.edu.tw/pages/pullpull/index_en.html)"
   venues:
+    - WACV 2027
     - name: "NeurIPS 2025 [SpaVLE](https://space-in-vision-language-embodied-ai.github.io/) Workshop"
       award: "✨ Oral"
   role: co-1st author
