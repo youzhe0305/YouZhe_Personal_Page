@@ -1,6 +1,6 @@
 {
-  "citations": 12,
-  "h_index": 1,
+  "citations": 13,
+  "h_index": 2,
   "i10_index": 1,
   "publications": [
     {
@@ -12,7 +12,7 @@
     {
       "title": "YoCausal: How Far is Video Generation from World Model? A Causality Perspective",
       "year": "2026",
-      "citations": 1,
+      "citations": 2,
       "id": "DHDR6DAAAAAJ:d1gkVwhDpl0C"
     },
     {
@@ -22,5 +22,5 @@
       "id": "DHDR6DAAAAAJ:u5HHmVD_uO8C"
     }
   ],
-  "updated": "2026-10-08"
+  "updated": "2026-10-16"
 }
