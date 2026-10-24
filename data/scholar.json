@@ -1,5 +1,5 @@
 {
-  "citations": 13,
+  "citations": 15,
   "h_index": 2,
   "i10_index": 1,
   "publications": [
@@ -12,15 +12,21 @@
     {
       "title": "YoCausal: How Far is Video Generation from World Model? A Causality Perspective",
       "year": "2026",
-      "citations": 2,
+      "citations": 3,
       "id": "DHDR6DAAAAAJ:d1gkVwhDpl0C"
+    },
+    {
+      "title": "OuroWorld: Bringing Any 3D World Alive as Diverse, Endlessly Looping 3D Cinemagraphs",
+      "year": "2026",
+      "citations": 1,
+      "id": "DHDR6DAAAAAJ:9yKSN-GCB0IC"
     },
     {
       "title": "Every Camera Effect, Every Time, All at Once: 4D Gaussian Ray Tracing for Physics-based Camera Effect Data Generation",
       "year": "2025",
       "citations": 0,
-      "id": "DHDR6DAAAAAJ:u5HHmVD_uO8C"
+      "id": "DHDR6DAAAAAJ:2osOgNQ5qMEC"
     }
   ],
-  "updated": "2026-10-16"
+  "updated": "2026-10-24"
 }
