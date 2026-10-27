@@ -5,6 +5,10 @@
 #   (in publications.yaml / projects.yaml; case doesn't matter). [[Name|https://...]] links somewhere else.
 #   Quote the text if it starts with [[ .
 
+- date: "2026-10"
+  icon: 🎉
+  text: "[[4DGRT]] accepted to **WACV 2027**."
+
 - date: "2026-06"
   icon: 🏅
   text: "Won 1st Place in the Capstone Project Competition (專題競賽特優) with [[YoCausal]]."
