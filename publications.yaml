@@ -26,8 +26,8 @@
     - "[Kaipeng Zhang](https://kpzhang93.github.io/)"
     - "[Zhixiang Wang†](https://lightchaserx.github.io/)"
     - "[Yu-Lun Liu†](https://yulunalexliu.github.io/)"
-  # venues:
-  #   - arXiv 2026
+  venues:
+    - arXiv 2026
   role: 1st author
   abstract: >-
     3D world models generate worlds that are frozen in time. OuroWorld brings them alive, endlessly. 
@@ -99,7 +99,7 @@
   date: "2025-12"
   media: files/4DGRT/coffee_martinirt_rolling_shutter.mp4
   authors:
-    - "Yi-Ruei Liu*"
+    - "[Yi-Ruei Liu*](https://shigon255.github.io/)"
     - "You-Zhe Xie*"
     - "Yu-Hsiang Hsu*"
     - "[I-Sheng Fang](https://ishengfang.github.io/)"
@@ -111,12 +111,13 @@
       award: "✨ Oral"
   role: co-1st author
   abstract: >-
-    Camera-effect video generation is limited by data. 4DGRT ray-traces dynamic 3D Gaussians (4DGS) to
-    synthesize physically-accurate camera effects, and releases a paired dataset of 8 dynamic indoor
-    scenes with multi-view videos under four camera effects.
+    Video models can look like a fisheye, shallow depth of field, or rolling shutter, but don’t follow the parameters you ask for.
+    4D-GRT reconstructs dynamic scenes as 4D Gaussians and re-renders them through physical camera models, producing camera-effect videos with exact labels to improve video models.
+    We also construct CamVFX-4D, a dataset of 4D camera-effect paired videos with 1600 labeled clips for evaluation.
   links:
     Project Page: https://shigon255.github.io/4DGRT-project-page/
     arXiv: https://www.arxiv.org/abs/2509.10759
+    Dataset: https://huggingface.co/datasets/Shigon/CamVFX-4D
   note: "Code coming soon"
     # Code not public yet:
     # Code: https://github.com/shigon255/4DGRT
