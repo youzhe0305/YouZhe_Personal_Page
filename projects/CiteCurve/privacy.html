@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy · CiteCurve</title>
+<link rel="icon" href="assets/favicon.png">
+<style>
+  :root { color-scheme: light; --bg: #f7f7f4; --surface: #fff; --text: #16161a; --text-2: #4b4a46; --border: #e4e2dc; --accent: #2563d4; }
+  @media (prefers-color-scheme: dark) {
+    :root { color-scheme: dark; --bg: #111113; --surface: #1a1a1d; --text: #ededea; --text-2: #c4c3bc; --border: #2e2e33; --accent: #4d8ef0; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.65 system-ui, -apple-system, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 20px 64px; }
+  nav { display: flex; align-items: center; gap: 16px; font-size: 14px; margin-bottom: 24px; }
+  nav .brand { display: flex; align-items: center; gap: 8px; color: var(--text); font-weight: 700; font-size: 17px; margin-right: auto; text-decoration: none; }
+  nav .brand img { width: 26px; height: 26px; }
+  a { color: var(--accent); }
+  h1 { font-size: 28px; line-height: 1.25; margin: 0 0 4px; }
+  h2 { font-size: 19px; margin: 32px 0 8px; }
+  .muted { color: var(--text-2); font-size: 14px; }
+  section.lang { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin-bottom: 28px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--border); }
+  th { font-size: 13px; color: var(--text-2); }
+  ul { padding-left: 22px; }
+  @media (max-width: 560px) { section.lang { padding: 18px; } table { font-size: 14px; } }
+</style>
+</head>
+<body>
+<main>
+  <nav><a class="brand" href="./"><img src="assets/icon.png" alt="">CiteCurve</a><a href="#en">English</a><a href="#zh">繁體中文</a></nav>
+
+  <section class="lang" id="en" lang="en">
+    <h1>Privacy Policy</h1>
+    <p class="muted">CiteCurve browser extension · Effective November 17, 2026</p>
+
+    <p>In short: the extension has no server of its own, collects no personal information, and does no tracking or analytics. To draw a chart it sends the paper you look up to a public citation database, and it keeps a few settings and a short-lived cache in your browser.</p>
+
+    <h2>What is sent, and to whom</h2>
+    <table>
+      <thead><tr><th>When</th><th>What is sent</th><th>Sent to</th></tr></thead>
+      <tbody>
+        <tr><td>You look up a paper (popup, viewer page, button on Scholar/arXiv, or right-click menu)</td><td>The paper title, arXiv ID or DOI you looked up (for the right-click menu: the text you selected), and the paper's ID to fetch the papers citing it</td><td>The data source you chose: <a href="https://www.semanticscholar.org/">Semantic Scholar</a> (Allen Institute for AI) or <a href="https://openalex.org/">OpenAlex</a> (OurResearch)</td></tr>
+        <tr><td>You added an API key in the settings</td><td>That key, attached to the requests above</td><td>Only the service that issued it</td></tr>
+        <tr><td>You click the extension's button on a Google Scholar page and “Compare with Google Scholar by year” is on</td><td>Search requests for that paper's citations, one per year</td><td>Google Scholar, the site you are already on, with your existing Scholar session — the same as clicking through the years yourself</td></tr>
+      </tbody>
+    </table>
+    <p>Nothing else is sent anywhere. The extension does not see or send your browsing history, the pages you visit, or your identity.</p>
+
+    <h2>Reading the current page</h2>
+    <p>When you open the extension's popup, it reads the current tab's address and its citation meta tags (such as <code>citation_title</code> or <code>citation_doi</code>) to pre-fill the search box. This happens only when you open the popup, stays on your device, and is sent nowhere unless you then click “Show”.</p>
+
+    <h2>What is stored in your browser</h2>
+    <ul>
+      <li><strong>API keys</strong> (optional, Semantic Scholar / OpenAlex): stored only on this device (<code>chrome.storage.local</code>). They are not synced and never sent anywhere except to the service that issued them.</li>
+      <li><strong>Settings</strong> (default data source, the Google Scholar comparison switch): stored with <code>chrome.storage.sync</code>, so your browser may sync them across your own signed-in devices.</li>
+      <li><strong>Cache</strong>: lookup results are kept on this device for one day so the same paper isn't fetched twice. You can delete it at any time with “Clear saved data” in the settings, or by removing the extension.</li>
+    </ul>
+
+    <h2>What the extension does not do</h2>
+    <ul>
+      <li>No analytics, telemetry, advertising or tracking of any kind.</li>
+      <li>No accounts, and no collection of names, email addresses or other personal information.</li>
+      <li>No selling or sharing of data with anyone.</li>
+    </ul>
+
+    <h2>Third-party services</h2>
+    <p>Requests to the data sources are covered by their own policies: <a href="https://allenai.org/privacy-policy">Allen Institute for AI (Semantic Scholar)</a>, <a href="https://ourresearch.org/privacy">OurResearch (OpenAlex)</a> and <a href="https://policies.google.com/privacy">Google (Google Scholar)</a>.</p>
+
+    <h2>Changes and contact</h2>
+    <p>If this policy changes, the new version will be posted on this page with a new effective date. Questions: please open an issue on the project's GitHub repository.</p>
+  </section>
+
+  <section class="lang" id="zh" lang="zh-Hant">
+    <h1>隱私權政策</h1>
+    <p class="muted">CiteCurve（CiteCurve）瀏覽器擴充功能 · 2026 年 11 月 17 日起生效</p>
+
+    <p>簡單說：這個擴充功能沒有自己的伺服器，不蒐集任何個人資料，也沒有追蹤或分析。為了畫出圖表，它會把你查詢的論文送到公開的引用資料庫，並在你的瀏覽器裡保存少量設定和短期快取。</p>
+
+    <h2>會送出什麼、送給誰</h2>
+    <table>
+      <thead><tr><th>什麼時候</th><th>送出的內容</th><th>送到哪裡</th></tr></thead>
+      <tbody>
+        <tr><td>你查詢一篇論文時（popup、圖表頁、Scholar/arXiv 上的按鈕或右鍵選單）</td><td>你查詢的論文標題、arXiv ID 或 DOI（右鍵選單則是你反白的文字），以及用來抓引用論文的論文 ID</td><td>你選的資料來源：<a href="https://www.semanticscholar.org/">Semantic Scholar</a>（Allen Institute for AI）或 <a href="https://openalex.org/">OpenAlex</a>（OurResearch）</td></tr>
+        <tr><td>你在設定中填了 API key</td><td>該 key，附在上述查詢中</td><td>只送到發給你這個 key 的服務</td></tr>
+        <tr><td>你在 Google Scholar 頁面按下擴充功能的按鈕，且「與 Google Scholar 逐年對照」為開啟</td><td>針對這篇論文的引用、每年一次的搜尋請求</td><td>Google Scholar（你正在瀏覽的網站），使用你原本的 Scholar 連線，等同你自己逐年點選</td></tr>
+      </tbody>
+    </table>
+    <p>除此之外不會送出任何資料。擴充功能看不到、也不會送出你的瀏覽紀錄、造訪的網頁或你的身分。</p>
+
+    <h2>讀取目前頁面</h2>
+    <p>當你打開擴充功能的 popup 時，它會讀取目前分頁的網址與論文 meta 標籤（例如 <code>citation_title</code>、<code>citation_doi</code>），用來自動填入搜尋框。這只會在你打開 popup 時發生、只在你的電腦上處理，除非你接著按下「畫曲線」，否則不會送到任何地方。</p>
+
+    <h2>在你的瀏覽器裡保存什麼</h2>
+    <ul>
+      <li><strong>API key</strong>（選填，Semantic Scholar / OpenAlex）：只存在這台電腦（<code>chrome.storage.local</code>），不會同步，除了發 key 的服務之外不會送到任何地方。</li>
+      <li><strong>設定</strong>（預設資料來源、Google Scholar 對照開關）：用 <code>chrome.storage.sync</code> 保存，瀏覽器可能會在你自己登入的裝置之間同步。</li>
+      <li><strong>快取</strong>：查詢結果在這台電腦上保留一天，避免同一篇論文重複查詢。你隨時可以在設定裡按「清除快取資料」，或移除擴充功能來刪除。</li>
+    </ul>
+
+    <h2>擴充功能不會做的事</h2>
+    <ul>
+      <li>沒有任何分析、遙測、廣告或追蹤。</li>
+      <li>沒有帳號，不蒐集姓名、Email 或其他個人資料。</li>
+      <li>不販售、也不與任何人分享資料。</li>
+    </ul>
+
+    <h2>第三方服務</h2>
+    <p>送往資料來源的請求適用各自的政策：<a href="https://allenai.org/privacy-policy">Allen Institute for AI（Semantic Scholar）</a>、<a href="https://ourresearch.org/privacy">OurResearch（OpenAlex）</a>與 <a href="https://policies.google.com/privacy">Google（Google Scholar）</a>。</p>
+
+    <h2>變更與聯絡</h2>
+    <p>本政策若有變更，新版本會公布在此頁並更新生效日期。如有問題，請在專案的 GitHub repository 開 issue。</p>
+  </section>
+</main>
+</body>
+</html>

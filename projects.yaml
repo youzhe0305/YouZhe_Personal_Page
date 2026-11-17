@@ -11,6 +11,17 @@
 # links:        label: url, in display order. Known labels get icons:
 #               Page, Project Page, Code, Video, Demo, Poster, arXiv, Dataset
 
+- title: "CiteCurve: Citations, Month by Month"
+  short: CiteCurve
+  url: projects/CiteCurve/index.html
+  selected: true
+  date: "2026-11"
+  image: images/CiteCurve.png
+  description: >-
+    A Chrome / Edge extension that shows how a paper's citations change **month by month**.
+  links:
+    Page: projects/CiteCurve/index.html
+
 - title: "ShellBench: A Parametric Shell Game Benchmark for Memory-Aware Manipulation"
   short: ShellBench
   url: https://www.youzhexie.me/projects/ShellBench/index.html
